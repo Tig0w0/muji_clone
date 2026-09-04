@@ -1,0 +1,106 @@
+{
+  "success": true,
+  "data": {
+    "point_name": "포인트",
+    "point_unit": "P",
+    "deposit_name": "MUJI GIFT CARD",
+    "deposit_unit": "원",
+    "fixed_price_name": "소비자가",
+    "sell_price_name": "판매가",
+    "price_unit": "원",
+    "unit_position": "back",
+    "weight_unit": "g",
+    "volume_unit": "ml",
+    "product_cut_unit": "1",
+    "product_decimal": "floor",
+    "point_cut_unit": "0.1",
+    "point_decimal": "floor",
+    "coupon_cut_unit": "1",
+    "coupon_decimal": "floor",
+    "grade_cut_unit": "1",
+    "grade_decimal": "floor",
+    "auth_sms": "y",
+    "security": "n",
+    "security_day": null,
+    "passwd_day": null,
+    "passwd_overlap": "n",
+    "passwd_overlap_day": "90",
+    "auto_logout": "n",
+    "excel_use": "n",
+    "excel_download_day": null,
+    "admin_access_reject_ip_use": "n",
+    "admin_ip": null,
+    "admin_reject_ip": [null],
+    "user_access_reject_ip_use": "n",
+    "user_ip": null
+  },
+  "js": {
+    "header": {
+      "title": "",
+      "author": "",
+      "desc": "",
+      "keyword": "",
+      "favicon": "https://public.mujikorea.co.kr/images/shop/LTZfRDDLeh4mDN92yrXOaxl49AVuepKEjs2nolQN.jpg",
+      "brand_id": "",
+      "og": {
+        "url": "https://mujikorea.co.kr",
+        "type": "shop",
+        "title": "MUJI",
+        "image": "https://public.mujikorea.co.kr/metas/nsGaFaLffindyVDC5BACub7Tog0evl5XZ4h1LNYD.jpg",
+        "image_width": "200",
+        "image_height": "200",
+        "image_desc": "MUJI",
+        "locale": "kr_KR"
+      },
+      "verification": {
+        "facebook": "12",
+        "google": "13",
+        "naver": "14"
+      },
+      "ld_json": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "무인양품 공식 온라인스토어",
+        "legalName": "무인양품(주)",
+        "url": "https://mujikorea.co.kr",
+        "founder": {
+          "@type": "Person",
+          "name": "NINOMIYA KENICHIRO,김진엽"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "서울 중구 서소문로 50",
+          "addressLocality": "10층(중림동,CENTRALPLACE)",
+          "postalCode": "04505",
+          "addressCountry": "대한민국"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "1551-3780",
+          "contactType": "customer service"
+        },
+        "sameAs": {
+          "11": "22",
+          "22": "33"
+        }
+      },
+      "header_js": [
+        "\u003C!-- Google tag (gtag.js) --\u003E\r\n\u003Cscript async src=\"https://www.googletagmanager.com/gtag/js?id=G-SWV75R3S8K\"\u003E\u003C/script\u003E\r\n\u003Cscript\u003E\r\n  window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n  gtag('js', new Date());\r\n\r\n  gtag('config', 'G-SWV75R3S8K');\r\n\u003C/script\u003E",
+        "\u003C!-- Google Tag Manager --\u003E\r\n\u003Cscript\u003E(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\r\nnew Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\r\nj=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\r\n'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\r\n})(window,document,'script','dataLayer','GTM-TT7QSQ3L');\u003C/script\u003E\r\n\u003C!-- End Google Tag Manager --\u003E",
+        "\u003Cscript type=\"text/javascript\" src=\"//wcs.naver.net/wcslog.js\"\u003E \u003C/script\u003E \r\n\u003Cscript type=\"text/javascript\"\u003E \r\nif (!wcs_add) var wcs_add={};\r\nwcs_add[\"wa\"] = \"s_1b7170c57b38\";\r\nif (!_nasa) var _nasa={};\r\nif(window.wcs){\r\nwcs.inflow(\"mujikorea.co.kr\");\r\nwcs_do();\r\n}\r\n\u003C/script\u003E"
+      ]
+    },
+    "page": {
+      "page_js": {
+        "ORDER_END": [
+          "gtag('event', 'conversion', {\r\n        send_to: 'AW–11381021118/pvjrCMzR8_AYEL6z8rIq', \r\n})"
+        ]
+      }
+    },
+    "footer": {
+      "footer_js": [
+        "\u003C!-- Google Tag Manager (noscript) --\u003E\r\n\u003Cnoscript\u003E\u003Ciframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-TT7QSQ3L\"\r\nheight=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"\u003E\u003C/iframe\u003E\u003C/noscript\u003E\r\n\u003C!-- End Google Tag Manager (noscript) --\u003E"
+      ]
+    }
+  }
+}

@@ -1,8 +1,40 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+:root {
+  /* 한/영 굵기 불균형을 해결하기 위해 Pretendard를 최우선 폰트로 배치 */
+  --bs-font-sans-serif: Pretendard, helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --bs-body-font-family: var(--bs-font-sans-serif);
+}
+
+body, a, button, input, textarea, select {
+  font-family: Pretendard, helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 무인양품 글로벌 디자인 토큰 (temp.txt 추출) */
+:root {
+  --font-roboto-mono: "Roboto Mono", "Roboto Mono Fallback";
+  --mantine-font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --mantine-heading-font-weight: 700;
+  --shadow-sm: inset 0 0 .5rem 0 #00000014;
+  --shadow-md: inset 0 0 1rem 0 #0000001f;
+  --shadow-lg: inset 0 0 1.5rem 0 #0003;
+  --border-radius-sm: .125rem;
+  --border-radius-md: .25rem;
+  --border-radius-lg: .5rem;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: helvetica, Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: -.02rem;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  color: #1d1d1f; /* colors-neutral-900 */
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +42,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* 부트스트랩 잔재 무력화 및 무인양품 링크 스타일 보존 */
+a {
+  text-decoration: none !important;
+  color: inherit !important;
 }

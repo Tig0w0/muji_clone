@@ -1,0 +1,156 @@
+{
+  "success": true,
+  "data": {
+    "configFileName": "shopDefaultConfig",
+    "shop_ko_name": "무인양품 공식 온라인스토어",
+    "shop_en_name": "MUJI KOREA",
+    "shop_domain": "https://mujikorea.co.kr",
+    "top_title": "MUJI KOREA",
+    "company_name": "무인양품(주)",
+    "company_num_first": "105",
+    "company_num_middle": "86",
+    "company_num_last": "73836",
+    "ceo_name": "NINOMIYA KENICHIRO,김진엽",
+    "business_status": "소매,제조,도매,도소매",
+    "business_item": "의류,커피,자수,무역(도서),생활잡화및식품,도서",
+    "email": "voc@mujikorea.co.kr",
+    "tel": "02-2632-8470",
+    "mail_order_num": "2024-서울중구-1904",
+    "zip": "04505",
+    "addr": "서울 중구 서소문로 50",
+    "addr_detail": "10층(중림동,CENTRALPLACE)",
+    "cs_tel": "1551-3780",
+    "cs_fax": "02-2632-8474",
+    "cs_email": "voc@mujikorea.co.kr",
+    "open_time": "평일 09:30 ~ 18:30 (주말, 공휴일 휴무)\r\n점심시간 12:30 ~ 13:30",
+    "privacy_responsible_name": null,
+    "privacy_responsible_position": null,
+    "privacy_responsible_department": null,
+    "privacy_responsible_tel": null,
+    "privacy_responsible_email": null,
+    "information_use": null,
+    "withdrawal_info": "회원탈퇴 안내 약관\r\n\r\n제 1 조 (목적)\r\n본 약관은 [무인양품 (주)] (이하 \"회사\")가 제공하는 서비스(이하 \"서비스\")의 회원 탈퇴 절차 및 관련 규정을 정하는 것을 목적으로 합니다.\r\n\r\n제 2 조 (회원 탈퇴 신청)\r\n1. 회원은 언제든지 서비스 내 \"회원 탈퇴\" 기능을 이용하여 탈퇴를 신청할 수 있습니다.\r\n2. 회원 탈퇴 신청 시, 본인 확인 절차가 요구될 수 있습니다.\r\n3. 회원 탈퇴 완료 후에는 계정 복구가 불가능합니다.\r\n\r\n제 3 조 (회원 탈퇴의 효과)\r\n1. 회원 탈퇴가 완료되면 해당 계정에 등록된 모든 정보는 삭제되며, 복구할 수 없습니다. 단, 관련 법령에 따라 일정 기간 보관이 필요한 정보는 별도 저장됩니다.\r\n2. 탈퇴 시 보유 중이던 포인트, 쿠폰, 마일리지 등은 즉시 소멸되며, 환불되지 않습니다.\r\n3. 회원 탈퇴 후에도 탈퇴 전 이용 내역과 관련된 법적 책임은 회원 본인에게 있습니다.\r\n\r\n제 4 조 (데이터 보관 및 삭제)\r\n1. 회사는 개인정보 보호법 및 관련 법령에 따라 회원의 개인정보를 보관 및 삭제합니다.\r\n2. 전자상거래 등에서의 소비자 보호에 관한 법률 등에 따라 거래 기록은 일정 기간 동안 보관됩니다.\r\n3. 탈퇴 후에도 관계 법령에 의해 일정 기간 보존해야 하는 정보는 법령에서 정한 기간 동안 보관되며, 해당 목적 외의 용도로 사용되지 않습니다.\r\n\r\n제 5 조 (탈퇴 제한)\r\n1. 회원이 아래의 사유에 해당하는 경우, 회원 탈퇴 신청이 제한될 수 있습니다.\r\n- 서비스 이용과 관련한 미결제 금액이 있는 경우\r\n- 진행 중인 거래가 있는 경우\r\n- 법적 절차가 진행 중인 경우\r\n위 사유가 해소된 후 회원 탈퇴가 가능합니다.\r\n\r\n제 6 조 (기타)\r\n1. 본 약관에 명시되지 않은 사항은 회사의 이용약관 및 관련 법령에 따릅니다.\r\n2. 본 약관은 회사의 정책에 따라 변경될 수 있으며, 변경 시 사전에 공지됩니다.\r\n\r\n본 약관은 [2025. 02. 18]부터 적용됩니다.",
+    "seal_img": "https://public.mujikorea.co.kr/images/shop/COYQwvFUTAvPXw4egNwmW2zcM4s2zn0u2qDcBa9h.png",
+    "point_name": null,
+    "point_unit": null,
+    "deposit_name": null,
+    "deposit_unit": null,
+    "fixed_price_name": null,
+    "sell_price_name": null,
+    "price_unit": "원",
+    "unit_position": "front",
+    "weight_unit": "kg",
+    "volume_unit": "l",
+    "product_cut_unit": "0.1",
+    "product_decimal": "floor",
+    "point_cut_unit": "0.1",
+    "point_decimal": "floor",
+    "coupon_cut_unit": "0.1",
+    "coupon_decimal": "floor",
+    "grade_cut_unit": "0.1",
+    "grade_decimal": "floor",
+    "favicon": "images/shop/e36er88J9xKR9nh2Wt8n7RBZatTxtpNRNHFAwEly.png",
+    "og_url": "1",
+    "og_title": "2",
+    "og_description": "3",
+    "app_aos_link": "https://play.google.com/store/apps/details?id=com.muji&hl=ko",
+    "app_ios_link": "https://apps.apple.com/us/app/%EB%AC%B4%EC%A7%80%EC%BD%94%EB%A6%AC%EC%95%84-%EB%A9%A4%EB%B2%84%EC%8B%AD/id6739993593",
+    "sns_instagram_link": "https://www.instagram.com/mujikr",
+    "sns_facebook_link": "https://www.facebook.com/mujikorea",
+    "sns_youtube_link": "https://www.youtube.com/@mujikorea_",
+    "sns_naver_link": null,
+    "sns_naver_blog_link": null,
+    "sns_naver_cafe_link": null,
+    "sns_daum_cafe_link": null,
+    "sns_daum_cafe_img": "https://public.mujikorea.co.kr/images/shop/b0DzsVM20Qsxw4IeJxNYeqFtcWtFsBw5EoOrEAtr.svg",
+    "og_img": "https://public.mujikorea.co.kr/images/shop/jN1N2zAqVelMJYxdXYWlS5ok45cxid7LdHifX6Zw.png",
+    "sns_instagram_img": "https://public.mujikorea.co.kr/images/shop/Al5DRMaV1Ch91qC6NMsJvI76DNrJ436xhhzIuxMQ.svg",
+    "favicon_img": "https://public.mujikorea.co.kr/images/shop/LTZfRDDLeh4mDN92yrXOaxl49AVuepKEjs2nolQN.jpg",
+    "app_ios_img": "https://public.mujikorea.co.kr/images/shop/M1ma1a2LXJZsu0IDKv8x0fCHI9Wx6tIhvjGraNYW.svg",
+    "app_id": "MUJIKOREA",
+    "app_aos_img": "https://public.mujikorea.co.kr/images/shop/HCEPhhas2bgQlXwuhPYl7lC4YqjkdOxwmo0RhEiG.png",
+    "sns_instagram_name": "instagram",
+    "sns_facebook_name": "facebook",
+    "sns_youtube_name": "youtube",
+    "sns_naver_name": "네이버",
+    "sns_naver_blog_name": "네이버 블로그",
+    "sns_naver_cafe_name": "네이버 카페",
+    "sns_daum_cafe_name": "다음 카페",
+    "sns_youtube_img": "https://public.mujikorea.co.kr/images/shop/GhGdgx5PwZyDjV12ByMAVbh4k05VUOeD4tAx9haK.svg",
+    "sns_naver_blog_img": "https://public.mujikorea.co.kr/images/shop/qQxspPipQGyZzEsL3G80v4jU8wBQ3xtqJB3lomsC.svg",
+    "sns_kakao_channel_name": null,
+    "sns_kakao_channel_link": null,
+    "sns_kakao_channel_img": "https://public.mujikorea.co.kr/images/shop/yXL5M2qa85vPIeybwDVbtLq80ZUwgsZM7Kx9y3jY.png",
+    "cs_sms_block_service": null,
+    "sns_facebook_img": "https://public.mujikorea.co.kr/images/shop/LX5Ph4zZMk1qXwjbkNw2xLieSI0XKULVgYtdyNjH.svg"
+  },
+  "js": {
+    "header": {
+      "title": "",
+      "author": "",
+      "desc": "",
+      "keyword": "",
+      "favicon": "https://public.mujikorea.co.kr/images/shop/LTZfRDDLeh4mDN92yrXOaxl49AVuepKEjs2nolQN.jpg",
+      "brand_id": "",
+      "og": {
+        "url": "https://mujikorea.co.kr",
+        "type": "shop",
+        "title": "MUJI",
+        "image": "https://public.mujikorea.co.kr/metas/nsGaFaLffindyVDC5BACub7Tog0evl5XZ4h1LNYD.jpg",
+        "image_width": "200",
+        "image_height": "200",
+        "image_desc": "MUJI",
+        "locale": "kr_KR"
+      },
+      "verification": {
+        "facebook": "12",
+        "google": "13",
+        "naver": "14"
+      },
+      "ld_json": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "무인양품 공식 온라인스토어",
+        "legalName": "무인양품(주)",
+        "url": "https://mujikorea.co.kr",
+        "founder": {
+          "@type": "Person",
+          "name": "NINOMIYA KENICHIRO,김진엽"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "서울 중구 서소문로 50",
+          "addressLocality": "10층(중림동,CENTRALPLACE)",
+          "postalCode": "04505",
+          "addressCountry": "대한민국"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "1551-3780",
+          "contactType": "customer service"
+        },
+        "sameAs": {
+          "11": "22",
+          "22": "33"
+        }
+      },
+      "header_js": [
+        "\u003C!-- Google tag (gtag.js) --\u003E\r\n\u003Cscript async src=\"https://www.googletagmanager.com/gtag/js?id=G-SWV75R3S8K\"\u003E\u003C/script\u003E\r\n\u003Cscript\u003E\r\n  window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n  gtag('js', new Date());\r\n\r\n  gtag('config', 'G-SWV75R3S8K');\r\n\u003C/script\u003E",
+        "\u003C!-- Google Tag Manager --\u003E\r\n\u003Cscript\u003E(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\r\nnew Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\r\nj=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\r\n'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\r\n})(window,document,'script','dataLayer','GTM-TT7QSQ3L');\u003C/script\u003E\r\n\u003C!-- End Google Tag Manager --\u003E",
+        "\u003Cscript type=\"text/javascript\" src=\"//wcs.naver.net/wcslog.js\"\u003E \u003C/script\u003E \r\n\u003Cscript type=\"text/javascript\"\u003E \r\nif (!wcs_add) var wcs_add={};\r\nwcs_add[\"wa\"] = \"s_1b7170c57b38\";\r\nif (!_nasa) var _nasa={};\r\nif(window.wcs){\r\nwcs.inflow(\"mujikorea.co.kr\");\r\nwcs_do();\r\n}\r\n\u003C/script\u003E"
+      ]
+    },
+    "page": {
+      "page_js": {
+        "ORDER_END": [
+          "gtag('event', 'conversion', {\r\n        send_to: 'AW–11381021118/pvjrCMzR8_AYEL6z8rIq', \r\n})"
+        ]
+      }
+    },
+    "footer": {
+      "footer_js": [
+        "\u003C!-- Google Tag Manager (noscript) --\u003E\r\n\u003Cnoscript\u003E\u003Ciframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-TT7QSQ3L\"\r\nheight=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"\u003E\u003C/iframe\u003E\u003C/noscript\u003E\r\n\u003C!-- End Google Tag Manager (noscript) --\u003E"
+      ]
+    }
+  }
+}

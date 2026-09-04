@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "data": {
+    "1_DISPLAY_MAIN_TOP_BELT": [
+      {
+        "display_id": 43,
+        "belt_title": "$MUJI APP$ 다운받고, 다양한 혜택을 경험해보세요.",
+        "belt_link_url": "/plan/view/145",
+        "belt_link_type": 0,
+        "belt_background_color": "#1d1d1fff",
+        "belt_font_color": "#ffffffff",
+        "belt_bold_color": "#ffffffff",
+        "belt_sort": 1
+      }
+    ]
+  }
+}
