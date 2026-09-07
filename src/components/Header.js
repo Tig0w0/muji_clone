@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
 import TopBelt from './TopBelt';
+import { useSelector } from 'react-redux';
 
 function Header() {
+  const cartCount = useSelector(state => state.cart.items.reduce((sum, item) => sum + item.quantity, 0));
   return (
     <>
       {/* 동적 띠 배너 컴포넌트 */}
@@ -83,12 +85,12 @@ function Header() {
                 </i>
                 
                 {/* 장바구니 */}
-                <Link className="relative inline-flex items-center hover:opacity-80" to="/cart">
+                <Link className="relative inline-flex items-center hover:opacity-80" to="/cart/list" aria-label={`장바구니 상품 ${cartCount}개`}>
                   <i className="inline-block cursor-pointer align-top w-6 h-6">
                     <img alt="cart" className="w-full h-full" src="/media/icons/icon_cart.svg" />
                   </i>
                   <span className="absolute left-[6px] top-0 w-[16px] text-center text-[10px] font-[600] leading-[1.5] text-[#1d1d1f]">
-                    0
+                    {cartCount}
                   </span>
                 </Link>
               </div>

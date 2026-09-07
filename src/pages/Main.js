@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 import Banner from '../components/Banner'; // 메인 비주얼 배너
 import CircleNav from '../components/CircleNav'; // 원형 퀵 메뉴
+import NewArrivals from '../components/NewArrivals'; // 신상품 섹션
+import PlanSection from '../components/PlanSection'; // 엇갈림 기획전 섹션
 
 function Main() {
   return (
@@ -12,11 +13,11 @@ function Main() {
       {/* 동그란 카테고리 퀵 메뉴 영역 (좌우 스크롤) */}
       <CircleNav />
       
-      {/* 아래부터는 양옆 여백이 있는 상품 영역 */}
-      <Container className="mt-5">
-        <h4 className="fw-bold mb-4">신상품이 입고 되었어요</h4>
-        <p>이곳에 동그란 카테고리 메뉴와 상품 리스트가 들어갈 예정입니다.</p>
-      </Container>
+      {/* 탭 기반 스와이퍼: 신상품 영역 */}
+      <NewArrivals />
+
+      {/* 좌측 Sticky 고정, 우측 스크롤 기획전 영역 */}
+      <PlanSection />
     </>
   );
 }

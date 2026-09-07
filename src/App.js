@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './pages/Main';
+import ProductDetail from './components/ProductDetail';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
       <div style={{ flex: 1 }}>
         <Routes>
           <Route path="/" element={<Main />} />
-          {/* 나중에 장바구니나 상세 페이지 경로가 여기에 추가됩니다! */}
+          <Route path="/products/view/:id" element={<ProductDetail />} />
+          <Route path="/cart/list" element={<Cart />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </div>
       
