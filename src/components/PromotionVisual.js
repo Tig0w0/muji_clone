@@ -41,6 +41,9 @@ export function PromotionVisual({ entry, featured = false, center = false }) {
       {featured && <div className="promotion-feature-copy"><p>{plan.title}</p><h2>{plan.name}</h2></div>}
     </Link>
     {point.map(({ info, products }, index) => {
+      // 상품이 없는 핫스팟(데이터 정리로 인해 비워진 경우)은 렌더링하지 않습니다.
+      if (!products || products.length === 0) return null;
+
       const id = `promotion-${plan.plan_id}-point-${index}`;
       return <div key={id} className={`promotion-hotspot${active === index ? ' is-open' : ''}`} style={{ left: `${info.x}%`, top: `calc(${info.y}% - 8px)` }} onPointerEnter={event => { if (event.pointerType === 'mouse') setActive(index); }} onPointerLeave={() => {
         if (!ref.current?.querySelector(`#${id}`)?.contains(document.activeElement) && document.activeElement !== triggerRefs.current[index]) setActive(null);
