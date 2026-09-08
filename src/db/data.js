@@ -20,11 +20,16 @@ export const highlightBanners = bannerData.data?.["1_BANNER_HIGHLIGHT_BAR_PC"] |
 // -------------------------------------------------------------
 // 2. 상품 및 카테고리 데이터 추출
 // -------------------------------------------------------------
-// 메인 페이지 노출용 기획전 (1_PLAN_0)
+// 메인 페이지 노출용 기획전 (1_PLAN_0, 1_PLAN_1)
 export const mainPlans = planData.data?.["1_PLAN_0"] || [];
 export const fromMujiPlans = planData.data?.["1_PLAN_1"] || [];
 
-// 메인 페이지 탭별 카테고리 상품 리스트 
+// plan_id로 기획전 데이터를 바로 조회합니다.
+const allPlans = [...mainPlans, ...fromMujiPlans];
+const plansById = new Map(allPlans.map(entry => [String(entry.plan.plan_id), entry]));
+export const getPlanDetail = (id) => plansById.get(String(id)) || null;
+
+// 메인 페이지 탭별 카테고리 상품 리스트
 // 구조: { A: { name: "남성", products: [...] }, B: { name: "여성", products: [...] }, ... }
 export const mainCategoryProducts = bannerData.data?.["1_DISPLAY_MAIN_PRODUCT"] || {};
 

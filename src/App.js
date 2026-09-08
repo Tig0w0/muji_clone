@@ -21,6 +21,7 @@ function App() {
           <Route path="/cart/list" element={<Cart />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/plan/view/:id" element={<PlanDetail />} />
+          <Route path="/frommuji/view/:id" element={<PlanDetail />} />
         </Routes>
       </div>
       

@@ -36,7 +36,7 @@ export function PromotionVisual({ entry, featured = false, center = false }) {
     if (event.key === 'Escape' && active !== null) { triggerRefs.current[active]?.focus(); setActive(null); }
   }}>
     <div className="promotion-stage">
-    <Link className="promotion-image-link" to="/plan/view/142" aria-label={plan.name}>
+    <Link className="promotion-image-link" to={`/plan/view/${plan.plan_id}`} aria-label={plan.name}>
       <MainImage src={plan.plan_thumbnail_image_full || plan.plan_thumbnail_image} alt={plan.name} />
       {featured && <div className="promotion-feature-copy"><p>{plan.title}</p><h2>{plan.name}</h2></div>}
     </Link>
@@ -59,6 +59,6 @@ export function PromotionVisual({ entry, featured = false, center = false }) {
       </div>;
     })}
     </div>
-    {!featured && <Link className="promotion-story-copy" to="/plan/view/142"><h3>{plan.name}</h3><p>{plan.sub_name}</p></Link>}
+    {!featured && <Link className="promotion-story-copy" to={`/plan/view/${plan.plan_id}`}><h3>{plan.name}</h3><p>{plan.sub_name}</p></Link>}
   </div>;
 }
