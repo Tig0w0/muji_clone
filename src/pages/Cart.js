@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiArrowLeft, FiHome, FiShoppingBag, FiX } from 'react-icons/fi';
 import { getProductVariants, isOptionAvailable } from '../db/data';
-import { cartItemKey, getCartLines, getCartTotals, removeItems, setSelected, updateItem } from '../store';
+import { getCartLines, getCartTotals, removeItems, setSelected, updateItem } from '../store';
 
 const money = value => Number(value || 0).toLocaleString('ko-KR');
 const outlineButton = 'rounded-md border border-neutral-300 bg-white px-3 text-sm font-medium text-neutral-800 disabled:cursor-not-allowed disabled:text-neutral-400';

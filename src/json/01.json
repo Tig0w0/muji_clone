@@ -63,7 +63,7 @@
               "is_display": 1,
               "weight": 0,
               "images": [
-                "https://product.mujikorea.co.kr/images/products/8803743003244/8803743003244_1260.jpg"
+                "/images/products/8803743003244/8803743003244_1260.jpg"
               ],
               "muji_kr_inventory": 2,
               "muji_dc_stock": 5200,
@@ -84,7 +84,7 @@
               "is_display": 1,
               "weight": 0,
               "images": [
-                "https://product.mujikorea.co.kr/images/products/8803743003244/8803743003244_1260.jpg"
+                "/images/products/8803743003244/8803743003244_1260.jpg"
               ],
               "muji_kr_inventory": 2,
               "muji_dc_stock": 5200,
@@ -98,7 +98,7 @@
         "sell_discount_rate": 0,
         "brand": [],
         "thumbnail_list": [
-          "https://product.mujikorea.co.kr/images/products/1/714/y0MK4zbJI5Ushfy6RxzXGYamQAdlNeIx87RVfJXk.jpg"
+          "/images/products/1/714/y0MK4zbJI5Ushfy6RxzXGYamQAdlNeIx87RVfJXk.jpg"
         ]
       },
       {
@@ -166,18 +166,18 @@
               "hex": "#0000ff",
               "color_name": "스모키블루 스트라이프",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723235563/4550723235563_99_95.jpg",
+              "image_chip": "/images/products/4550723235563/4550723235563_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723235563/4550723235563_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235563/4550723235563_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235563/4550723235563_02_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235563/4550723235563_03_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235556/4550723235556_04_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235556/4550723235556_05_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235556/4550723235556_06_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235556/4550723235556_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235556/4550723235556_08_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235556/4550723235556_09_1260.jpg"
+                "/images/products/4550723235563/4550723235563_1260.jpg",
+                "/images/products/4550723235563/4550723235563_01_1260.jpg",
+                "/images/products/4550723235563/4550723235563_02_1260.jpg",
+                "/images/products/4550723235563/4550723235563_03_1260.jpg",
+                "/images/products/4550723235556/4550723235556_04_1260.jpg",
+                "/images/products/4550723235556/4550723235556_05_1260.jpg",
+                "/images/products/4550723235556/4550723235556_06_1260.jpg",
+                "/images/products/4550723235556/4550723235556_07_1260.jpg",
+                "/images/products/4550723235556/4550723235556_08_1260.jpg",
+                "/images/products/4550723235556/4550723235556_09_1260.jpg"
               ],
               "sizes": [
                 {
@@ -257,18 +257,18 @@
               "hex": "#008000",
               "color_name": "스모키그린",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_99_95.jpg",
+              "image_chip": "/images/products/4550723235440/4550723235440_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_02_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_03_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_04_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_05_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_06_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_08_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235440/4550723235440_09_1260.jpg"
+                "/images/products/4550723235440/4550723235440_1260.jpg",
+                "/images/products/4550723235440/4550723235440_01_1260.jpg",
+                "/images/products/4550723235440/4550723235440_02_1260.jpg",
+                "/images/products/4550723235440/4550723235440_03_1260.jpg",
+                "/images/products/4550723235440/4550723235440_04_1260.jpg",
+                "/images/products/4550723235440/4550723235440_05_1260.jpg",
+                "/images/products/4550723235440/4550723235440_06_1260.jpg",
+                "/images/products/4550723235440/4550723235440_07_1260.jpg",
+                "/images/products/4550723235440/4550723235440_08_1260.jpg",
+                "/images/products/4550723235440/4550723235440_09_1260.jpg"
               ],
               "sizes": [
                 {
@@ -348,11 +348,11 @@
               "hex": "#895129",
               "color_name": "스모키브라운 스트라이프",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723235624/4550723235624_99_95.jpg",
+              "image_chip": "/images/products/4550723235624/4550723235624_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723235624/4550723235624_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235624/4550723235624_08_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235600/4550723235600_09_1260.jpg"
+                "/images/products/4550723235624/4550723235624_1260.jpg",
+                "/images/products/4550723235624/4550723235624_08_1260.jpg",
+                "/images/products/4550723235600/4550723235600_09_1260.jpg"
               ],
               "sizes": [
                 {
@@ -432,18 +432,18 @@
               "hex": "#000080",
               "color_name": "다크네이비",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_99_95.jpg",
+              "image_chip": "/images/products/4550723235501/4550723235501_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_02_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_03_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_04_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_05_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_06_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_08_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723235501/4550723235501_09_1260.jpg"
+                "/images/products/4550723235501/4550723235501_1260.jpg",
+                "/images/products/4550723235501/4550723235501_01_1260.jpg",
+                "/images/products/4550723235501/4550723235501_02_1260.jpg",
+                "/images/products/4550723235501/4550723235501_03_1260.jpg",
+                "/images/products/4550723235501/4550723235501_04_1260.jpg",
+                "/images/products/4550723235501/4550723235501_05_1260.jpg",
+                "/images/products/4550723235501/4550723235501_06_1260.jpg",
+                "/images/products/4550723235501/4550723235501_07_1260.jpg",
+                "/images/products/4550723235501/4550723235501_08_1260.jpg",
+                "/images/products/4550723235501/4550723235501_09_1260.jpg"
               ],
               "sizes": [
                 {
@@ -672,16 +672,16 @@
               "hex": "#0000ff",
               "color_name": "스모키블루",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723214278/4550723214278_99_95.jpg",
+              "image_chip": "/images/products/4550723214278/4550723214278_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723214278/4550723214278_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214278/4550723214278_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214278/4550723214278_02_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214278/4550723214278_03_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214278/4550723214278_04_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214278/4550723214278_05_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214278/4550723214278_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214278/4550723214278_08_1260.jpg"
+                "/images/products/4550723214278/4550723214278_1260.jpg",
+                "/images/products/4550723214278/4550723214278_01_1260.jpg",
+                "/images/products/4550723214278/4550723214278_02_1260.jpg",
+                "/images/products/4550723214278/4550723214278_03_1260.jpg",
+                "/images/products/4550723214278/4550723214278_04_1260.jpg",
+                "/images/products/4550723214278/4550723214278_05_1260.jpg",
+                "/images/products/4550723214278/4550723214278_07_1260.jpg",
+                "/images/products/4550723214278/4550723214278_08_1260.jpg"
               ],
               "sizes": [
                 {
@@ -761,16 +761,16 @@
               "hex": "#90d5ff",
               "color_name": "라이트블루",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723214216/4550723214216_99_95.jpg",
+              "image_chip": "/images/products/4550723214216/4550723214216_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723214216/4550723214216_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214216/4550723214216_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214216/4550723214216_02_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214216/4550723214216_03_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214216/4550723214216_04_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214216/4550723214216_05_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214216/4550723214216_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214216/4550723214216_08_1260.jpg"
+                "/images/products/4550723214216/4550723214216_1260.jpg",
+                "/images/products/4550723214216/4550723214216_01_1260.jpg",
+                "/images/products/4550723214216/4550723214216_02_1260.jpg",
+                "/images/products/4550723214216/4550723214216_03_1260.jpg",
+                "/images/products/4550723214216/4550723214216_04_1260.jpg",
+                "/images/products/4550723214216/4550723214216_05_1260.jpg",
+                "/images/products/4550723214216/4550723214216_07_1260.jpg",
+                "/images/products/4550723214216/4550723214216_08_1260.jpg"
               ],
               "sizes": [
                 {
@@ -850,17 +850,17 @@
               "hex": "#ffffff",
               "color_name": "화이트",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_99_95.jpg",
+              "image_chip": "/images/products/4550723214094/4550723214094_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_02_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_03_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_04_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_05_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_06_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_08_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214094/4550723214094_09_1260.jpg"
+                "/images/products/4550723214094/4550723214094_1260.jpg",
+                "/images/products/4550723214094/4550723214094_01_1260.jpg",
+                "/images/products/4550723214094/4550723214094_02_1260.jpg",
+                "/images/products/4550723214094/4550723214094_03_1260.jpg",
+                "/images/products/4550723214094/4550723214094_04_1260.jpg",
+                "/images/products/4550723214094/4550723214094_05_1260.jpg",
+                "/images/products/4550723214094/4550723214094_06_1260.jpg",
+                "/images/products/4550723214094/4550723214094_08_1260.jpg",
+                "/images/products/4550723214094/4550723214094_09_1260.jpg"
               ],
               "sizes": [
                 {
@@ -940,12 +940,12 @@
               "hex": "#895129",
               "color_name": "브라운",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723214339/4550723214339_99_95.jpg",
+              "image_chip": "/images/products/4550723214339/4550723214339_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723214339/4550723214339_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214339/4550723214339_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214339/4550723214339_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214339/4550723214339_08_1260.jpg"
+                "/images/products/4550723214339/4550723214339_1260.jpg",
+                "/images/products/4550723214339/4550723214339_01_1260.jpg",
+                "/images/products/4550723214339/4550723214339_07_1260.jpg",
+                "/images/products/4550723214339/4550723214339_08_1260.jpg"
               ],
               "sizes": [
                 {
@@ -1025,12 +1025,12 @@
               "hex": "#898989",
               "color_name": "그레이 체크",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723214391/4550723214391_99_95.jpg",
+              "image_chip": "/images/products/4550723214391/4550723214391_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723214391/4550723214391_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214391/4550723214391_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214391/4550723214391_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214391/4550723214391_08_1260.jpg"
+                "/images/products/4550723214391/4550723214391_1260.jpg",
+                "/images/products/4550723214391/4550723214391_01_1260.jpg",
+                "/images/products/4550723214391/4550723214391_07_1260.jpg",
+                "/images/products/4550723214391/4550723214391_08_1260.jpg"
               ],
               "sizes": [
                 {
@@ -1110,12 +1110,12 @@
               "hex": "#ede8d0",
               "color_name": "샌드베이지 체크",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723214452/4550723214452_99_95.jpg",
+              "image_chip": "/images/products/4550723214452/4550723214452_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723214452/4550723214452_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214452/4550723214452_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214452/4550723214452_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214452/4550723214452_08_1260.jpg"
+                "/images/products/4550723214452/4550723214452_1260.jpg",
+                "/images/products/4550723214452/4550723214452_01_1260.jpg",
+                "/images/products/4550723214452/4550723214452_07_1260.jpg",
+                "/images/products/4550723214452/4550723214452_08_1260.jpg"
               ],
               "sizes": [
                 {
@@ -1195,12 +1195,12 @@
               "hex": "#898989",
               "color_name": "그레이 스트라이프",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723214513/4550723214513_99_95.jpg",
+              "image_chip": "/images/products/4550723214513/4550723214513_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723214513/4550723214513_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214513/4550723214513_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214513/4550723214513_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214513/4550723214513_08_1260.jpg"
+                "/images/products/4550723214513/4550723214513_1260.jpg",
+                "/images/products/4550723214513/4550723214513_01_1260.jpg",
+                "/images/products/4550723214513/4550723214513_07_1260.jpg",
+                "/images/products/4550723214513/4550723214513_08_1260.jpg"
               ],
               "sizes": [
                 {
@@ -1280,16 +1280,16 @@
               "hex": "#000000",
               "color_name": "블랙",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723214155/4550723214155_99_95.jpg",
+              "image_chip": "/images/products/4550723214155/4550723214155_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723214155/4550723214155_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214155/4550723214155_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214155/4550723214155_02_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214155/4550723214155_03_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214155/4550723214155_04_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214155/4550723214155_05_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214155/4550723214155_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214155/4550723214155_08_1260.jpg"
+                "/images/products/4550723214155/4550723214155_1260.jpg",
+                "/images/products/4550723214155/4550723214155_01_1260.jpg",
+                "/images/products/4550723214155/4550723214155_02_1260.jpg",
+                "/images/products/4550723214155/4550723214155_03_1260.jpg",
+                "/images/products/4550723214155/4550723214155_04_1260.jpg",
+                "/images/products/4550723214155/4550723214155_05_1260.jpg",
+                "/images/products/4550723214155/4550723214155_07_1260.jpg",
+                "/images/products/4550723214155/4550723214155_08_1260.jpg"
               ],
               "sizes": [
                 {
@@ -1369,12 +1369,12 @@
               "hex": "#0000ff",
               "color_name": "스모키블루 스트라이프",
               "color_chip": null,
-              "image_chip": "https://product.mujikorea.co.kr/images/products/4550723214575/4550723214575_99_95.jpg",
+              "image_chip": "/images/products/4550723214575/4550723214575_99_95.jpg",
               "images": [
-                "https://product.mujikorea.co.kr/images/products/4550723214575/4550723214575_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214575/4550723214575_01_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214575/4550723214575_07_1260.jpg",
-                "https://product.mujikorea.co.kr/images/products/4550723214575/4550723214575_08_1260.jpg"
+                "/images/products/4550723214575/4550723214575_1260.jpg",
+                "/images/products/4550723214575/4550723214575_01_1260.jpg",
+                "/images/products/4550723214575/4550723214575_07_1260.jpg",
+                "/images/products/4550723214575/4550723214575_08_1260.jpg"
               ],
               "sizes": [
                 {
@@ -1451,16 +1451,6 @@
             }
           },
           "size_info": {
-            "426929": {
-              "product_option_id": 426929,
-              "stock": 6,
-              "sale_state": "ON",
-              "adjust_price": "0",
-              "is_display": 1,
-              "muji_kr_inventory": null,
-              "muji_dc_stock": 0,
-              "muji_release_date": null
-            },
             "426928": {
               "product_option_id": 426928,
               "stock": 8,
@@ -1470,6 +1460,16 @@
               "muji_kr_inventory": null,
               "muji_dc_stock": 4,
               "muji_release_date": "2026-09-05 00:00:00"
+            },
+            "426929": {
+              "product_option_id": 426929,
+              "stock": 6,
+              "sale_state": "ON",
+              "adjust_price": "0",
+              "is_display": 1,
+              "muji_kr_inventory": null,
+              "muji_dc_stock": 0,
+              "muji_release_date": null
             },
             "426930": {
               "product_option_id": 426930,

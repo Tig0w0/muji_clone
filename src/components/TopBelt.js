@@ -51,7 +51,7 @@ function TopBelt() {
               }}
             >
               <a 
-                href={item.belt_link_url} 
+                href="#"
                 style={{ textDecoration: 'none', display: 'block', height: '100%' }}
               >
                 <div 

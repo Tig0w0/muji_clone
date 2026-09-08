@@ -3,8 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './pages/Main';
-import ProductDetail from './components/ProductDetail';
+import Detail from './pages/Detail';
 import Cart from './pages/Cart';
+import PlanDetail from './pages/PlanDetail';
 
 function App() {
   return (
@@ -16,9 +17,10 @@ function App() {
       <div style={{ flex: 1 }}>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/products/view/:id" element={<ProductDetail />} />
+          <Route path="/products/view/:id" element={<Detail />} />
           <Route path="/cart/list" element={<Cart />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/plan/view/:id" element={<PlanDetail />} />
         </Routes>
       </div>
       

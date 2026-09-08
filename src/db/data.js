@@ -22,6 +22,7 @@ export const highlightBanners = bannerData.data?.["1_BANNER_HIGHLIGHT_BAR_PC"] |
 // -------------------------------------------------------------
 // 메인 페이지 노출용 기획전 (1_PLAN_0)
 export const mainPlans = planData.data?.["1_PLAN_0"] || [];
+export const fromMujiPlans = planData.data?.["1_PLAN_1"] || [];
 
 // 메인 페이지 탭별 카테고리 상품 리스트 
 // 구조: { A: { name: "남성", products: [...] }, B: { name: "여성", products: [...] }, ... }
@@ -36,11 +37,31 @@ const collectProducts = (value) => {
     if (value.product_id && value.product_name) return [value];
     return Object.values(value).flatMap(collectProducts);
 };
+// 무인양품 원본 이미지가 없거나 다운로드에 실패한 상품 코드 리스트 (페이지에서 완전히 제외)
+export const noImageProductCodes = new Set([
+  // 영문 코드 (서버 403 차단 확인됨)
+  'KE2V2A3A', 'KE2V1A3A', 'KE2Y6A3A', 'KE2Y5A3A',
+  'MAJ37A5A', 'MAJ36A5A', 'MAH76A5A',
+  'LB35CC3S', 'LB14CC3S', 'NE62CC2S', 'LAB5CC3S', 'LA1PUA3A',
+  'C9S1008', 'C4A1005', 'NBE22A3A', 'NBH7CC4S', 'NBH6CC4S',
+  'NBC0CC2S', 'NBB9CC2S', 'NB80CC2S',
+  'OGB93A5A', 'OGB92A5A', 'OGB91A5A',
+  'ODA60A6S', 'ODA59A6S', 'OAP02A3A', 'OAP01A3A',
+  'OAO97A3A', 'OAO96A3A', 'OAO95A3A', 'OAO94A3A',
+  'OAO93A3A', 'OAO92A3A', 'OAO23A3A', 'OAO09A3A',
+  // 숫자 코드 (로컬 파일 없음 - 음식류 간편조리 등)
+  '003244', '003046', '8013106', '3039', '595', '557',
+  '2865', '717', '14917', '785364', '785357', '000755',
+  '003251', '000748', '000731', '78967', '61986', '77618',
+  '2988', '2971', '564', '77335', '2926', '2919',
+  '2902', '25675',
+]);
+
 export const catalogProducts = [...new Map([
     ...productDetailsList,
     ...collectProducts(planData.data),
     ...Object.values(mainCategoryProducts).flatMap(category => category.products),
-].map(product => [Number(product.product_id), product])).values()];
+].filter(product => !noImageProductCodes.has(product.code)).map(product => [Number(product.product_id), product])).values()];
 const productsById = new Map(catalogProducts.map(product => [Number(product.product_id), product]));
 
 export const getProductById = (productId) => productsById.get(Number(productId)) || null;
@@ -50,7 +71,7 @@ export const productImageUrl = (src) => {
     if (/^https?:\/\//.test(src)) return src;
     if (src.startsWith('//')) return `https:${src}`;
     if (src.startsWith('/images/products/') || src.startsWith('/media/')) return src;
-    return `https://public.mujikorea.co.kr/${src.replace(/^\//, '')}`;
+    return `/${src.replace(/^\//, '')}`;
 };
 
 // SUB(색상 → 사이즈)와 ONE(단일/선택 옵션)을 화면에서 같은 방식으로 읽도록 정리합니다.

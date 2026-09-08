@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
@@ -42,14 +41,14 @@ function Banner() {
   return (
     <section className="relative overflow-hidden lg:overflow-visible">
       
-      {/* 1. PC용 배너 (max-sm:hidden) */}
-      <div className="max-sm:hidden">
+      {/* 1. PC용 배너: 모바일 배너와 동시에 노출되지 않도록 기본 숨김 */}
+      <div className="hidden sm:block">
         <Swiper {...swiperOptions}>
           {pcSlides.map((item, index) => (
             // PC 뷰 폭을 화면의 일정 비율(원본 약 1200px / 1920px = 62.5vw)로 제한하여 양옆이 걸리도록 유도
             <SwiperSlide key={`pc-${item.banner_id || index}`} className="w-[85vw] lg:w-[62.5vw] 3xl:w-[1200px] [&.swiper-slide]:h-[138.88vw] [&.swiper-slide]:sm:h-[35.42vw] [&.swiper-slide]:3xl:h-[680px]">
               {({ isActive }) => (
-                <Link to={item.banner_image_link} className="relative block h-full w-full cursor-pointer">
+                <a href="#" className="relative block h-full w-full cursor-pointer">
                   <img 
                     alt={item.banner_title || `banner-${index}`}
                     className="h-full w-full object-cover" 
@@ -80,7 +79,7 @@ function Banner() {
                       </div>
                     </div>
                   )}
-                </Link>
+                </a>
               )}
             </SwiperSlide>
           ))}
@@ -95,12 +94,12 @@ function Banner() {
           </div>
           <div className="main-swiper-prev absolute left-[4.17vw] top-[50%] z-[9999] h-[40px] w-[40px] -translate-y-1/2 cursor-pointer max-lg:hidden">
             <i className="inline-block cursor-pointer align-top w-6 h-[100%] w-[100%]">
-              <img alt="prev" className="h-full w-full" src="https://mujikorea.co.kr/_next/static/media/arrow_prev.0m60iquqirhb3.svg" />
+              <img alt="prev" className="h-full w-full" src="/images/icons/arrow_prev.svg" />
             </i>
           </div>
           <div className="main-swiper-next absolute right-[4.17vw] top-[50%] z-[9999] h-[40px] w-[40px] -translate-y-1/2 cursor-pointer max-lg:hidden">
             <i className="inline-block cursor-pointer align-top w-6 h-[100%] w-[100%]">
-              <img alt="next" className="h-full w-full" src="https://mujikorea.co.kr/_next/static/media/arrow_next.2o62v-g4yjes3.svg" />
+              <img alt="next" className="h-full w-full" src="/images/icons/arrow_next.svg" />
             </i>
           </div>
         </Swiper>
@@ -113,7 +112,7 @@ function Banner() {
             // 모바일 뷰 폭을 화면의 85%로 제한하여 양옆 슬라이드가 보이게 함
             <SwiperSlide key={`mo-${item.banner_id || index}`} className="w-[85vw] [&.swiper-slide]:h-[138.88vw] [&.swiper-slide]:sm:h-[35.42vw] [&.swiper-slide]:3xl:h-[680px]">
               {({ isActive }) => (
-                <Link to={item.banner_image_link} className="relative block h-full w-full cursor-pointer">
+                <a href="#" className="relative block h-full w-full cursor-pointer">
                   <img 
                     alt={item.banner_title || `banner-mo-${index}`}
                     className="h-full w-full object-cover" 
@@ -143,7 +142,7 @@ function Banner() {
                       </div>
                     </div>
                   )}
-                </Link>
+                </a>
               )}
             </SwiperSlide>
           ))}

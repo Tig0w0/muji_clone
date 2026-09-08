@@ -1,9 +1,17 @@
 import React from 'react';
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { fireEvent, render as renderReact, screen, within } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { getProductById, getProductDetail, getProductVariants, isOptionAvailable, mainCategoryProducts } from './db/data';
 import ProductDetail from './components/ProductDetail';
 import NewArrivals from './components/NewArrivals';
+import Cart from './pages/Cart';
+import Header from './components/Header';
+import { addItem, createCartStore } from './store';
+
+const render = (ui, store = createCartStore(null)) => ({
+  ...renderReact(<Provider store={store}>{ui}</Provider>), store,
+});
 
 // Use the real v7 router exports through its CommonJS entry for CRA's Jest resolver.
 jest.mock('react-router-dom', () => jest.requireActual('react-router'));
@@ -23,6 +31,62 @@ beforeEach(() => {
 });
 
 const renderDetail = id => render(<MemoryRouter initialEntries={[`/products/view/${id}`]}><Routes><Route path="/products/view/:id" element={<ProductDetail />} /></Routes></MemoryRouter>);
+
+it('adds the selected option to the cart and updates the header count', () => {
+  const { store } = render(<MemoryRouter initialEntries={['/products/view/1005355']}><Header /><Routes><Route path="/products/view/:id" element={<ProductDetail />} /><Route path="/cart/list" element={<Cart />} /></Routes></MemoryRouter>);
+  fireEvent.click(within(screen.getByRole('group', { name: '옵션 선택' })).getByRole('button', { name: 'S', exact: true }));
+  fireEvent.click(screen.getByRole('button', { name: '수량 늘리기' }));
+  fireEvent.click(screen.getByRole('button', { name: '장바구니', exact: true }));
+  expect(store.getState().cart.items).toEqual([{ productId: 1005355, optionId: 426331, quantity: 2, selected: true }]);
+  expect(screen.getByRole('link', { name: '장바구니 상품 2개' })).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('link', { name: '장바구니 보기' }));
+  expect(screen.getByRole('heading', { name: '장바구니', level: 1 })).toBeInTheDocument();
+  expect(screen.getByText('옵션 : 스모키블루 스트라이프/S/2개')).toBeInTheDocument();
+  expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('119,800원');
+});
+
+it('changes cart color, size and quantity and removes the selected item', () => {
+  const store = createCartStore(null);
+  store.dispatch(addItem({ productId: 1005355, optionId: 426331, quantity: 1 }));
+  render(<MemoryRouter><Cart /></MemoryRouter>, store);
+  fireEvent.click(screen.getByRole('button', { name: '옵션 변경하기' }));
+  const editor = within(screen.getByRole('form', { name: '옵션 변경' }));
+  fireEvent.change(editor.getByLabelText('색상'), { target: { value: '스모키그린' } });
+  fireEvent.change(editor.getByLabelText('옵션'), { target: { value: '426320' } });
+  fireEvent.click(editor.getByRole('button', { name: '수량 늘리기' }));
+  fireEvent.click(editor.getByRole('button', { name: '변경 적용' }));
+  expect(store.getState().cart.items[0]).toMatchObject({ optionId: 426320, quantity: 2 });
+  expect(screen.getByText('옵션 : 스모키그린/S/2개')).toBeInTheDocument();
+  fireEvent.click(screen.getByRole('checkbox', { name: '전체 선택' }));
+  expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('0원');
+  fireEvent.click(screen.getByRole('checkbox', { name: '전체 선택' }));
+  fireEvent.click(screen.getAllByRole('button', { name: '선택 삭제' })[0]);
+  expect(screen.getByText('장바구니에 담긴 상품이 없습니다.')).toBeInTheDocument();
+  expect(store.getState().cart.items).toHaveLength(0);
+});
+
+it('keeps delivery-tab selection and totals separate', () => {
+  const store = createCartStore(null);
+  store.dispatch(addItem({ productId: 1005714, optionId: 430844, quantity: 1 }));
+  store.dispatch(addItem({ productId: 1005293, optionId: 426016, quantity: 1 }));
+  render(<MemoryRouter><Cart /></MemoryRouter>, store);
+  expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('11,400원');
+  fireEvent.click(screen.getByRole('tab', { name: '설치 배송 (1)' }));
+  expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('129,000원');
+  fireEvent.click(screen.getByRole('checkbox', { name: '전체 선택' }));
+  fireEvent.click(screen.getByRole('tab', { name: '택배 배송 (1)' }));
+  expect(screen.getByRole('checkbox', { name: '전체 선택' })).toBeChecked();
+  expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('11,400원');
+});
+
+it('lets users remove saved sold-out items without charging for them', () => {
+  const storage = { getItem: () => JSON.stringify([{ productId: 1005355, optionId: 426335, quantity: 1, selected: true }]), setItem: jest.fn() };
+  render(<MemoryRouter><Cart /></MemoryRouter>, createCartStore(storage));
+  expect(screen.getByText('품절', { exact: true })).toBeInTheDocument();
+  expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('0원');
+  fireEvent.click(screen.getAllByRole('button', { name: '품절 삭제' })[0]);
+  expect(screen.getByText('장바구니에 담긴 상품이 없습니다.')).toBeInTheDocument();
+});
 
 it('uses the exact main-list product objects for every category and builds valid options', () => {
   Object.values(mainCategoryProducts).forEach(category => category.products.forEach(product => {

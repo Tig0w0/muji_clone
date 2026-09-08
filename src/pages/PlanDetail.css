@@ -1,0 +1,48 @@
+#wrapper { width: 600px; margin: 0 auto; font-size: 16px; font-weight: 400; color: #1d1d1f; line-height: 1.8; text-decoration: none;}
+#wrapper a{ text-decoration: none; color: #1d1d1f; }
+#wrapper img { width: 100%;}
+.mo { display: none;}
+.fm_bn { margin-bottom: 60px;}
+.bn_text { margin: 50px 0 40px; text-align: center;}
+.bn_text .sub { font-size: 14px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: center; }
+.bn_text .sub > div { border-top: solid 2px #3c3c43; border-bottom: solid 2px #3c3c43; padding: 0 4px; }
+.bn_text .title { font-size: 32px; font-weight: 700; line-height: 1.4; margin-bottom: 8px; letter-spacing: -0.5px;}
+.bn_text .date { font-size: 12px; color: #76767b; font-weight: 400;}
+.market { margin-bottom: 60px; padding: 24px 20px; border: solid 1px #d8d8d9; position: relative;}
+.mk_logo { width: 120px; position: absolute; top: 20px; right: 24px;}
+.mk_title { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #7f0019; display: flex; gap: 6px; line-height: 1.4;}
+.mk_title > div:first-child { color: #1d1d1f;}
+.mk_info > div { display: flex; gap: 10px; align-items: center; }
+.mk_info > div > div:first-child { font-weight: 600;}
+.mk_info > div > div:nth-child(2) { width: 1px; height: 12px; background-color: #c4c4c6;}
+.img { margin-bottom: 50px;}
+.img > img { margin-bottom: 8px;}
+.img > img:last-child { margin-bottom: 0;}
+.text { color: #3c3c43; margin-bottom: 50px; }
+.text > div:first-child { font-size: 18px; font-weight: 700; margin-bottom: 4px;}
+.text > div:first-child span { font-size: 14px; font-weight: 400; color: #9d9da0; margin-left: 4px;}
+.text span { font-weight: 700;}
+.credit_wrap { background-color: #f2f1ed; padding: 5%; color: #3c3c43; }
+.content_info { font-size: 14px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: solid 1px #00000010; }
+.con_title { font-size: 18px; font-weight: 700; margin-bottom: 2px;}
+.crd_text { display: flex; gap: 6px; align-items: baseline; font-size: 14px; line-height: 1.4; margin-bottom: 8px; }
+.crd_text > div:first-child { font-weight: 700; flex-shrink: 0; }
+.crd_text > div:nth-child(2) { width: 1px; height: 10px; background-color: #76767b;}
+
+@media (max-width: 759px) {
+  #wrapper { width: 100%;}
+  .mo { display: block;}
+  .pc { display: none;}
+  .fm_bn { margin-bottom: 10%;}
+  .bn_text { margin: 40px 20px;}
+  .bn_text .title { font-size: 28px;}
+  .market { margin-bottom: 10%; padding: 7.5% 5%; }
+  .mk_logo { position: static; margin: 0 auto 5%;}
+  .mk_title { flex-direction: column; align-items: center; margin-bottom: 5%;}
+  .mk_info { font-size: 14px;}
+  .mk_info > div > div:first-child { white-space: nowrap; }
+  .fm_con_wrap { margin: 0 20px;}
+  .img { margin-bottom: 40px;}
+  .text { font-size: 15px; margin-bottom: 48px;}
+  .credit_wrap { padding: 24px 20px; }
+}
