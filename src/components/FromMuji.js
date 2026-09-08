@@ -1,7 +1,6 @@
 import React from 'react';
 import { fromMujiPlans } from '../db/data';
 import { PromotionVisual } from './PromotionVisual';
-import './MainEditorial.css';
 
 export default function FromMuji() {
   return <section className="from-muji" aria-labelledby="from-muji-title">
