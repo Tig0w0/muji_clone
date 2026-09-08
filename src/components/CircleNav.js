@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { mainCategoryProducts, productDetailsList } from '../db/data';
+import { mainCategoryProducts, productDetailsList, getProductById } from '../db/data';
 
 const initialNavItems = [
   { title: "신상품", link: "#", img: "mKF3arlxh2tev2L7P0p0PRoOUXKnZXpF4NUq8kq1.png" },
@@ -40,7 +40,10 @@ function CircleNav() {
         }
       }
 
-      // 일치하는 카테고리가 없거나 상품이 비어있으면, 전체 상품 리스트를 사용합니다.
+      // 유효한 상품(catalogProducts에 존재하는 상품)만 필터링합니다. (이미지 없는 상품은 제외됨)
+      targetProducts = targetProducts.filter(p => getProductById(p.product_id || p.item_id || p.code));
+
+      // 일치하는 카테고리가 없거나 유효한 상품이 비어있으면, 전체 상세 상품 리스트를 사용합니다.
       if (targetProducts.length === 0 && productDetailsList.length > 0) {
         targetProducts = productDetailsList;
       }
