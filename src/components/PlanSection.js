@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { mainPlans } from '../db/data';
 import { MainImage, ProductPreview, PromotionVisual } from './PromotionVisual';
+import './MainEditorial.css';
 
 // 보조 카드의 짧은 등장 효과는 큰 이미지의 sticky 동작과 분리합니다.
 function RevealColumn({ children }) {
