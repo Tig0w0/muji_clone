@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { mainPlans } from '../db/data';
 import { MainImage, ProductPreview, PromotionVisual } from './PromotionVisual';
 import './MainEditorial.css';
@@ -21,10 +22,10 @@ function PlanCard({ entry }) {
   const { plan, point } = entry;
   const products = [...new Map(point.flatMap(item => item.products).map(product => [product.product_id, product])).values()];
   return <article className="plan-card">
-    <a href="#">
+    <Link to={`/plan/view/${plan.plan_id}`}>
       <MainImage className="plan-card-image" src={plan.plan_thumbnail_image_full || plan.plan_thumbnail_image} alt={plan.name} />
       <div className="plan-card-copy"><h3>{plan.name}</h3><p>{plan.sub_name}</p></div>
-    </a>
+    </Link>
     <div className="plan-products">{products.map(product => <ProductPreview key={product.product_id} product={product} />)}</div>
   </article>;
 }
@@ -37,7 +38,7 @@ export default function PlanSection() {
         <div className="plan-cards">
           <div className="plan-column">{group.slice(1, 3).map(entry => <PlanCard key={entry.plan.plan_id} entry={entry} />)}</div>
           <RevealColumn>{group.slice(3, 5).map(entry => <PlanCard key={entry.plan.plan_id} entry={entry} />)}</RevealColumn>
-          {index === 1 && <a className="editorial-more" href="#">기획전 더보기</a>}
+          {index === 1 && <Link className="editorial-more" to="/plan">기획전 더보기</Link>}
         </div>
       </section>
     ))}

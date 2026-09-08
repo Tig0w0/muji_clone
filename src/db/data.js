@@ -27,8 +27,29 @@ export const fromMujiPlans = planData.data?.["1_PLAN_1"] || [];
 // plan_id로 기획전 데이터를 바로 조회합니다.
 const allPlans = [...mainPlans, ...fromMujiPlans];
 const plansById = new Map(allPlans.map(entry => [String(entry.plan.plan_id), entry]));
-export const getPlanDetail = (id) => plansById.get(String(id)) || null;
 
+export const getPlanDetail = (id) => {
+  const planId = String(id);
+  const found = plansById.get(planId);
+  if (found) return found;
+
+  // 메인 슬라이더 기획전(389, 332)이 04.json에 누락되어 있으므로, 
+  // 포트폴리오용으로 정상 작동을 보여주기 위해 배너 이미지와 텍스트를 조합한 데이터를 생성합니다.
+  if (planId === '389') {
+    return {
+      plan: { plan_id: 389, name: '자연, 피부에 닿다', plan_thumbnail_image_full: '/images/banner/YryLPkuTA70OYbBZDZUcOOmraMOagw6Y3uuyxYQY.jpg' },
+      point: []
+    };
+  }
+  if (planId === '332') {
+    return {
+      plan: { plan_id: 332, name: '여름의 온도를 낮추는 시원한 패브릭', sub_name: '부드러운 냉감과 산뜻한 서커 침장 시리즈', plan_thumbnail_image_full: '/images/banner/14lpHkMNLfzBwQVfpQ0M1VMV7XA6Aed1bpMMsGlO.jpg' },
+      point: []
+    };
+  }
+
+  return null;
+};
 // 메인 페이지 탭별 카테고리 상품 리스트
 // 구조: { A: { name: "남성", products: [...] }, B: { name: "여성", products: [...] }, ... }
 export const mainCategoryProducts = bannerData.data?.["1_DISPLAY_MAIN_PRODUCT"] || {};
@@ -44,22 +65,19 @@ const collectProducts = (value) => {
 };
 // 무인양품 원본 이미지가 없거나 다운로드에 실패한 상품 코드 리스트 (페이지에서 완전히 제외)
 export const noImageProductCodes = new Set([
-  // 영문 코드 (서버 403 차단 확인됨)
-  'KE2V2A3A', 'KE2V1A3A', 'KE2Y6A3A', 'KE2Y5A3A',
-  'MAJ37A5A', 'MAJ36A5A', 'MAH76A5A',
-  'LB35CC3S', 'LB14CC3S', 'NE62CC2S', 'LAB5CC3S', 'LA1PUA3A',
-  'C9S1008', 'C4A1005', 'NBE22A3A', 'NBH7CC4S', 'NBH6CC4S',
-  'NBC0CC2S', 'NBB9CC2S', 'NB80CC2S',
-  'OGB93A5A', 'OGB92A5A', 'OGB91A5A',
-  'ODA60A6S', 'ODA59A6S', 'OAP02A3A', 'OAP01A3A',
-  'OAO97A3A', 'OAO96A3A', 'OAO95A3A', 'OAO94A3A',
-  'OAO93A3A', 'OAO92A3A', 'OAO23A3A', 'OAO09A3A',
-  // 숫자 코드 (로컬 파일 없음 - 음식류 간편조리 등)
-  '003244', '003046', '8013106', '3039', '595', '557',
-  '2865', '717', '14917', '785364', '785357', '000755',
-  '003251', '000748', '000731', '78967', '61986', '77618',
-  '2988', '2971', '564', '77335', '2926', '2919',
-  '2902', '25675',
+  'AC23DA6A', 'BC2O4A6A', 'FCE28A6A', 'MDA90A5A', 'MDA87A5A', 'MDU86A5A', 'MDU85A5A', 'MDU84A5A', 
+  'MCL13A5A', 'MCL12A5A', 'MCL11A5A', 'MCL10A5A', 'MCI20A5A', 'D6S4032', '7A59048', 'D2A4085', 
+  'D6A4040', 'D6A4039', 'JBAI3A6S', 'JB40CC6S', 'KG15WA4A', 'KG15VA4A', 'KG147A4A', 'KG146A4A', 
+  'KG13OA4A', 'KG13HA4A', 'KG13GA4A', 'KG10UA4A', 'KG145A4A', 'KG144A4A', 'KG143A4A', 'XA049A4A', 
+  'XA044A4A', 'XA041A4A', 'XA040A4A', 'XA03ZA4A', 'KE37PA4A', 'KE37NA4A', 'KE37MA4A', 'KE2YGA3A', 
+  'KE2YFA3A', 'KE2Y6A3A', 'KE2Y5A3A', 'MAJ37A5A', 'MAJ36A5A', 'MAH76A5A', 'LB35CC3S', 'LB14CC3S', 
+  'NE62CC2S', 'LAB5CC3S', 'LA1PUA3A', 'C9S1008', 'C4A1005', 'NBE22A3A', 'NBH7CC4S', 'NBH6CC4S', 
+  'NBC0CC2S', 'NBB9CC2S', 'NB80CC2S', 'OGB93A5A', 'OGB92A5A', 'OGB91A5A', 'ODA60A6S', 'ODA59A6S', 
+  'OAP02A3A', 'OAP01A3A', 'OAO97A3A', 'OAO96A3A', 'OAO95A3A', 'OAO94A3A', 'OAO93A3A', 'OAO92A3A', 
+  'OAO23A3A', 'OAO09A3A', '003244', '003046', '8013106', '3039', '595', '557', 
+  '2865', '717', '14917', '785364', '785357', '000755', '003251', '000748', 
+  '000731', '78967', '61986', '77618', '2988', '2971', '564', '77335', 
+  '2926', '2919', '2902', '25675', 
 ]);
 
 export const catalogProducts = [...new Map([
