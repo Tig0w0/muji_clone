@@ -63,13 +63,13 @@ const MarketPlanLayout = () => (
         </div>
       </div>
       <div className="bn_img">
-        <div><img src="/images/plans/2608_market_main.jpg" alt="" /></div>
+        <div><img src={process.env.PUBLIC_URL + "/images/plans/2608_market_main.jpg"} alt="" /></div>
       </div>
     </div>
 
     <div className="fm_con_wrap">
       <div className="market">
-        <div className="mk_logo"><img src="/images/plans/community_market_logo.png" alt="" /></div>
+        <div className="mk_logo"><img src={process.env.PUBLIC_URL + "/images/plans/community_market_logo.png"} alt="" /></div>
         <div className="mk_title">
           <div>[제142회]</div>
           <div>연결되는 시장 인천상회편</div>
@@ -82,8 +82,8 @@ const MarketPlanLayout = () => (
       </div>
 
       <div className="img">
-        <img src="/images/plans/2608_market_img.jpg" alt="" />
-        <img src="/images/plans/2608_market_img1.jpg" alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img.jpg"} alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img1.jpg"} alt="" />
       </div>
 
       <div className="text">
@@ -92,8 +92,8 @@ const MarketPlanLayout = () => (
       </div>
 
       <div className="img">
-        <img src="/images/plans/2608_market_img12.jpg" alt="" />
-        <img src="/images/plans/2608_market_img3.jpg" alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img12.jpg"} alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img3.jpg"} alt="" />
       </div>
 
       <div className="text">
@@ -102,11 +102,11 @@ const MarketPlanLayout = () => (
       </div>
 
       <div className="img">
-        <img src="/images/plans/2608_market_img4.jpg" alt="" />
-        <img src="/images/plans/2608_market_img5.jpg" alt="" />
-        <img src="/images/plans/2608_market_img6.jpg" alt="" />
-        <img src="/images/plans/2608_market_img7.jpg" alt="" />
-        <img src="/images/plans/2608_market_img8.jpg" alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img4.jpg"} alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img5.jpg"} alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img6.jpg"} alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img7.jpg"} alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img8.jpg"} alt="" />
       </div>
 
       <div className="text">
@@ -115,9 +115,9 @@ const MarketPlanLayout = () => (
       </div>
 
       <div className="img">
-        <img src="/images/plans/2608_market_img9.jpg" alt="" />
-        <img src="/images/plans/2608_market_img10.jpg" alt="" />
-        <img src="/images/plans/2608_market_img11.jpg" alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img9.jpg"} alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img10.jpg"} alt="" />
+        <img src={process.env.PUBLIC_URL + "/images/plans/2608_market_img11.jpg"} alt="" />
       </div>
 
       <div className="text">
