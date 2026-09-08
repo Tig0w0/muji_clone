@@ -71,11 +71,12 @@ const productsById = new Map(catalogProducts.map(product => [Number(product.prod
 export const getProductById = (productId) => productsById.get(Number(productId)) || null;
 
 export const productImageUrl = (src) => {
+    const base = process.env.PUBLIC_URL || '';
     if (!src || typeof src !== 'string') return '';
     if (/^https?:\/\//.test(src)) return src;
     if (src.startsWith('//')) return `https:${src}`;
-    if (src.startsWith('/images/products/') || src.startsWith('/media/')) return src;
-    return `/${src.replace(/^\//, '')}`;
+    if (src.startsWith('/images/products/') || src.startsWith('/media/') || src.startsWith('/images/')) return `${base}${src}`;
+    return `${base}/${src.replace(/^\//, '')}`;
 };
 
 // SUB(색상 → 사이즈)와 ONE(단일/선택 옵션)을 화면에서 같은 방식으로 읽도록 정리합니다.

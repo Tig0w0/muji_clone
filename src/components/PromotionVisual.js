@@ -4,7 +4,9 @@ import { getProductImage, productImageUrl } from '../db/data';
 import imagePaths from '../db/mainImagePaths.json';
 
 export function MainImage({ src, alt, ...props }) {
-  return <img {...props} src={imagePaths[src] || productImageUrl(src)} alt={alt} loading="lazy" onError={event => {
+  const base = process.env.PUBLIC_URL || '';
+  const localPath = imagePaths[src] ? `${base}${imagePaths[src]}` : productImageUrl(src);
+  return <img {...props} src={localPath} alt={alt} loading="lazy" onError={event => {
     const fallback = productImageUrl(src);
     if (event.currentTarget.src !== fallback) event.currentTarget.src = fallback;
   }} />;
