@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 // 1. JSON 파일에서 원본 데이터 불러오기
-import bannerJson from '../json/05.json';
+import bannerJson from '../json/main_banner_and_products.json';
 
 function Banner() {
   

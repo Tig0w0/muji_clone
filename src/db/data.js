@@ -1,16 +1,14 @@
-// 사용자님이 수집해주신 원본 JSON 데이터 임포트
-import productDetailData from '../json/01.json'; // 상세 상품 정보
-import planData from '../json/04.json';          // 기획전 리스트
-import bannerData from '../json/05.json';        // 메인 배너 및 메인 상품 리스트
-import beltData from '../json/06.json';          // 최상단 띠 배너
+// 사용자님이 수집해주신 원본 JSON 데이터 임포트
+import productDetailData from '../json/products_info.json'; // 상세 상품 정보
+import planData from '../json/main_plan.json';              // 기획전 리스트
+import bannerData from '../json/main_banner_and_products.json'; // 메인 배너 및 메인 상품 리스트
+import beltData from '../json/main_top_belt.json';          // 최상단 띠 배너
 
 // -------------------------------------------------------------
 // 1. 배너 및 레이아웃 데이터 추출
 // -------------------------------------------------------------
 // 최상단 띠 배너 ($MUJI APP$ 다운받고...)
 export const topBelt = beltData.data?.["1_DISPLAY_MAIN_TOP_BELT"] || [];
-
-// 메인 최상단 롤링 배너 (PC 및 모바일)
 export const mainBannersPC = bannerData.data?.["1_BANNER_MAIN_TOP_PC"] || [];
 export const mainBannersMO = bannerData.data?.["1_BANNER_MAIN_TOP_MO"] || [];
 
@@ -33,7 +31,7 @@ export const getPlanDetail = (id) => {
   const found = plansById.get(planId);
   if (found) return found;
 
-  // 메인 슬라이더 기획전(389, 332)이 04.json에 누락되어 있으므로, 
+  // 메인 슬라이더 기획전(389, 332)이 main_plan.json에 누락되어 있으므로, 
   // 포트폴리오용으로 정상 작동을 보여주기 위해 배너 이미지와 텍스트를 조합한 데이터를 생성합니다.
   if (planId === '389') {
     return {
@@ -57,7 +55,7 @@ export const mainCategoryProducts = bannerData.data?.["1_DISPLAY_MAIN_PRODUCT"] 
 // 상품 상세 데이터 (product_id로 모든 상세 옵션과 갤러리 이미지 확인 가능)
 export const productDetailsList = productDetailData.data?.rows || [];
 
-// 기획전에도 상품이 있으므로 함께 조회합니다. 메인 목록(05.json)을 최우선으로 사용합니다.
+// 기획전에도 상품이 있으므로 함께 조회합니다. 메인 목록(main_banner_and_products.json)을 최우선으로 사용합니다.
 const collectProducts = (value) => {
     if (!value || typeof value !== 'object') return [];
     if (value.product_id && value.product_name) return [value];
