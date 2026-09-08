@@ -175,9 +175,11 @@ const PlanDetail = () => {
 
   /* pc_content HTML이 있으면 그대로 렌더링 */
   if (plan.pc_content) {
+    // raw HTML 내 절대 경로(/images/...)를 GitHub Pages(하위 경로)에서도 작동하도록 PUBLIC_URL 주입
+    const htmlContent = plan.pc_content.replace(/(src|href)="(\/images\/[^"]+)"/g, `$1="${process.env.PUBLIC_URL}$2"`);
     return (
-      <div>
-        <div dangerouslySetInnerHTML={{ __html: plan.pc_content }} />
+      <div className="plan-html-content">
+        <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
       </div>
     );
   }
