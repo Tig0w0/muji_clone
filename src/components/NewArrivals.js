@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 import { Link } from 'react-router-dom';
-import { mainCategoryProducts, noImageProductCodes, getProductImage } from '../db/data';
+import { mainCategoryProducts, getProductImage } from '../db/data';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 
@@ -20,10 +20,10 @@ const NewArrivals = () => {
   // 2. 상태 관리 (첫번째 탭(남성)이 기본 선택되도록 설정)
   const [activeTab, setActiveTab] = useState(categories.length > 0 ? categories[0].key : null);
 
-  // 현재 활성화된 카테고리의 상품 리스트 (이미지 없는 상품은 제외)
+  // 현재 활성화된 카테고리의 상품 리스트 (이미지 없는 상품은 영구 제거되었으므로 필터 불필요)
   const currentCategory = categories.find(cat => cat.key === activeTab);
   const products = currentCategory
-    ? currentCategory.products.filter(p => !noImageProductCodes.has(p.code))
+    ? currentCategory.products
     : [];
 
   return (
