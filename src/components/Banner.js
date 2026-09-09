@@ -1,4 +1,5 @@
 import React from 'react';
+import { asset } from '../utils/asset';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { Link } from 'react-router-dom';
@@ -53,7 +54,7 @@ function Banner() {
                   <img 
                     alt={item.banner_title || `banner-${index}`}
                     className="h-full w-full object-cover" 
-                    src={item.banner_image_url} 
+                    src={asset(item.banner_image_url)} 
                   />
                   
                   {/* 2. 딤(Dim) 처리 버그 수정: 비활성화 슬라이드만 어둡게 */}
@@ -95,12 +96,12 @@ function Banner() {
           </div>
           <div className="main-swiper-prev absolute left-[4.17vw] top-[50%] z-[9999] h-[40px] w-[40px] -translate-y-1/2 cursor-pointer max-lg:hidden">
             <i className="inline-block cursor-pointer align-top w-6 h-[100%] w-[100%]">
-              <img alt="prev" className="h-full w-full" src="/images/icons/arrow_prev.svg" />
+              <img alt="prev" className="h-full w-full" src={asset('/images/icons/arrow_prev.svg')} />
             </i>
           </div>
           <div className="main-swiper-next absolute right-[4.17vw] top-[50%] z-[9999] h-[40px] w-[40px] -translate-y-1/2 cursor-pointer max-lg:hidden">
             <i className="inline-block cursor-pointer align-top w-6 h-[100%] w-[100%]">
-              <img alt="next" className="h-full w-full" src="/images/icons/arrow_next.svg" />
+              <img alt="next" className="h-full w-full" src={asset('/images/icons/arrow_next.svg')} />
             </i>
           </div>
         </Swiper>
@@ -117,7 +118,7 @@ function Banner() {
                   <img 
                     alt={item.banner_title || `banner-mo-${index}`}
                     className="h-full w-full object-cover" 
-                    src={item.banner_image_url} 
+                    src={asset(item.banner_image_url)} 
                   />
                   
                   {/* 비활성화 슬라이드 딤(Dim) 처리 */}

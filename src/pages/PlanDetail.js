@@ -1,5 +1,6 @@
 import React, { useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { asset } from '../utils/asset';
 import { getPlanDetail } from '../db/data';
 import { ProductPreview } from '../components/PromotionVisual';
 import './PlanDetail.css';
@@ -32,7 +33,7 @@ const DefaultPlanLayout = ({ entry }) => {
         </div>
         {plan.plan_thumbnail_image_full && (
           <div className="bn_img">
-            <div><img src={plan.plan_thumbnail_image_full} alt={plan.name} /></div>
+            <div><img src={asset(plan.plan_thumbnail_image_full)} alt={plan.name} /></div>
           </div>
         )}
       </div>
@@ -176,7 +177,9 @@ const PlanDetail = () => {
   /* pc_content HTML이 있으면 그대로 렌더링 */
   if (plan.pc_content) {
     // raw HTML 내 절대 경로(/images/...)를 GitHub Pages(하위 경로)에서도 작동하도록 PUBLIC_URL 주입
-    const htmlContent = plan.pc_content.replace(/(src|href)="(\/images\/[^"]+)"/g, `$1="${process.env.PUBLIC_URL}$2"`);
+    const htmlContent = plan.pc_content
+      .replace(/(src|href)="(\/images\/[^"]+)"/g, (match, attr, path) => `${attr}="${asset(path)}"`)
+      .replace(/url\((['"]?)(\/images\/[^'")]+)\1\)/g, (match, quote, path) => `url(${quote}${asset(path)}${quote})`);
     return (
       <div className="plan-html-content">
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />

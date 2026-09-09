@@ -1,28 +1,29 @@
 import React, { useMemo } from 'react';
+import { asset } from '../utils/asset';
 import { Link } from 'react-router-dom';
 import { mainCategoryProducts, productDetailsList, getProductById } from '../db/data';
 
 const initialNavItems = [
-  { title: "신상품", link: "#", img: "mKF3arlxh2tev2L7P0p0PRoOUXKnZXpF4NUq8kq1.png" },
-  { title: "숏클립", link: "#", img: "bBpBF3PMsbN6fhqqKpOfKuFSbutE8WbGyE1VIFRM.png" },
-  { title: "MUJI GIFT\nCARD", link: "#", img: "ti7n4lHbivGKel7EPlMjpPRCSHTtDJqbmPS0tSZt.png" },
-  { title: "SNS 인기템", link: "#", img: "XcdcY6GdqYhip3ss2iUc8gRmjN65DmHLAd3Jjdbf.png" },
-  { title: "남성", link: "#", img: "pow2JtVlLlsGhrA40nVgm9A02hvZPBNWdcQxNGJB.png" },
-  { title: "여성", link: "#", img: "PXInCXTTvYplyS4utYLMV7fb3rPv3BTPN4pblqB5.png" },
-  { title: "아동", link: "#", img: "bgfoeDJuuVDf4AqVBUtpi3UiHJurfQpmJkGBa7NH.png" },
-  { title: "패션잡화", link: "#", img: "F7HO5fwzzbM6B0TYnV7bhlMb7d8hOEaXPKffFCqk.png" },
-  { title: "생활용품", link: "#", img: "xDs9DAJM7J9CtH10pBhiWJWCGClj3ps40xuQ8Fhd.png" },
-  { title: "주방용품", link: "#", img: "IxKQWKHdgKPwovTOdFzMntMYdUtlMUiGbVnjXOXi.png" },
-  { title: "패브릭", link: "#", img: "lJCAn2MifIIpPhcBsEHosg0T0KVOqP1CWXvSXMHY.png" },
-  { title: "수납/정리", link: "#", img: "FnHKt30d20nucSTowFmRogxCvpNoPx7aE14TDhHY.png" },
-  { title: "가구", link: "#", img: "CIXkzScFWN3tsUIUGzWMayb9LHVQ0sLlmSQheek2.png" },
-  { title: "뷰티", link: "#", img: "pDRI9JTZWuZjcpTa4o3SG3cZqAkI1f74YOS8pmNz.png" },
-  { title: "반려동물", link: "#", img: "2mTa4ecjkQEcsuOgqWEI0SIYJJ878IxImnl3U7F5.png" },
-  { title: "문구", link: "#", img: "a9pV7Qlc1Nyjmv3Iy4dvIWg2Z9SiiFLy127BC58W.png" },
-  { title: "간편조리", link: "#", img: "FhvWdITLbPWGSHbrd1GCMF80SNlOheVqbS0Sckzz.png" },
-  { title: "스낵", link: "#", img: "jCseAx18FRguTu2ZP9Am50uYyTtBj9jZ9envenSi.png" },
-  { title: "가전/디지털", link: "#", img: "239VcSNaFVsteXgcpwLlbcirULYrA2i42rBhmXtM.png" },
-  { title: "Labo", link: "#", img: "Wn4ueN8MpE1XNQB6wKmCz5OEzDVFyctU8rpW3FYG.jpg" },
+  { title: "신상품", link: "#", img: "circlenav_01.png" },
+  { title: "숏클립", link: "#", img: "circlenav_02.png" },
+  { title: "MUJI GIFT\nCARD", link: "#", img: "circlenav_03.png" },
+  { title: "SNS 인기템", link: "#", img: "circlenav_04.png" },
+  { title: "남성", link: "#", img: "circlenav_05.png" },
+  { title: "여성", link: "#", img: "circlenav_06.png" },
+  { title: "아동", link: "#", img: "circlenav_07.png" },
+  { title: "패션잡화", link: "#", img: "circlenav_08.png" },
+  { title: "생활용품", link: "#", img: "circlenav_09.png" },
+  { title: "주방용품", link: "#", img: "circlenav_10.png" },
+  { title: "패브릭", link: "#", img: "circlenav_11.png" },
+  { title: "수납/정리", link: "#", img: "circlenav_12.png" },
+  { title: "가구", link: "#", img: "circlenav_13.png" },
+  { title: "뷰티", link: "#", img: "circlenav_14.png" },
+  { title: "반려동물", link: "#", img: "circlenav_15.png" },
+  { title: "문구", link: "#", img: "circlenav_16.png" },
+  { title: "간편조리", link: "#", img: "circlenav_17.png" },
+  { title: "스낵", link: "#", img: "circlenav_18.png" },
+  { title: "가전/디지털", link: "#", img: "circlenav_19.png" },
+  { title: "Labo", link: "#", img: "circlenav_20.jpg" },
 ];
 
 function CircleNav() {
@@ -74,7 +75,7 @@ function CircleNav() {
                       alt={item.title.replace('\n', ' ')} 
                       loading="lazy" 
                       className="object-cover h-full w-full absolute inset-0"
-                      src={`/images/banner/${item.img}`} 
+                      src={asset(`/images/circlenav/${item.img}`)} 
                     />
                   </div>
                   <p className="text-[15px] font-medium leading-[1.3] max-xl:text-[14px] whitespace-pre-line">{item.title}</p>
@@ -102,7 +103,7 @@ function CircleNav() {
                             alt={item.title.replace('\n', ' ')} 
                             loading="lazy" 
                             className="h-full w-full rounded-full object-cover absolute inset-0"
-                            src={`/images/banner/${item.img}`} 
+                            src={asset(`/images/circlenav/${item.img}`)} 
                           />
                         </div>
                         <p className="text-[12px] font-medium leading-[1.36] whitespace-pre-line">{item.title}</p>
@@ -126,7 +127,7 @@ function CircleNav() {
                             alt={item.title.replace('\n', ' ')} 
                             loading="lazy" 
                             className="h-full w-full rounded-full object-cover absolute inset-0"
-                            src={`/images/banner/${item.img}`} 
+                            src={asset(`/images/circlenav/${item.img}`)} 
                           />
                         </div>
                         <p className="text-[12px] font-medium leading-[1.36] whitespace-pre-line">{item.title}</p>
@@ -144,7 +145,7 @@ function CircleNav() {
                             alt="더보기" 
                             loading="lazy" 
                             className="h-full w-full"
-                            src="/images/icons/arrow_right.svg" 
+                            src={asset('/images/icons/arrow_right.svg')} 
                           />
                         </i>
                       </div>

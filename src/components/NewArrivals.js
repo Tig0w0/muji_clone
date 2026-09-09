@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { asset } from '../utils/asset';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 import { Link } from 'react-router-dom';
@@ -96,7 +97,7 @@ const NewArrivals = () => {
                                 {product.review_count > 0 && (
                                   <div className="flex items-center justify-center gap-[2px]">
                                     <i className="inline-block cursor-pointer align-top w-6 mr-[2px] h-[16px] w-[16px]">
-                                      <img alt="star" loading="lazy" width="24" height="24" className="h-full w-full" src="/images/icons/star.svg" />
+                                      <img alt="star" loading="lazy" width="24" height="24" className="h-full w-full" src={asset('/images/icons/star.svg')} />
                                     </i>
                                     <p className="text-[12px] font-normal leading-[12px] text-[#9D9DA0] lg:text-[13px] lg:leading-[13px]">
                                       {Number(product.review_score).toFixed(1)}
@@ -131,7 +132,7 @@ const NewArrivals = () => {
                   <div className="flex h-[44.44vw] w-[44.44vw] lg:h-[14.58vw] lg:w-[14.58vw] flex-col items-center justify-center gap-2 lg:gap-4 bg-white hover:bg-neutral-50 transition-colors rounded-md" style={{marginTop: '0px'}}>
                     <p className="text-[14px] font-semibold text-neutral-900 lg:text-[15px]">신상품 모아보기</p>
                     <i className="inline-block cursor-pointer align-top w-6 lg:w-[24px]">
-                      <img alt="arrow right" loading="lazy" width="24" height="24" decoding="async" className="h-full w-full opacity-40" src="/images/icons/arrow_right_g.svg" />
+                      <img alt="arrow right" loading="lazy" width="24" height="24" decoding="async" className="h-full w-full opacity-40" src={asset('/images/icons/arrow_right_g.svg')} />
                     </i>
                   </div>
                 </SwiperSlide>

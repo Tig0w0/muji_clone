@@ -1,4 +1,5 @@
 import React from 'react';
+import { asset } from '../utils/asset';
 import { Link, useLocation } from 'react-router-dom';
 import { getProductDetail, getProductImage } from '../db/data';
 
@@ -22,7 +23,7 @@ const Footer = () => {
           <div className="lg:w-1/4 2xl:w-1/3">
             <a href="/">
               <i className="inline-block cursor-pointer align-top w-6 w-[120px] lg:w-[140px]">
-                <img alt="MUJI Logo" loading="lazy" width="140" height="22" decoding="async" className="h-full w-full" style={{color: 'transparent'}} src="/images/logo/logo.svg" />
+                <img alt="MUJI Logo" loading="lazy" width="140" height="22" decoding="async" className="h-full w-full" style={{color: 'transparent'}} src={asset('/images/logo/logo.svg')} />
               </i>
             </a>
             <ul className="mt-6 flex flex-col gap-4 text-sm font-semibold lg:mt-11 lg:gap-5 lg:pb-4 lg:text-base [&_a]:block [&_a]:leading-none">
@@ -36,7 +37,7 @@ const Footer = () => {
             <button type="button" className="flex w-full justify-center gap-1 py-[10px] text-sm text-neutral-500 lg:hidden">
               무인양품(주) 사업자정보
               <i className="inline-block cursor-pointer align-top w-5">
-                <img alt="" loading="lazy" width="24" height="24" decoding="async" className="h-full w-full" style={{color: 'transparent'}} src="/images/icons/arrow_bottom_g.svg" />
+                <img alt="" loading="lazy" width="24" height="24" decoding="async" className="h-full w-full" style={{color: 'transparent'}} src={asset('/images/icons/arrow_bottom_g.svg')} />
               </i>
             </button>
             <div className="hidden max-lg:mt-4 max-lg:flex-col max-lg:gap-4 lg:flex lg:h-full lg:justify-between [&_p]:text-xs [&_p]:leading-[18px] [&_p]:text-neutral-500 [&_p]:lg:text-sm [&_p]:lg:leading-[20px]">
@@ -50,19 +51,19 @@ const Footer = () => {
                 </div>
                 <div className="flex gap-2 [&_a]:flex [&_a]:h-[40px] [&_a]:w-[40px] [&_a]:items-center [&_a]:justify-center [&_a]:rounded-full [&_a]:border [&_a]:border-neutral-200">
                   <a href="#">
-                    <img alt="Google Play" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src="/images/icons/google_play.png" style={{color: 'transparent'}} />
+                    <img alt="Google Play" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src={asset('/images/icons/google_play.png')} style={{color: 'transparent'}} />
                   </a>
                   <a href="#">
-                    <img alt="App Store" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src="/images/icons/app_store.svg" style={{color: 'transparent'}} />
+                    <img alt="App Store" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src={asset('/images/icons/app_store.svg')} style={{color: 'transparent'}} />
                   </a>
                   <a href="#">
-                    <img alt="instagram" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src="/images/icons/instagram.svg" style={{color: 'transparent'}} />
+                    <img alt="instagram" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src={asset('/images/icons/instagram.svg')} style={{color: 'transparent'}} />
                   </a>
                   <a href="#">
-                    <img alt="facebook" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src="/images/icons/facebook.svg" style={{color: 'transparent'}} />
+                    <img alt="facebook" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src={asset('/images/icons/facebook.svg')} style={{color: 'transparent'}} />
                   </a>
                   <a href="#">
-                    <img alt="youtube" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src="/images/icons/youtube.svg" style={{color: 'transparent'}} />
+                    <img alt="youtube" loading="lazy" width="20" height="20" decoding="async" className="aspect-square object-contain" src={asset('/images/icons/youtube.svg')} style={{color: 'transparent'}} />
                   </a>
                 </div>
               </div>
@@ -77,7 +78,7 @@ const Footer = () => {
                   <a className="inline-flex items-center justify-center font-medium gap-1 h-[44px] px-[12px] text-sm rounded-md border border-neutral-300 bg-neutral-white lg:hover:bg-neutral-200 text-neutral-800 w-full justify-between px-4 py-[10px] uppercase lg:max-w-[150px]" href="#">
                     <span>Global Site</span>
                     <i className="inline-block cursor-pointer align-top w-6">
-                      <img alt="" loading="lazy" width="24" height="24" decoding="async" className="h-full w-full" style={{color: 'transparent'}} src="/images/icons/arrow_right.svg" />
+                      <img alt="" loading="lazy" width="24" height="24" decoding="async" className="h-full w-full" style={{color: 'transparent'}} src={asset('/images/icons/arrow_right.svg')} />
                     </i>
                   </a>
                 </div>
@@ -99,7 +100,7 @@ const Footer = () => {
             )}
             <button onClick={() => window.scrollTo({top:0, behavior:'smooth'})} className="inline-flex items-center justify-center font-medium gap-1 text-sm text-neutral-500 lg:hover:text-neutral-900 h-[38px] w-[38px] overflow-hidden rounded-full border border-neutral-100 bg-neutral-white transition-all duration-300 lg:h-10 lg:w-10 pointer-events-auto translate-y-0 opacity-100" type="button">
               <i className="inline-block cursor-pointer align-top w-6 !w-4 lg:w-[18px]">
-                <img alt="" loading="lazy" width="24" height="24" decoding="async" className="h-full w-full" style={{color: 'transparent'}} src="/images/icons/arrow_top.svg" />
+                <img alt="" loading="lazy" width="24" height="24" decoding="async" className="h-full w-full" style={{color: 'transparent'}} src={asset('/images/icons/arrow_top.svg')} />
               </i>
             </button>
           </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { asset } from '../utils/asset';
 import { Link } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
 import TopBelt from './TopBelt';
@@ -38,13 +39,13 @@ const megaMenuData = {
 
 /* MUJI Support는 아이콘 카드 형태라 별도 데이터 */
 const supportMenu = [
-  { name: 'MUJI GIFT CARD', icon: '/media/images/support_bn_giftcard_02.jpg' },
-  { name: 'ReMUJI',         icon: '/media/images/support_bn_stamp_02.jpg' },
-  { name: '카탈로그',        icon: '/media/images/support_bn_catalog_02.jpg' },
-  { name: '사용설명서',      icon: '/media/images/support_bn_instructions_02.jpg' },
-  { name: 'IA 상담 서비스',  icon: '/media/images/support_bn_ia_02.jpg' },
-  { name: '커뮤니티 예약',   icon: '/media/images/support_bn_commu_02.jpg' },
-  { name: '매장 픽업',       icon: '/media/images/support_bn_pickup_02.jpg' },
+  { name: 'MUJI GIFT CARD', icon: asset('/images/support/support_bn_giftcard_02.jpg') },
+  { name: 'ReMUJI',         icon: asset('/images/support/support_bn_stamp_02.jpg') },
+  { name: '카탈로그',        icon: asset('/images/support/support_bn_catalog_02.jpg') },
+  { name: '사용설명서',      icon: asset('/images/support/support_bn_instructions_02.jpg') },
+  { name: 'IA 상담 서비스',  icon: asset('/images/support/support_bn_ia_02.jpg') },
+  { name: '커뮤니티 예약',   icon: asset('/images/support/support_bn_commu_02.jpg') },
+  { name: '매장 픽업',       icon: asset('/images/support/support_bn_pickup_02.jpg') },
 ];
 
 /* ── 메가 메뉴 패널 (2단 좌우 구조) ──────────────────── */
@@ -123,7 +124,7 @@ function Header() {
               <div className="flex h-full items-center justify-between lg:gap-[32px] 3xl:gap-[60px]">
                 {/* 로고 */}
                 <Link to="/" className="inline-block w-[100px] cursor-pointer align-top lg:w-[140px]">
-                  <img alt="MUJI logo" className="h-full w-full" src="/images/logo.svg" />
+                  <img alt="MUJI logo" className="h-full w-full" src={asset('/images/logo/logo.svg')} />
                 </Link>
 
                 {/* PC 메인 메뉴 */}
@@ -172,21 +173,21 @@ function Header() {
                 {/* 검색창 영역 (PC) */}
                 <div className="flex items-center max-lg:hidden">
                   <i className="inline-block h-6 w-6 cursor-pointer align-top hover:opacity-80">
-                    <img alt="search" className="h-full w-full" src="/media/icons/icon_search.svg" />
+                    <img alt="search" className="h-full w-full" src={asset('/images/icons/icon_search.svg')} />
                   </i>
                 </div>
                 {/* 모바일 돋보기 */}
                 <i className="inline-block h-6 w-6 cursor-pointer lg:hidden">
-                  <img alt="search mobile" className="h-full w-full" src="/media/icons/icon_search.svg" />
+                  <img alt="search mobile" className="h-full w-full" src={asset('/images/icons/icon_search.svg')} />
                 </i>
                 {/* 마이페이지 */}
                 <i className="inline-block h-6 w-6 cursor-pointer hover:opacity-80 max-lg:hidden">
-                  <img alt="mypage" className="h-full w-full" src="/media/icons/icon_user.svg" />
+                  <img alt="mypage" className="h-full w-full" src={asset('/images/icons/icon_user.svg')} />
                 </i>
                 {/* 장바구니 */}
                 <Link className="relative inline-flex items-center hover:opacity-80" to="/cart/list" aria-label={`장바구니 상품 ${cartCount}개`}>
                   <i className="inline-block h-6 w-6 cursor-pointer align-top">
-                    <img alt="cart" className="h-full w-full" src="/media/icons/icon_cart.svg" />
+                    <img alt="cart" className="h-full w-full" src={asset('/images/icons/icon_cart.svg')} />
                   </i>
                   <span className="absolute left-[6px] top-0 w-[16px] text-center text-[10px] font-[600] leading-[1.5] text-[#1d1d1f]">
                     {cartCount}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import BottomNav from './components/BottomNav';
 import Main from './pages/Main';
 import Detail from './pages/Detail';
 import Cart from './pages/Cart';
@@ -9,7 +10,7 @@ import PlanDetail from './pages/PlanDetail';
 
 function App() {
   return (
-    <div className="App" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="App pb-[60px] lg:pb-0" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* 화면 상단에 항상 고정되는 헤더 */}
       <Header />
       
@@ -27,6 +28,9 @@ function App() {
       
       {/* 화면 하단에 항상 고정되는 푸터 */}
       <Footer />
+      
+      {/* 모바일 환경에서 나타나는 하단 네비게이션 바 */}
+      <BottomNav />
     </div>
   );
 }

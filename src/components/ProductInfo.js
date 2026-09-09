@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { asset } from '../utils/asset';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiHeart, FiUpload, FiMessageSquare, FiStar, FiX, FiSearch } from 'react-icons/fi';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -148,10 +149,10 @@ const ProductInfo = ({ product, color, onColorChange, relatedProducts = [] }) =>
                 ))}
               </Swiper>
               <button className="custom-prev-btn absolute left-0 top-[60px] z-10 hidden -translate-y-1/2 cursor-pointer items-center justify-center transition-opacity lg:flex">
-                <img src="/images/arrow_left.svg" alt="이전" className="h-[22px]" />
+                <img src={asset('/images/icons/arrow_left.svg')} alt="이전" className="h-[22px]" />
               </button>
               <button className="custom-next-btn absolute right-0 top-[60px] z-10 hidden -translate-y-1/2 cursor-pointer items-center justify-center transition-opacity lg:flex">
-                <img src="/images/arrow_right.svg" alt="다음" className="h-[22px]" />
+                <img src={asset('/images/icons/arrow_right.svg')} alt="다음" className="h-[22px]" />
               </button>
             </div>
           </div>
