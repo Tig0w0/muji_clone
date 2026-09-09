@@ -38,7 +38,7 @@ export default function PlanSection() {
         <div className="plan-cards">
           <div className="plan-column">{group.slice(1, 3).map(entry => <PlanCard key={entry.plan.plan_id} entry={entry} />)}</div>
           <RevealColumn>{group.slice(3, 5).map(entry => <PlanCard key={entry.plan.plan_id} entry={entry} />)}</RevealColumn>
-          {index === 1 && <Link className="editorial-more" to="/plan">기획전 더보기</Link>}
+          {index === 1 && <Link className="editorial-more" to="#">기획전 더보기</Link>}
         </div>
       </section>
     ))}

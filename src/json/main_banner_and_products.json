@@ -14,7 +14,7 @@
         "banner_sub_title": "",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_01_pc.jpg",
+        "banner_image": "/images/banner/main_banner_01_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/389",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":577130,\"width\":1941,\"height\":750}",
@@ -34,7 +34,7 @@
         "created_at": "2026-08-06 18:39:53",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_01_pc.jpg",
-        "banner_image2": "images/banner/main_banner_01_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_01_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -50,7 +50,7 @@
         "banner_sub_title": "부드러운 냉감과 산뜻한 서커 침장 시리즈",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_02_pc.jpg",
+        "banner_image": "/images/banner/main_banner_02_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/332",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":157090,\"width\":1941,\"height\":750}",
@@ -70,7 +70,7 @@
         "created_at": "2026-03-09 09:48:39",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_02_pc.jpg",
-        "banner_image2": "images/banner/main_banner_02_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_02_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -86,7 +86,7 @@
         "banner_sub_title": "무인양품 티셔츠 시리즈",
         "banner_sub_title_color": "#1d1d1f",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_03_pc.jpg",
+        "banner_image": "/images/banner/main_banner_03_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/344",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":173929,\"width\":1941,\"height\":750}",
@@ -106,7 +106,7 @@
         "created_at": "2026-05-08 10:24:10",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_03_pc.jpg",
-        "banner_image2": "images/banner/main_banner_03_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_03_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -122,7 +122,7 @@
         "banner_sub_title": "",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_04_pc.jpg",
+        "banner_image": "/images/banner/main_banner_04_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/372",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":139814,\"width\":1941,\"height\":750}",
@@ -142,7 +142,7 @@
         "created_at": "2026-06-25 19:48:45",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_04_pc.jpg",
-        "banner_image2": "images/banner/main_banner_04_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_04_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -158,7 +158,7 @@
         "banner_sub_title": "장소나 용도에 맞추어 소재와 사이즈를 자유롭게",
         "banner_sub_title_color": "#3c3c43",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_05_pc.jpg",
+        "banner_image": "/images/banner/main_banner_05_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/127",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":1803962,\"width\":3883,\"height\":1501}",
@@ -178,7 +178,7 @@
         "created_at": "2025-02-04 17:50:15",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_05_pc.jpg",
-        "banner_image2": "images/banner/main_banner_05_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_05_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -194,7 +194,7 @@
         "banner_sub_title": "주방용품 시리즈",
         "banner_sub_title_color": "#1d1d1f",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_06_pc.jpg",
+        "banner_image": "/images/banner/main_banner_06_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/185",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":108430,\"width\":1941,\"height\":750}",
@@ -214,7 +214,7 @@
         "created_at": "2026-02-23 14:31:16",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_06_pc.jpg",
-        "banner_image2": "images/banner/main_banner_06_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_06_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -230,7 +230,7 @@
         "banner_sub_title": "무더운 여름, 바캉스를 더 쾌적하고 편리하게!",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_07_pc.jpg",
+        "banner_image": "/images/banner/main_banner_07_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/385",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":117052,\"width\":1941,\"height\":750}",
@@ -250,7 +250,7 @@
         "created_at": "2026-04-20 13:50:02",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_07_pc.jpg",
-        "banner_image2": "images/banner/main_banner_07_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_07_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -266,7 +266,7 @@
         "banner_sub_title": "어떤 장소에서나 활용할 수 있는 청소용품",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_08_pc.jpg",
+        "banner_image": "/images/banner/main_banner_08_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/125",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":177391,\"width\":1941,\"height\":750}",
@@ -286,7 +286,7 @@
         "created_at": "2025-02-04 17:51:03",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_08_pc.jpg",
-        "banner_image2": "images/banner/main_banner_08_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_08_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -302,7 +302,7 @@
         "banner_sub_title": "실용적이며 단정한 디자인의 무인양품 가구",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_09_pc.jpg",
+        "banner_image": "/images/banner/main_banner_09_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/187",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":564910,\"width\":1941,\"height\":750}",
@@ -322,7 +322,7 @@
         "created_at": "2025-04-24 20:32:21",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_09_pc.jpg",
-        "banner_image2": "images/banner/main_banner_09_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_09_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -338,7 +338,7 @@
         "banner_sub_title": "오가닉 코튼과 리오셀 소재",
         "banner_sub_title_color": "#000000",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_10_pc.jpg",
+        "banner_image": "/images/banner/main_banner_10_pc.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/381",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":75756,\"width\":1941,\"height\":750}",
@@ -358,7 +358,7 @@
         "created_at": "2026-07-03 17:50:13",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_10_pc.jpg",
-        "banner_image2": "images/banner/main_banner_10_pc.jpg",
+        "banner_image2": "/images/banner/main_banner_10_pc.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       }
@@ -376,7 +376,7 @@
         "banner_sub_title": "",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_01_mo.jpg",
+        "banner_image": "/images/banner/main_banner_01_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/389",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":350144,\"width\":750,\"height\":1042}",
@@ -396,7 +396,7 @@
         "created_at": "2026-08-06 18:42:34",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_01_mo.jpg",
-        "banner_image2": "images/banner/main_banner_01_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_01_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -412,7 +412,7 @@
         "banner_sub_title": "부드러운 냉감과 산뜻한 서커 침장 시리즈",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_02_mo.jpg",
+        "banner_image": "/images/banner/main_banner_02_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/332",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":77676,\"width\":720,\"height\":1000}",
@@ -432,7 +432,7 @@
         "created_at": "2026-03-09 09:49:24",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_02_mo.jpg",
-        "banner_image2": "images/banner/main_banner_02_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_02_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -448,7 +448,7 @@
         "banner_sub_title": "무인양품 티셔츠",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_03_mo.jpg",
+        "banner_image": "/images/banner/main_banner_03_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/344",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":109112,\"width\":720,\"height\":1000}",
@@ -468,7 +468,7 @@
         "created_at": "2026-05-08 10:24:56",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_03_mo.jpg",
-        "banner_image2": "images/banner/main_banner_03_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_03_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -484,7 +484,7 @@
         "banner_sub_title": "",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_04_mo.jpg",
+        "banner_image": "/images/banner/main_banner_04_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/372",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":84984,\"width\":750,\"height\":1042}",
@@ -504,7 +504,7 @@
         "created_at": "2026-06-25 19:49:28",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_04_mo.jpg",
-        "banner_image2": "images/banner/main_banner_04_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_04_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -520,7 +520,7 @@
         "banner_sub_title": "장소나 용도에 맞추어 소재와 사이즈를 자유롭게",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_05_mo.jpg",
+        "banner_image": "/images/banner/main_banner_05_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/127",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":700534,\"width\":1081,\"height\":1501}",
@@ -540,7 +540,7 @@
         "created_at": "2025-02-28 11:38:16",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_05_mo.jpg",
-        "banner_image2": "images/banner/main_banner_05_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_05_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -556,7 +556,7 @@
         "banner_sub_title": "주방용품 시리즈",
         "banner_sub_title_color": "#1d1d1f",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_06_mo.jpg",
+        "banner_image": "/images/banner/main_banner_06_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/185",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":67135,\"width\":720,\"height\":1000}",
@@ -576,7 +576,7 @@
         "created_at": "2026-02-23 14:32:23",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_06_mo.jpg",
-        "banner_image2": "images/banner/main_banner_06_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_06_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -592,7 +592,7 @@
         "banner_sub_title": "무더운 여름, 바캉스를 더 쾌적하고 편리하게!",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_07_mo.jpg",
+        "banner_image": "/images/banner/main_banner_07_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/385",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":86693,\"width\":750,\"height\":1042}",
@@ -612,7 +612,7 @@
         "created_at": "2026-04-20 13:55:32",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_07_mo.jpg",
-        "banner_image2": "images/banner/main_banner_07_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_07_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -628,7 +628,7 @@
         "banner_sub_title": "어떤 장소에서나 활용할 수 있는 청소용품",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_08_mo.jpg",
+        "banner_image": "/images/banner/main_banner_08_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/125",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":116443,\"width\":750,\"height\":1042}",
@@ -648,7 +648,7 @@
         "created_at": "2025-04-22 11:22:30",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_08_mo.jpg",
-        "banner_image2": "images/banner/main_banner_08_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_08_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -664,7 +664,7 @@
         "banner_sub_title": "실용적이며 단정한 디자인의 무인양품 가구",
         "banner_sub_title_color": "#ffffff",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_09_mo.jpg",
+        "banner_image": "/images/banner/main_banner_09_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/187",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":214149,\"width\":540,\"height\":750}",
@@ -684,7 +684,7 @@
         "created_at": "2025-04-24 20:35:54",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_09_mo.jpg",
-        "banner_image2": "images/banner/main_banner_09_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_09_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       },
@@ -700,7 +700,7 @@
         "banner_sub_title": "오가닉 코튼과 리오셀 소재",
         "banner_sub_title_color": "#000000",
         "banner_content_type": "N",
-        "banner_image": "images/banner/main_banner_10_mo.jpg",
+        "banner_image": "/images/banner/main_banner_10_mo.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/381",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":73226,\"width\":750,\"height\":1042}",
@@ -720,7 +720,7 @@
         "created_at": "2026-07-03 17:50:49",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/banner/main_banner_10_mo.jpg",
-        "banner_image2": "images/banner/main_banner_10_mo.jpg",
+        "banner_image2": "/images/banner/main_banner_10_mo.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "메인 상단 배너"
       }
@@ -738,7 +738,7 @@
         "banner_sub_title": "신상품",
         "banner_sub_title_color": "#000000",
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_01.png",
+        "banner_image": "/images/circlenav/circlenav_01.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/new?qb=&category=2",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":1894,\"width\":200,\"height\":200}",
@@ -758,7 +758,7 @@
         "created_at": "2025-12-10 11:49:43",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_01.png",
-        "banner_image2": "images/circlenav/circlenav_01.png",
+        "banner_image2": "/images/circlenav/circlenav_01.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -774,7 +774,7 @@
         "banner_sub_title": "숏클립",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_02.png",
+        "banner_image": "/images/circlenav/circlenav_02.png",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/197",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":2371,\"width\":200,\"height\":200}",
@@ -794,7 +794,7 @@
         "created_at": "2025-05-07 16:50:53",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_02.png",
-        "banner_image2": "images/circlenav/circlenav_02.png",
+        "banner_image2": "/images/circlenav/circlenav_02.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -810,7 +810,7 @@
         "banner_sub_title": "MUJI GIFT CARD",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_03.png",
+        "banner_image": "/images/circlenav/circlenav_03.png",
         "banner_link_type": 0,
         "banner_image_link": "/mujisupport/giftcard?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":23082,\"width\":200,\"height\":200}",
@@ -830,7 +830,7 @@
         "created_at": "2025-06-30 17:37:43",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_03.png",
-        "banner_image2": "images/circlenav/circlenav_03.png",
+        "banner_image2": "/images/circlenav/circlenav_03.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -846,7 +846,7 @@
         "banner_sub_title": "SNS에 계속 뜨는 그 아이템.",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_04.png",
+        "banner_image": "/images/circlenav/circlenav_04.png",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/261?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":3075,\"width\":200,\"height\":200}",
@@ -866,7 +866,7 @@
         "created_at": "2025-08-11 11:02:10",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_04.png",
-        "banner_image2": "images/circlenav/circlenav_04.png",
+        "banner_image2": "/images/circlenav/circlenav_04.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -882,7 +882,7 @@
         "banner_sub_title": "남성",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_05.png",
+        "banner_image": "/images/circlenav/circlenav_05.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/5?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":31841,\"width\":201,\"height\":201}",
@@ -902,7 +902,7 @@
         "created_at": "2025-01-08 17:26:31",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_05.png",
-        "banner_image2": "images/circlenav/circlenav_05.png",
+        "banner_image2": "/images/circlenav/circlenav_05.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -918,7 +918,7 @@
         "banner_sub_title": "여성",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_06.png",
+        "banner_image": "/images/circlenav/circlenav_06.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/6?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":19518,\"width\":201,\"height\":201}",
@@ -938,7 +938,7 @@
         "created_at": "2025-01-08 17:27:05",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_06.png",
-        "banner_image2": "images/circlenav/circlenav_06.png",
+        "banner_image2": "/images/circlenav/circlenav_06.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -954,7 +954,7 @@
         "banner_sub_title": "아동",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_07.png",
+        "banner_image": "/images/circlenav/circlenav_07.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/7?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":34985,\"width\":201,\"height\":201}",
@@ -974,7 +974,7 @@
         "created_at": "2025-01-08 17:27:40",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_07.png",
-        "banner_image2": "images/circlenav/circlenav_07.png",
+        "banner_image2": "/images/circlenav/circlenav_07.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -990,7 +990,7 @@
         "banner_sub_title": "패션잡화",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_08.png",
+        "banner_image": "/images/circlenav/circlenav_08.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/8?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":21767,\"width\":201,\"height\":201}",
@@ -1010,7 +1010,7 @@
         "created_at": "2025-01-08 17:28:07",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_08.png",
-        "banner_image2": "images/circlenav/circlenav_08.png",
+        "banner_image2": "/images/circlenav/circlenav_08.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1026,7 +1026,7 @@
         "banner_sub_title": "생활용품",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_09.png",
+        "banner_image": "/images/circlenav/circlenav_09.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/26?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":5936,\"width\":201,\"height\":201}",
@@ -1046,7 +1046,7 @@
         "created_at": "2025-01-08 17:38:09",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_09.png",
-        "banner_image2": "images/circlenav/circlenav_09.png",
+        "banner_image2": "/images/circlenav/circlenav_09.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1062,7 +1062,7 @@
         "banner_sub_title": "주방용품",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_10.png",
+        "banner_image": "/images/circlenav/circlenav_10.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/22?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":14173,\"width\":201,\"height\":201}",
@@ -1082,7 +1082,7 @@
         "created_at": "2025-01-08 17:28:40",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_10.png",
-        "banner_image2": "images/circlenav/circlenav_10.png",
+        "banner_image2": "/images/circlenav/circlenav_10.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1098,7 +1098,7 @@
         "banner_sub_title": "패브릭",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_11.png",
+        "banner_image": "/images/circlenav/circlenav_11.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/23?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":10033,\"width\":200,\"height\":200}",
@@ -1118,7 +1118,7 @@
         "created_at": "2025-01-21 17:22:58",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_11.png",
-        "banner_image2": "images/circlenav/circlenav_11.png",
+        "banner_image2": "/images/circlenav/circlenav_11.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1134,7 +1134,7 @@
         "banner_sub_title": "수납/정리",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_12.png",
+        "banner_image": "/images/circlenav/circlenav_12.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/24?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":13327,\"width\":201,\"height\":201}",
@@ -1154,7 +1154,7 @@
         "created_at": "2025-01-08 17:29:32",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_12.png",
-        "banner_image2": "images/circlenav/circlenav_12.png",
+        "banner_image2": "/images/circlenav/circlenav_12.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1170,7 +1170,7 @@
         "banner_sub_title": "가구",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_13.png",
+        "banner_image": "/images/circlenav/circlenav_13.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/25?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":20279,\"width\":201,\"height\":201}",
@@ -1190,7 +1190,7 @@
         "created_at": "2025-01-08 17:30:01",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_13.png",
-        "banner_image2": "images/circlenav/circlenav_13.png",
+        "banner_image2": "/images/circlenav/circlenav_13.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1206,7 +1206,7 @@
         "banner_sub_title": "뷰티",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_14.png",
+        "banner_image": "/images/circlenav/circlenav_14.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/178",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":13530,\"width\":201,\"height\":201}",
@@ -1226,7 +1226,7 @@
         "created_at": "2025-01-09 12:25:18",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_14.png",
-        "banner_image2": "images/circlenav/circlenav_14.png",
+        "banner_image2": "/images/circlenav/circlenav_14.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1242,7 +1242,7 @@
         "banner_sub_title": "",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_15.png",
+        "banner_image": "/images/circlenav/circlenav_15.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/168?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":33862,\"width\":200,\"height\":200}",
@@ -1262,7 +1262,7 @@
         "created_at": "2025-09-24 08:55:06",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_15.png",
-        "banner_image2": "images/circlenav/circlenav_15.png",
+        "banner_image2": "/images/circlenav/circlenav_15.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1278,7 +1278,7 @@
         "banner_sub_title": "문구",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_16.png",
+        "banner_image": "/images/circlenav/circlenav_16.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/28?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":15939,\"width\":201,\"height\":201}",
@@ -1298,7 +1298,7 @@
         "created_at": "2025-01-08 17:39:48",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_16.png",
-        "banner_image2": "images/circlenav/circlenav_16.png",
+        "banner_image2": "/images/circlenav/circlenav_16.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1314,7 +1314,7 @@
         "banner_sub_title": "간편조리",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_17.png",
+        "banner_image": "/images/circlenav/circlenav_17.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/9?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":23033,\"width\":201,\"height\":201}",
@@ -1334,7 +1334,7 @@
         "created_at": "2025-01-09 16:03:55",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_17.png",
-        "banner_image2": "images/circlenav/circlenav_17.png",
+        "banner_image2": "/images/circlenav/circlenav_17.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1350,7 +1350,7 @@
         "banner_sub_title": "스낵",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_18.png",
+        "banner_image": "/images/circlenav/circlenav_18.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/10?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":29629,\"width\":201,\"height\":201}",
@@ -1370,7 +1370,7 @@
         "created_at": "2025-01-21 17:18:57",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_18.png",
-        "banner_image2": "images/circlenav/circlenav_18.png",
+        "banner_image2": "/images/circlenav/circlenav_18.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1386,7 +1386,7 @@
         "banner_sub_title": "가전/디지털",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_19.png",
+        "banner_image": "/images/circlenav/circlenav_19.png",
         "banner_link_type": 0,
         "banner_image_link": "/products/category/27?qb",
         "banner_image_info": "{\"type\":\"image\\/png\",\"size\":12343,\"width\":200,\"height\":200}",
@@ -1406,7 +1406,7 @@
         "created_at": "2025-01-08 17:39:24",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_19.png",
-        "banner_image2": "images/circlenav/circlenav_19.png",
+        "banner_image2": "/images/circlenav/circlenav_19.png",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       },
@@ -1422,7 +1422,7 @@
         "banner_sub_title": "Labo",
         "banner_sub_title_color": null,
         "banner_content_type": "N",
-        "banner_image": "images/circlenav/circlenav_20.jpg",
+        "banner_image": "/images/circlenav/circlenav_20.jpg",
         "banner_link_type": 0,
         "banner_image_link": "/plan/view/110?qb",
         "banner_image_info": "{\"type\":\"image\\/jpeg\",\"size\":51446,\"width\":201,\"height\":201}",
@@ -1442,7 +1442,7 @@
         "created_at": "2025-10-15 16:01:09",
         "video_thumbnail_image": null,
         "banner_image_url": "/images/circlenav/circlenav_20.jpg",
-        "banner_image2": "images/circlenav/circlenav_20.jpg",
+        "banner_image2": "/images/circlenav/circlenav_20.jpg",
         "site_name_kr": "무인양품 공식 온라인스토어",
         "code_name": "퀵배너"
       }
@@ -12011,11 +12011,11 @@
                   "hex": "#895129",
                   "color_name": "다크브라운 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/840/zuxzRPuKIOyxROYYJ9kfMgonJE2HhWyJ3Ionthql.jpg",
+                  "image_chip": "/images/products/womens/1005840/1005840_01.jpg",
                   "images": [
-                    "/images/products/1/840/1Rzj0StDHEl7ZWqwRADuqDMSDccsKOnkH8ClCSIj.jpg",
-                    "/images/products/1/840/LAKvD6khsMF2QLDbfwoqKm3atCzm3k3ifNXm8c6E.jpg",
-                    "/images/products/1/840/lJmYtge19htE4kZErG53zm3Ek4lcRi1Bt6GstYkJ.jpg"
+                    "/images/products/womens/1005840/1005840_c1_01.jpg",
+                    "/images/products/womens/1005840/1005840_c1_02.jpg",
+                    "/images/products/womens/1005840/1005840_c1_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -12081,14 +12081,14 @@
                   "hex": "#ede8d0",
                   "color_name": "베이지 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/840/JVnOuUImR5Gk86C8sHuAL3rvm4N81ESRThtnqIbf.jpg",
+                  "image_chip": "/images/products/womens/1005840/1005840_01.jpg",
                   "images": [
-                    "/images/products/1/840/IxjTg3ppb3hVPCKiI79gGE6ZVQQzNqCsVe8SMl8i.jpg",
-                    "/images/products/1/840/3Qzhnofu9mfjtVOSbsqkJOcIjGE2AYKPiLXodzTf.jpg",
-                    "/images/products/1/840/uxHt3NsBHX6GMDiXIY1DFWeoN4nwwNXsdMUU0Oxx.jpg",
-                    "/images/products/1/840/CXYC5BYnWQZ7EdSzbDp45AjJOqW5yjmOe3FkNzR6.jpg",
-                    "/images/products/1/840/IG6UDneHVBb2VwT2LGjGihrYbDqK7H50Gym3q7dk.jpg",
-                    "/images/products/1/840/vaHq7vMhvhR2zO2wZXVKgTWosrDkbE84vNIfgDU6.jpg"
+                    "/images/products/womens/1005840/1005840_c2_01.jpg",
+                    "/images/products/womens/1005840/1005840_c2_02.jpg",
+                    "/images/products/womens/1005840/1005840_c2_03.jpg",
+                    "/images/products/womens/1005840/1005840_c2_04.jpg",
+                    "/images/products/womens/1005840/1005840_c2_05.jpg",
+                    "/images/products/womens/1005840/1005840_c2_06.jpg"
                   ],
                   "sizes": [
                     {
@@ -12154,11 +12154,11 @@
                   "hex": "#ffffe3",
                   "color_name": "아이보리",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/840/Cdx9S3ZwuvCT7KX6FacFaDYHQ68NREl9Za2Nmsaw.jpg",
+                  "image_chip": "/images/products/womens/1005840/1005840_01.jpg",
                   "images": [
-                    "/images/products/1/840/MZWMBviY7FrJMF27g2A9szxNWSOiJ67PuleC0xa9.jpg",
-                    "/images/products/1/840/dCKK8jZ5Q7nwhGusUWkSLpXJHyNu5AQZKchtGPhc.jpg",
-                    "/images/products/1/840/GXNUpJOHXpjc1VEb3ZCmpUHylAea95Uiv1EFWDVb.jpg"
+                    "/images/products/womens/1005840/1005840_c3_01.jpg",
+                    "/images/products/womens/1005840/1005840_c3_02.jpg",
+                    "/images/products/womens/1005840/1005840_c3_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -12224,11 +12224,11 @@
                   "hex": "#008000",
                   "color_name": "다크그린 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/840/Hr8tpXKLKEi3zzaj49j3C0xXBhrQd2bJWgCTuRs5.jpg",
+                  "image_chip": "/images/products/womens/1005840/1005840_01.jpg",
                   "images": [
-                    "/images/products/1/840/ExBt7SuZKlI5CQ2mXjshQevAAQIYEu1W6jSDrGje.jpg",
-                    "/images/products/1/840/USbbDvYUrP526wA5zMeBqcdASspAC7I1EVYaKztm.jpg",
-                    "/images/products/1/840/HcrwovRcYeUzvDsz1G8wbg5ezGkUHnB2q26xwcIO.jpg"
+                    "/images/products/womens/1005840/1005840_c4_01.jpg",
+                    "/images/products/womens/1005840/1005840_c4_02.jpg",
+                    "/images/products/womens/1005840/1005840_c4_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -12294,11 +12294,11 @@
                   "hex": "#660033",
                   "color_name": "버건디 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/840/gIlU2o0Msqrfv5CWicSdpzhuNPfA4duvMlAHVlQU.jpg",
+                  "image_chip": "/images/products/womens/1005840/1005840_01.jpg",
                   "images": [
-                    "/images/products/1/840/URV5dQ2frfz34HDcIG2MTGROSFxoy7cPmsVJaMw2.jpg",
-                    "/images/products/1/840/RCfOKHO3oOU1LLTL0208klx746m7t84IY7NwoqhG.jpg",
-                    "/images/products/1/840/ChEzyYyBygzII0dnBDjUscpQoDSWLhzl83qdcXOR.jpg"
+                    "/images/products/womens/1005840/1005840_c5_01.jpg",
+                    "/images/products/womens/1005840/1005840_c5_02.jpg",
+                    "/images/products/womens/1005840/1005840_c5_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -12364,11 +12364,11 @@
                   "hex": "#e6e6fa",
                   "color_name": "라벤더 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/840/GUqsy7QztoJUQDSpexM5UYowIv3D2LU75UOUzBZ0.jpg",
+                  "image_chip": "/images/products/womens/1005840/1005840_01.jpg",
                   "images": [
-                    "/images/products/1/840/KcDF9Hsf22Y8m8aKltYON5Va4xlWx7jLIdndhln8.jpg",
-                    "/images/products/1/840/c6Dv4i9uiRbdXuT9y75QSvYggJJxvtG0iv4VpGfv.jpg",
-                    "/images/products/1/840/ZRxhvi2J5PV9SfbOBVhtL3DAGOjcxIuV4l5TYObr.jpg"
+                    "/images/products/womens/1005840/1005840_c6_01.jpg",
+                    "/images/products/womens/1005840/1005840_c6_02.jpg",
+                    "/images/products/womens/1005840/1005840_c6_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -12434,11 +12434,11 @@
                   "hex": "#FFC0CB",
                   "color_name": "스모키핑크 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/840/A1hMyxoeJ8R3eQVsxBVbnsZj0LJaDLA9VknQy9hU.jpg",
+                  "image_chip": "/images/products/womens/1005840/1005840_01.jpg",
                   "images": [
-                    "/images/products/1/840/mEvT89a4qzwB11bDbQqU3cfNSVmSqGUTpQ1ArBjb.jpg",
-                    "/images/products/1/840/sVq2Gbx5jQZH9pfYwpVf3YHzXDjDrrHf5rAyKGHe.jpg",
-                    "/images/products/1/840/fj8XKeYvJNTvsIC7DE0Y5RwCSc1q555yhgleGu0l.jpg"
+                    "/images/products/womens/1005840/1005840_c7_01.jpg",
+                    "/images/products/womens/1005840/1005840_c7_02.jpg",
+                    "/images/products/womens/1005840/1005840_c7_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -12504,11 +12504,11 @@
                   "hex": "#000080",
                   "color_name": "다크네이비",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/840/NNzGO8JfKcPDldpHhSBJiZsVLkxESt0TALMwAA0H.jpg",
+                  "image_chip": "/images/products/womens/1005840/1005840_01.jpg",
                   "images": [
-                    "/images/products/1/840/zXQ2ZNFeHH91QZd9NIKn8QJIZuqN0RPHtvvLILRp.jpg",
-                    "/images/products/1/840/7TYqpWr3IckWXeadIiqTNpHQb5MjM6Es4oQMxWiu.jpg",
-                    "/images/products/1/840/cQn2FKqdwQ4vBFGJ74L4Omfx9K2bL1RfhC3AEVa8.jpg"
+                    "/images/products/womens/1005840/1005840_c8_01.jpg",
+                    "/images/products/womens/1005840/1005840_c8_02.jpg",
+                    "/images/products/womens/1005840/1005840_c8_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -13995,11 +13995,11 @@
                   "hex": "#895129",
                   "color_name": "브라운 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/544/GbzalG3obqCH71Z4jkG3dhJcpyVFkGhpoeCo5uXY.jpg",
+                  "image_chip": "/images/products/womens/1005544/1005544_01.jpg",
                   "images": [
-                    "/images/products/1/544/vnJ3p6XTckaOFMDiJdx0dd8I4Qz29ZeMyfLzSWCv.jpg",
-                    "/images/products/1/544/mGT5Let8RHyYce0wAJZB9hu2sTYy3sFHmieKxbxG.jpg",
-                    "/images/products/1/544/ZlIoCt9dZdWJIFX3giUhjAlr1ZbRrUgPoisHe1ly.jpg"
+                    "/images/products/womens/1005544/1005544_c1_01.jpg",
+                    "/images/products/womens/1005544/1005544_c1_02.jpg",
+                    "/images/products/womens/1005544/1005544_c1_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -14065,11 +14065,11 @@
                   "hex": "#a9a9a9",
                   "color_name": "다크그레이",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/544/hYnN2qRVBhYTUzFpckyMFrufnkcHPaCUv3n5qF4z.jpg",
+                  "image_chip": "/images/products/womens/1005544/1005544_01.jpg",
                   "images": [
-                    "/images/products/1/544/lcH0B3lLxF7teKZyh4wHQGo1gTWzfsJqSnRGHnYo.jpg",
-                    "/images/products/1/544/SEtYzBh7YmQQ5H4furpPJ8DQOWYepBgh6hnnw7ij.jpg",
-                    "/images/products/1/544/cIV57wfPBbXcxzk9kLthTUBJkNplSrgL1QnfzsX3.jpg"
+                    "/images/products/womens/1005544/1005544_c2_01.jpg",
+                    "/images/products/womens/1005544/1005544_c2_02.jpg",
+                    "/images/products/womens/1005544/1005544_c2_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -14135,11 +14135,11 @@
                   "hex": "#ffffe3",
                   "color_name": "아이보리",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/544/eMLvYvQJeb7YkPJbIyfv9rJngSfFAeKUAwQiatgH.jpg",
+                  "image_chip": "/images/products/womens/1005544/1005544_01.jpg",
                   "images": [
-                    "/images/products/1/544/6JCuj90jeq1rMueSJNv4WdolsnQqiiAkzNzzXjKJ.jpg",
-                    "/images/products/1/544/OmLY1v5yJWFOvnF18Hcnw83uN2O5LcRC2aCjXlji.jpg",
-                    "/images/products/1/544/Gl529WeJ7IvBtbnM6zfFrfvPhLdJkaEyZAYNfEbR.jpg"
+                    "/images/products/womens/1005544/1005544_c3_01.jpg",
+                    "/images/products/womens/1005544/1005544_c3_02.jpg",
+                    "/images/products/womens/1005544/1005544_c3_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -14205,11 +14205,11 @@
                   "hex": "#008000",
                   "color_name": "그린 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/544/ZvwNkbQuv3938Kq1PTN8gQ8SZdcPW0Wc9gcUqCJp.jpg",
+                  "image_chip": "/images/products/womens/1005544/1005544_01.jpg",
                   "images": [
-                    "/images/products/1/544/2dMQ42OpJmt2iBgGRbsHml9sUVni4kgjssdbkvb2.jpg",
-                    "/images/products/1/544/UJuAnVS3WS7hgKIij4LwnwIWElo1Vrr4GhgmWzDf.jpg",
-                    "/images/products/1/544/lvFg0084D4j5DbRWK1PZyKy3T9HcCcxuElK76T9a.jpg"
+                    "/images/products/womens/1005544/1005544_c4_01.jpg",
+                    "/images/products/womens/1005544/1005544_c4_02.jpg",
+                    "/images/products/womens/1005544/1005544_c4_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -14275,11 +14275,11 @@
                   "hex": "#000000",
                   "color_name": "블랙 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/544/BmdmRhKw2wZzXMTrlu6gBJKt5faam7f7YP560Xk4.jpg",
+                  "image_chip": "/images/products/womens/1005544/1005544_01.jpg",
                   "images": [
-                    "/images/products/1/544/VCOTPTQJO8hfvXkAaIFi7O0ftNnCzHN3xMEybhgS.jpg",
-                    "/images/products/1/544/rvWBIWtb7UQlygxbGol3aDHf8n2Oo0eTTk3Xs4j7.jpg",
-                    "/images/products/1/544/CPuT0NJgXn3O5JBpTv5itStMSOLRVsMHYxqHAULE.jpg"
+                    "/images/products/womens/1005544/1005544_c5_01.jpg",
+                    "/images/products/womens/1005544/1005544_c5_02.jpg",
+                    "/images/products/womens/1005544/1005544_c5_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -14345,11 +14345,11 @@
                   "hex": "#898989",
                   "color_name": "라이트그레이 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/544/wCjYr25mKwhg2XnLdxRC90U1kAawWSVrn0wDnj0i.jpg",
+                  "image_chip": "/images/products/womens/1005544/1005544_01.jpg",
                   "images": [
-                    "/images/products/1/544/k13M1cOTkz5WakhPdezxbiUCkxb38bu5CZdemIIE.jpg",
-                    "/images/products/1/544/8T5JzGHu2ZXaGyTe3YD6sZQExJW6mBzTcFO3WdP7.jpg",
-                    "/images/products/1/544/GF4Ta5lbOI81t2UzAxZvHDPDcfEZRdxYn2IcDSjp.jpg"
+                    "/images/products/womens/1005544/1005544_c6_01.jpg",
+                    "/images/products/womens/1005544/1005544_c6_02.jpg",
+                    "/images/products/womens/1005544/1005544_c6_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -14415,14 +14415,14 @@
                   "hex": "#898989",
                   "color_name": "그레이 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/544/UNBUiIosYbs5Q45expn2dJZpa3P8zSqS0KEwzoOE.jpg",
+                  "image_chip": "/images/products/womens/1005544/1005544_01.jpg",
                   "images": [
-                    "/images/products/1/544/z1vtRAtzed3s8SUl1Ravx8QkrpRQwetW2bSp96dV.jpg",
-                    "/images/products/1/544/YvCM2zXSZECBTMr32VZOEdKpMTl658KBMHCTMeCT.jpg",
-                    "/images/products/1/544/afdVJkF7wZG5q3YhRojLCnMZ8FVws0g1qVzWDQ1y.jpg",
-                    "/images/products/1/544/CkgWsbPgW5YRlQQC7Uy2Iw411XZ2AoYkg8gUtFv5.jpg",
-                    "/images/products/1/544/eJ7khM9hwUwsd44BwDQKG95PRhojZ72yUFMcnTjc.jpg",
-                    "/images/products/1/544/Rc0ngcSxQRdWasHcZOl8HvD1lln5PzRq6YAwzSx3.jpg"
+                    "/images/products/womens/1005544/1005544_c7_01.jpg",
+                    "/images/products/womens/1005544/1005544_c7_02.jpg",
+                    "/images/products/womens/1005544/1005544_c7_03.jpg",
+                    "/images/products/womens/1005544/1005544_c7_04.jpg",
+                    "/images/products/womens/1005544/1005544_c7_05.jpg",
+                    "/images/products/womens/1005544/1005544_c7_06.jpg"
                   ],
                   "sizes": [
                     {
@@ -14890,8 +14890,8 @@
                   "color_chip": null,
                   "image_chip": "/images/products/womens/1005525/1005525_c4_chip.jpg",
                   "images": [
-                    "/images/products/1/525/m1dRmqxTL2gehVjp8ujqyc1ANfOlyILySTFVg4aU.jpg",
-                    "/images/products/1/525/LLiXbUHLhBGg0htbcLwM9h01jLUjQMHjvBgTVGMV.jpg"
+                    "/images/products/womens/1005525/1005525_c4_01.jpg",
+                    "/images/products/womens/1005525/1005525_c4_02.jpg"
                   ],
                   "sizes": [
                     {
@@ -15029,8 +15029,8 @@
                   "color_chip": null,
                   "image_chip": "/images/products/womens/1005525/1005525_c6_chip.jpg",
                   "images": [
-                    "/images/products/1/525/KodiDQzkUj8laEMKY6Kz9VB3K9SoywdMDyJoCKsz.jpg",
-                    "/images/products/1/525/JcpJFPkvfZIiMA737DHL6NkfvvujEUKRsjIXD3ZQ.jpg"
+                    "/images/products/womens/1005525/1005525_c6_01.jpg",
+                    "/images/products/womens/1005525/1005525_c6_02.jpg"
                   ],
                   "sizes": [
                     {
@@ -15098,8 +15098,8 @@
                   "color_chip": null,
                   "image_chip": "/images/products/womens/1005525/1005525_c7_chip.jpg",
                   "images": [
-                    "/images/products/1/525/ZfM3KJez5f3E11SqLCFMlgpZb3vdDdUgAsSmVro1.jpg",
-                    "/images/products/1/525/Enr4rAtbtAwVjmuM6XUee1vecVhEDzjlQvu8JIG5.jpg"
+                    "/images/products/womens/1005525/1005525_c7_01.jpg",
+                    "/images/products/womens/1005525/1005525_c7_02.jpg"
                   ],
                   "sizes": [
                     {
@@ -15167,8 +15167,8 @@
                   "color_chip": null,
                   "image_chip": "/images/products/womens/1005525/1005525_c8_chip.jpg",
                   "images": [
-                    "/images/products/1/525/xA5HUau5OsGnXZqh1uZtoIBYstgupQyX7f5XlFX9.jpg",
-                    "/images/products/1/525/AyzFbieySDeo4bZQPSkkteJcMwfo6Z59igtuAB10.jpg"
+                    "/images/products/womens/1005525/1005525_c8_01.jpg",
+                    "/images/products/womens/1005525/1005525_c8_02.jpg"
                   ],
                   "sizes": [
                     {
@@ -16651,9 +16651,9 @@
                   "color_chip": null,
                   "image_chip": "",
                   "images": [
-                    "/images/products/1/529/kgowLgvd2CFPTNLGyxTNSgc5wedHTNRVj0wZfOe4.jpg",
-                    "/images/products/1/529/OcF8e7DvhTS0ALqMPrlNdUamF2IvzViTJlsidO6j.jpg",
-                    "/images/products/1/529/3omv6pJTgvU4nxGgTTIQAiUaSf9MArn5cWGGZhar.jpg"
+                    "/images/products/womens/1005529/1005529_c1_01.jpg",
+                    "/images/products/womens/1005529/1005529_c1_02.jpg",
+                    "/images/products/womens/1005529/1005529_c1_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -16721,9 +16721,9 @@
                   "color_chip": null,
                   "image_chip": "",
                   "images": [
-                    "/images/products/1/529/dOc5wec1ZOLiTVTLwYwSUIQIlZAyAbMp19V2T8zv.jpg",
-                    "/images/products/1/529/V67k3xBUdiqmFHrs3DcdBcUscBfxUNhqTxn80Sd1.jpg",
-                    "/images/products/1/529/RNlTL8Cdyq6EvLQTjb5opPiZh5RaFE4S1vMtNim4.jpg"
+                    "/images/products/womens/1005529/1005529_c2_01.jpg",
+                    "/images/products/womens/1005529/1005529_c2_02.jpg",
+                    "/images/products/womens/1005529/1005529_c2_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -16791,7 +16791,7 @@
                   "color_chip": null,
                   "image_chip": "",
                   "images": [
-                    "/images/products/1/529/STT8m0uxFodBxubLWf69RVUn3vRBuD7hlRWyKAXF.jpg"
+                    "/images/products/womens/1005529/1005529_c3_01.jpg"
                   ],
                   "sizes": [
                     {
@@ -16859,7 +16859,7 @@
                   "color_chip": null,
                   "image_chip": "",
                   "images": [
-                    "/images/products/1/529/PvWcpYMfh1elYWrKmWTvsUqLzv1ncr4jgJpQU2k3.jpg"
+                    "/images/products/womens/1005529/1005529_c4_01.jpg"
                   ],
                   "sizes": [
                     {
@@ -16927,8 +16927,8 @@
                   "color_chip": null,
                   "image_chip": "",
                   "images": [
-                    "/images/products/1/529/4PZaS2j1srVnEeWGK9qfoc4V2fEh4aM8oN9bpamY.jpg",
-                    "/images/products/1/529/QSyzFugtPzrBGNlo7cwfc2LlbEEMKEpMXK99Shih.jpg"
+                    "/images/products/womens/1005529/1005529_c5_01.jpg",
+                    "/images/products/womens/1005529/1005529_c5_02.jpg"
                   ],
                   "sizes": [
                     {
@@ -16996,7 +16996,7 @@
                   "color_chip": null,
                   "image_chip": "",
                   "images": [
-                    "/images/products/1/529/SXhfrfleCk4uRK1YCNIQM89jqdXI7paBdj5PzM6d.jpg"
+                    "/images/products/womens/1005529/1005529_c6_01.jpg"
                   ],
                   "sizes": [
                     {
@@ -17690,12 +17690,12 @@
                   "hex": "#898989",
                   "color_name": "그레이 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/497/Y1q1AKNHfPlOLvDKLZVnH4EZL0Dd5CJUHcqnt0s3.jpg",
+                  "image_chip": "/images/products/womens/1005497/1005497_01.jpg",
                   "images": [
-                    "/images/products/1/497/TMFBL9S4ud9Y1bcm0wkPfiWbPmv7GKYw51ZP8XHx.jpg",
-                    "/images/products/1/497/7Xe4bxngt2weP6Ui5ZVNx4GeB86EDmMGnZieHE8t.jpg",
-                    "/images/products/1/497/wnBsixakq8i2HOTDxC5DL8kATnCM4tzr9CEKwcLn.jpg",
-                    "/images/products/1/497/wpRYqBy9TdonlTwi0qfIclrwEodxlEYHdYGqFifH.jpg"
+                    "/images/products/womens/1005497/1005497_c1_01.jpg",
+                    "/images/products/womens/1005497/1005497_c1_02.jpg",
+                    "/images/products/womens/1005497/1005497_c1_03.jpg",
+                    "/images/products/womens/1005497/1005497_c1_04.jpg"
                   ],
                   "sizes": [
                     {
@@ -17761,12 +17761,12 @@
                   "hex": "#895129",
                   "color_name": "모카브라운 체크",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/497/apUmEGBxEB1SS7mQcpQ2aSSk1crMhUHpJZZ1qpMK.jpg",
+                  "image_chip": "/images/products/womens/1005497/1005497_01.jpg",
                   "images": [
-                    "/images/products/1/497/1iCwL71s5UuGiNJfw9Fdf7e4PBPKoiPfjK2D5g78.jpg",
-                    "/images/products/1/497/RQRviwoDeaR0r4x2T6QPl5M3dBtY3yTkb576c53n.jpg",
-                    "/images/products/1/497/pfyDA7QZ8jua6xXXjf4qLBdcGcBIk1n1nJQ8ZaMp.jpg",
-                    "/images/products/1/497/zjiKqF4PtEuRzhOGLfCSqq8hrbl3OM1qfx0doDZA.jpg"
+                    "/images/products/womens/1005497/1005497_c2_01.jpg",
+                    "/images/products/womens/1005497/1005497_c2_02.jpg",
+                    "/images/products/womens/1005497/1005497_c2_03.jpg",
+                    "/images/products/womens/1005497/1005497_c2_04.jpg"
                   ],
                   "sizes": [
                     {
@@ -20405,7 +20405,6 @@
                   "color_chip": null,
                   "image_chip": "/images/products/womens/1005431/1005431_c1_chip.jpg",
                   "images": [
-                    "/images/products/1/431/2ACrlRPhhmcc6DVWTT3DAoHxSU6HLLdnQVuezPIN.jpg",
                     "/images/products/womens/1005431/1005431_c1_02.jpg",
                     "/images/products/womens/1005431/1005431_c1_03.jpg",
                     "/images/products/womens/1005431/1005431_c1_04.jpg"
@@ -20476,7 +20475,6 @@
                   "color_chip": null,
                   "image_chip": "/images/products/womens/1005431/1005431_c2_chip.jpg",
                   "images": [
-                    "/images/products/1/431/A5yqMTNmAZfIl2hZoL7ZgMvN1QgNqJtzKng3tFI9.jpg",
                     "/images/products/womens/1005431/1005431_c2_02.jpg",
                     "/images/products/womens/1005431/1005431_c2_03.jpg",
                     "/images/products/womens/1005431/1005431_c2_04.jpg"
@@ -22358,12 +22356,12 @@
                   "hex": "#898989",
                   "color_name": "라이트그레이 스트라이프",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/317/vATLnm9t1CSxckBZlxFSQC8JHLunWL2DafFnhAla.jpg",
+                  "image_chip": "/images/products/womens/1005317/1005317_01.jpg",
                   "images": [
-                    "/images/products/1/317/9WsOQULhvqZaUxRF5MbNHi1MMKd4dD6tbjv3thGQ.jpg",
-                    "/images/products/1/317/6sE3rZKwNflOr8LjZtyxx5U6Appsl3OgFTRuKsWN.jpg",
-                    "/images/products/1/317/oJwvRCEFy1IFsBjeYdmoSCdmMYldplrZy5QyHgcd.jpg",
-                    "/images/products/1/317/yi9DTmAQGTUXfkPsK8wfK5hjQxEkPl8owx1MIOgp.jpg"
+                    "/images/products/womens/1005317/1005317_c1_01.jpg",
+                    "/images/products/womens/1005317/1005317_c1_02.jpg",
+                    "/images/products/womens/1005317/1005317_c1_03.jpg",
+                    "/images/products/womens/1005317/1005317_c1_04.jpg"
                   ],
                   "sizes": [
                     {
@@ -22429,11 +22427,11 @@
                   "hex": "#000000",
                   "color_name": "블랙",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/317/TKyvez0TordX981FikXKv4zq36MOGoKmFkshqCBd.jpg",
+                  "image_chip": "/images/products/womens/1005317/1005317_01.jpg",
                   "images": [
-                    "/images/products/1/317/Enkc6ObhEKrDC3WSEUWXjSZpfccF65rFzf9Xvlly.jpg",
-                    "/images/products/1/317/ykuRTpSno8gZEiOeqKWJJq1N9x08mSdGAlGSBkC8.jpg",
-                    "/images/products/1/317/ZRi5VAL4J2KNrPb4AMU91rGjOLaohHvkdQJnC6bc.jpg"
+                    "/images/products/womens/1005317/1005317_c2_01.jpg",
+                    "/images/products/womens/1005317/1005317_c2_02.jpg",
+                    "/images/products/womens/1005317/1005317_c2_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -22499,11 +22497,11 @@
                   "hex": "#ffde21",
                   "color_name": "옐로우",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/317/aqPEBHFlhBsFQGNKHvJkfWnRtiNASp1LsmP42vFp.jpg",
+                  "image_chip": "/images/products/womens/1005317/1005317_01.jpg",
                   "images": [
-                    "/images/products/1/317/qiuR6URLikMzCkKUnzmeAOMCydvFc3znyft1yoDd.jpg",
-                    "/images/products/1/317/6PNZySok4eVxenalNlMxysDcFSPygmtPdONXpbeE.jpg",
-                    "/images/products/1/317/UnwBRV40LFJiiN7v3JEHaH8BpuuhNdOOctyZHltQ.jpg"
+                    "/images/products/womens/1005317/1005317_c3_01.jpg",
+                    "/images/products/womens/1005317/1005317_c3_02.jpg",
+                    "/images/products/womens/1005317/1005317_c3_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -22569,11 +22567,11 @@
                   "hex": "#895129",
                   "color_name": "모카브라운 스트라이프",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/317/npTRlrVARVgIqEPd5EWZyFVjHPum7pYD0qJkSZa1.jpg",
+                  "image_chip": "/images/products/womens/1005317/1005317_01.jpg",
                   "images": [
-                    "/images/products/1/317/gIEdGuSvWD44kWhgixZ3jKbFlgswyTjtx8lhb75G.jpg",
-                    "/images/products/1/317/RbJubKe0oGeQybKISPZBdVDX7AkzdW6zRv9w6rpC.jpg",
-                    "/images/products/1/317/YXYboC6nv30uUM2wifeEnV9xKk1SUur8h0VP6Ox9.jpg"
+                    "/images/products/womens/1005317/1005317_c4_01.jpg",
+                    "/images/products/womens/1005317/1005317_c4_02.jpg",
+                    "/images/products/womens/1005317/1005317_c4_03.jpg"
                   ],
                   "sizes": [
                     {
@@ -36144,12 +36142,12 @@
                   "color_chip": null,
                   "image_chip": "",
                   "images": [
-                    "/images/products/1/550/FBLWYGCT2lchoyud0Lmq6LPnImTD9YY3PkA4fEub.jpg",
-                    "/images/products/1/550/4HysQZI61EyFsmPRr4ReGhaWGOIOP4zLeUQMTgIp.jpg",
-                    "/images/products/1/550/Vrma13NJfLeMiPy1gLqwsR72pGdRdXjlNrpcUb2d.jpg",
-                    "/images/products/1/550/EgTDYM0Q9yuZJASkLamTV8rtO9BGn9CyQwjWKBAQ.jpg",
-                    "/images/products/1/550/qnkdn5vQRWqmcwFuQzSV8fsRL5WpGSIhbxPQstjV.jpg",
-                    "/images/products/1/550/D6aSoH3arK2LapxGQhXEcaHKzkLQR1fOtlpbvCbv.jpg"
+                    "/images/products/fashion_accessories/1005550/1005550_c1_01.jpg",
+                    "/images/products/fashion_accessories/1005550/1005550_c1_02.jpg",
+                    "/images/products/fashion_accessories/1005550/1005550_c1_03.jpg",
+                    "/images/products/fashion_accessories/1005550/1005550_c1_04.jpg",
+                    "/images/products/fashion_accessories/1005550/1005550_c1_05.jpg",
+                    "/images/products/fashion_accessories/1005550/1005550_c1_06.jpg"
                   ],
                   "sizes": [
                     {
@@ -36292,13 +36290,13 @@
                   "color_chip": null,
                   "image_chip": "",
                   "images": [
-                    "/images/products/1/549/DrXNoCA0xGiv2mfRA6RKnZT2Ueg7lslAVBHeHADJ.jpg",
-                    "/images/products/1/549/9m2h370ivOOwp0YRnALe8zFN94MNi1WfauoGVDLY.jpg",
-                    "/images/products/1/549/Wkxvf2OHy9EZCgbdFdLlNdtcWWjnwl3B0o4fFrZ8.jpg",
-                    "/images/products/1/549/lg5dqQMHAAdkHPgaFOIPQx2NzUsQ28aE4qQQY2Dk.jpg",
-                    "/images/products/1/549/bsOTgFqRazXBbM8o884D17oWI1jmDTcmVcufp9Gm.jpg",
-                    "/images/products/1/549/VnDukZLeZn0Ay4LVczU0RhKr62agwCwayCjWiKIo.jpg",
-                    "/images/products/1/549/eCtNWOtm6zcgalm332snRhFulbInQ80u2xQCLpAt.jpg"
+                    "/images/products/fashion_accessories/1005549/1005549_c1_01.jpg",
+                    "/images/products/fashion_accessories/1005549/1005549_c1_02.jpg",
+                    "/images/products/fashion_accessories/1005549/1005549_c1_03.jpg",
+                    "/images/products/fashion_accessories/1005549/1005549_c1_04.jpg",
+                    "/images/products/fashion_accessories/1005549/1005549_c1_05.jpg",
+                    "/images/products/fashion_accessories/1005549/1005549_c1_06.jpg",
+                    "/images/products/fashion_accessories/1005549/1005549_c1_07.jpg"
                   ],
                   "sizes": [
                     {
@@ -36441,13 +36439,13 @@
                   "color_chip": null,
                   "image_chip": "",
                   "images": [
-                    "/images/products/1/548/0gC31LMgNtWYzAtrbL92PcccEVGLrwhWVGQBksMT.jpg",
-                    "/images/products/1/548/SQCuqJ0gZi0CdZaFuGp3gTUznj0UQcEVxGaegpMg.jpg",
-                    "/images/products/1/548/0QSHWmRcCNiTsqIxgiZA2mL2dzTePoMCtnWvl9lz.jpg",
-                    "/images/products/1/548/hSC9KQthEtRRAj3bYb2M4nNiq9lWUk1jqBE1wOTo.jpg",
-                    "/images/products/1/548/mwWuu76zEiQe82Tl7Jwp6HVBfDkXjGNjLHrTzaJL.jpg",
-                    "/images/products/1/548/NCag9DrSVhY74j7OpOo5h8JpQkfjj8CLIerN3qam.jpg",
-                    "/images/products/1/548/jyYzHly2FVkf2H5ZUq20ydkgTGITsG6vNbFBLIgF.jpg"
+                    "/images/products/fashion_accessories/1005548/1005548_c1_01.jpg",
+                    "/images/products/fashion_accessories/1005548/1005548_c1_02.jpg",
+                    "/images/products/fashion_accessories/1005548/1005548_c1_03.jpg",
+                    "/images/products/fashion_accessories/1005548/1005548_c1_04.jpg",
+                    "/images/products/fashion_accessories/1005548/1005548_c1_05.jpg",
+                    "/images/products/fashion_accessories/1005548/1005548_c1_06.jpg",
+                    "/images/products/fashion_accessories/1005548/1005548_c1_07.jpg"
                   ],
                   "sizes": [
                     {
@@ -37956,7 +37954,7 @@
                   "hex": "#000000",
                   "color_name": "블랙",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/513/gyc1VleaB7AMhl4vzTqjb7Gs625tRzKeRzy8glqb.jpg",
+                  "image_chip": "/images/products/fashion_accessories/1003513/1003513_c1_01.jpg",
                   "images": [
                     "/images/products/fashion_accessories/1003513/1003513_c1_01.jpg",
                     "/images/products/fashion_accessories/1003513/1003513_c1_02.jpg",
@@ -41767,9 +41765,9 @@
                   "hex": null,
                   "color_name": "기타",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/343/LPKmS8bKUPn9boE3YOqWjrKKbtYN5sLlaUXqYpwW.jpg",
+                  "image_chip": "/images/products/fabric/1005343/1005343_01.jpg",
                   "images": [
-                    "/images/products/1/343/5mxKcIb2maHiRqput3iWyIdDMpzQFgBqZPI8xwyl.jpg"
+                    "/images/products/fabric/1005343/1005343_01.jpg"
                   ],
                   "sizes": [
                     {
@@ -41849,8 +41847,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/fabric/1005343/1005343_01.jpg",
-              "/images/products/1/343/nmvgevkv9p9w8iF36WMTBlasyq4gIZmrJBSrkxHN.jpg"
+              "/images/products/fabric/1005343/1005343_01.jpg"
             ]
           },
           {
@@ -42209,9 +42206,9 @@
                   "hex": null,
                   "color_name": "기타",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/340/a2kabHuvcnWIPqXmsG0Y5ouwk5uxcmsX8QV9DpxN.jpg",
+                  "image_chip": "/images/products/fabric/1005340/1005340_01.jpg",
                   "images": [
-                    "/images/products/1/340/1GukoKJ8nRX0WaScbSX4B1j5vmEBuJDFy0OmQi6f.jpg"
+                    "/images/products/fabric/1005340/1005340_01.jpg"
                   ],
                   "sizes": [
                     {
@@ -42291,8 +42288,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/fabric/1005340/1005340_01.jpg",
-              "/images/products/1/340/ouvvAJqllqN8bYTMdQZEjpWjx8f9btDwaRhAGBtv.jpg"
+              "/images/products/fabric/1005340/1005340_01.jpg"
             ]
           },
           {
@@ -45873,8 +45869,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/storage/1005346/1005346_01.jpg",
-              "/images/products/1/346/Txm70IpnFwPDUkMZ5rgdW4u8xhcMx4g0ucBgoQnV.jpg"
+              "/images/products/storage/1005346/1005346_01.jpg"
             ]
           },
           {
@@ -47225,8 +47220,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/storage/1003686/1003686_01.jpg",
-              "/images/products/1/686/kIOZyUIVloa2rt8qwVczZUwwuKojy1NtZVHao5Wl.jpg"
+              "/images/products/storage/1003686/1003686_01.jpg"
             ]
           },
           {
@@ -47379,8 +47373,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/storage/1003685/1003685_01.jpg",
-              "/images/products/1/685/TsiaZaHmAWSerzvpzdWaSChtNsKMrD5BYs3mPKlZ.jpg"
+              "/images/products/storage/1003685/1003685_01.jpg"
             ]
           },
           {
@@ -47538,8 +47531,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/storage/1003684/1003684_01.jpg",
-              "/images/products/1/684/XeWSrWqy6Ed2pwgz6UK5f7Li5r2x3sE3tvKjyNTm.jpg"
+              "/images/products/storage/1003684/1003684_01.jpg"
             ]
           },
           {
@@ -47699,8 +47691,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/storage/1003682/1003682_01.jpg",
-              "/images/products/1/682/WryeCqZFeXL90hyCyTJNoAlWNjssXqHVzYfZN2vH.jpg"
+              "/images/products/storage/1003682/1003682_01.jpg"
             ]
           },
           {
@@ -47999,8 +47990,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/storage/1003200/1003200_01.jpg",
-              "/images/products/1/200/efMwRpthGUqDagEh8h11uJge6fyrQ5JV1V3SvYHL.jpg"
+              "/images/products/storage/1003200/1003200_01.jpg"
             ]
           },
           {
@@ -48151,8 +48141,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/storage/1003199/1003199_01.jpg",
-              "/images/products/1/199/xQ3rAm8DkAjyDnJJYwyNSyIzTmK0LlSCZ7YJZKUb.jpg"
+              "/images/products/storage/1003199/1003199_01.jpg"
             ]
           },
           {
@@ -48300,8 +48289,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/storage/1003198/1003198_01.jpg",
-              "/images/products/1/198/deR9e2YyyUuhB78ou3gkuiTZ9SjrnZypvAcLl1JZ.jpg"
+              "/images/products/storage/1003198/1003198_01.jpg"
             ]
           },
           {
@@ -48458,8 +48446,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/storage/1003197/1003197_01.jpg",
-              "/images/products/1/197/QpHvlFdEeAAsoFuGrd3toXdfLeYmi21WRvQqdWng.jpg"
+              "/images/products/storage/1003197/1003197_01.jpg"
             ]
           }
         ]
@@ -48825,9 +48812,9 @@
                   "hex": "#895129",
                   "color_name": "브라운",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/307/3NPuJwFXut2CZfq3YNIdvE8dKPCbWjJwQKXFnVTT.jpg",
+                  "image_chip": "/images/products/furniture/1005307/1005307_01.jpg",
                   "images": [
-                    "/images/products/1/307/ExkPfX9MIKtz9LHe9XW1965gZEuZl4RQm6ucRejt.jpg"
+                    "/images/products/furniture/1005307/1005307_01.jpg"
                   ],
                   "sizes": [
                     {
@@ -48907,8 +48894,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/furniture/1005307/1005307_01.jpg",
-              "/images/products/1/307/z2K7IWlbrK1Mnuw7xxYtKJLHbQnZDoaNKkepMdkK.jpg"
+              "/images/products/furniture/1005307/1005307_01.jpg"
             ]
           },
           {
@@ -48969,9 +48955,9 @@
                   "hex": "#ede8d0",
                   "color_name": "베이지",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/306/a0geV19fcCyA3sJpsWkctvD6YtU69B42II3aY3gA.jpg",
+                  "image_chip": "/images/products/furniture/1005306/1005306_01.jpg",
                   "images": [
-                    "/images/products/1/306/LQJSNsatf1i8xuqosFeGC37OrUvmk8mLCiwtyMNl.jpg"
+                    "/images/products/furniture/1005306/1005306_01.jpg"
                   ],
                   "sizes": [
                     {
@@ -49051,8 +49037,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/furniture/1005306/1005306_01.jpg",
-              "/images/products/1/306/wyNM4U2GwlNtYNZSjOf96Lm4UxR5cILGpN5K8AxI.jpg"
+              "/images/products/furniture/1005306/1005306_01.jpg"
             ]
           },
           {
@@ -49113,9 +49098,9 @@
                   "hex": "#FAEBD7",
                   "color_name": "에크루",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/305/84Wser7h1Aa5ao7kKusg6EBkyi4wVIJUkcDWCqJ0.jpg",
+                  "image_chip": "/images/products/furniture/1005305/1005305_01.jpg",
                   "images": [
-                    "/images/products/1/305/4UTeXTaKqWnW23WRQPCshIG6UQ83pHZ3rJ1EVXdP.jpg"
+                    "/images/products/furniture/1005305/1005305_01.jpg"
                   ],
                   "sizes": [
                     {
@@ -49195,8 +49180,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/furniture/1005305/1005305_01.jpg",
-              "/images/products/1/305/Qu6Hc8WXXcbPCzAEeLYkIQy1tJPqGZxrwWNEYAsu.jpg"
+              "/images/products/furniture/1005305/1005305_01.jpg"
             ]
           },
           {
@@ -50502,8 +50486,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/furniture/1005274/1005274_01.jpg",
-              "/images/products/1/274/pTF2H2UBz4nZxEwvCf52sjNcO8XZqps5UrvvYKXV.jpg"
+              "/images/products/furniture/1005274/1005274_01.jpg"
             ]
           },
           {
@@ -50644,7 +50627,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/1/272/zwb7L5JkDU0NS2K6CMHShblWLdf8eKS89ECQCEsa.jpg"
+              "/images/products/furniture/1005272/1005272_01.jpg"
             ]
           },
           {
@@ -50785,7 +50768,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/1/271/HFPQBfzrqYJUlaKQn7zeucv4dQUPs5yGeawbQY1N.jpg"
+              "/images/products/furniture/1005271/1005271_01.jpg"
             ]
           },
           {
@@ -53517,7 +53500,7 @@
                   "hex": "#008000",
                   "color_name": "페일그린",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/717/HlzfEvS205gSPN0IZGlGLgWB7vQpriIZvNN0BkrY.jpg",
+                  "image_chip": "/images/products/living/1004717/1004717_c1_01.jpg",
                   "images": [
                     "/images/products/living/1004717/1004717_c1_01.jpg",
                     "/images/products/living/1004717/1004717_c1_02.jpg"
@@ -55143,9 +55126,8 @@
                   "hex": "#ffffff",
                   "color_name": "화이트",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/712/bcRoY8H1OWsmqOOLL5lgKAxlcXi9cBcnb7U57Acq.jpg",
+                  "image_chip": "/images/products/electronics/1005712/1005712_c1_02.jpg",
                   "images": [
-                    "/images/products/1/712/3Npt8iNwheHmQQWEsPWW6Nr7N6QSijsKHAzP4SC0.jpg",
                     "/images/products/electronics/1005712/1005712_c1_02.jpg",
                     "/images/products/electronics/1005712/1005712_c1_03.jpg",
                     "/images/products/electronics/1005712/1005712_c1_04.jpg",
@@ -55239,8 +55221,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/electronics/1005712/1005712_01.jpg",
-              "/images/products/1/712/IOl85nvt5ymnQqmkVoADBPOCvu2Xz9EPbpUlyB5R.jpg"
+              "/images/products/electronics/1005712/1005712_01.jpg"
             ]
           },
           {
@@ -55393,8 +55374,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/electronics/1004932/1004932_01.jpg",
-              "/images/products/1/932/8BHlNPOIwkA10oLlnp9MUdcYyyNXoK5LkuedE22d.jpg"
+              "/images/products/electronics/1004932/1004932_01.jpg"
             ]
           },
           {
@@ -56176,8 +56156,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/electronics/1002714/1002714_01.jpg",
-              "/images/products/1/714/0sVmySOISuLYw2dLU8oPZX83LM70YqcrTXmv49m3.jpg"
+              "/images/products/electronics/1002714/1002714_01.jpg"
             ]
           },
           {
@@ -61240,8 +61219,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/stationery/1003695/1003695_01.jpg",
-              "/images/products/1/695/kRo5VTZdKrffBxPE4lURbDfnrJAR5q3cs7XuoHS3.jpg"
+              "/images/products/stationery/1003695/1003695_01.jpg"
             ]
           },
           {
@@ -61396,8 +61374,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/stationery/1003694/1003694_01.jpg",
-              "/images/products/1/694/32R6DrfzEpYjqh77MhsbCIsoCsPf5JE11r1ATd32.jpg"
+              "/images/products/stationery/1003694/1003694_01.jpg"
             ]
           },
           {
@@ -61552,8 +61529,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/stationery/1003693/1003693_01.jpg",
-              "/images/products/1/693/ojn2IktHZTe71e6HFMPBXa7GSWZHt6ZqOHZg7IQR.jpg"
+              "/images/products/stationery/1003693/1003693_01.jpg"
             ]
           },
           {
@@ -61708,8 +61684,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/stationery/1003692/1003692_01.jpg",
-              "/images/products/1/692/4vEP3E9K5T0Ec5NdswA8ZYYRf4AXIDUwZHNvmXQu.jpg"
+              "/images/products/stationery/1003692/1003692_01.jpg"
             ]
           },
           {
@@ -62515,7 +62490,7 @@
                   "hex": "#ffffff",
                   "color_name": "화이트",
                   "color_chip": null,
-                  "image_chip": "/images/products/1/493/Zo9S3sYHNesb5JgYS4mI5p6rHaS3OnKh35Xueiyt.jpg",
+                  "image_chip": "/images/products/beauty/1005493/1005493_c1_01.jpg",
                   "images": [
                     "/images/products/beauty/1005493/1005493_c1_01.jpg"
                   ],
@@ -66365,8 +66340,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/food_cooking/94092/94092_01.jpg",
-              "/images/products/1/92/VRxlYQbR75ymqEoq4XpylZEzO1nvWdCqkDyAqEBL.jpg"
+              "/images/products/food_cooking/94092/94092_01.jpg"
             ]
           },
           {
@@ -66898,8 +66872,7 @@
             "sell_discount_rate": 0,
             "brand": [],
             "thumbnail_list": [
-              "/images/products/food_cooking/94393/94393_01.jpg",
-              "/images/products/1/393/5QICG0q8PNWsvMjSaYW1VSWQKLKCwhJIV2kQww6u.webp"
+              "/images/products/food_cooking/94393/94393_01.jpg"
             ]
           },
           {
