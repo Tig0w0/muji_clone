@@ -1,5 +1,5 @@
 <details>
-  <summary>📑 <b>발표 자료 슬라이드 전체 보기 (클릭하여 펼치기)</b></summary>
+  <summary><b>ppt 자료 보기</b></summary>
   <img src="./MUJI_Clone_Presentation_v6/MUJI_Clone_Presentation_v6_page-0001.jpg" width="100%" />
   <img src="./MUJI_Clone_Presentation_v6/MUJI_Clone_Presentation_v6_page-0002.jpg" width="100%" />
   <img src="./MUJI_Clone_Presentation_v6/MUJI_Clone_Presentation_v6_page-0003.jpg" width="100%" />
