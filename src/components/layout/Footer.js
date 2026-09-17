@@ -5,7 +5,8 @@ import { getProductDetail, getProductImage } from '../../data/catalog';
 
 const Footer = () => {
   useLocation(); // Route 변경 시 재렌더링 유발
-  const recentId = localStorage.getItem('recentProductId');
+  let recentId = null;
+  try { recentId = JSON.parse(localStorage.getItem('recentProductIds') || '[]')[0] || null; } catch (e) {}
   const recentProduct = recentId ? getProductDetail(recentId) : null;
   const recentImage = recentProduct ? getProductImage(recentProduct) : null;
 
