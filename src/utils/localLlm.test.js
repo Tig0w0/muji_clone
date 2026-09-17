@@ -21,3 +21,15 @@ test('removes repeated product names and prices from model reasons', () => {
   );
   expect(reason).toBe('편안한 잠옷으로 추천합니다');
 });
+
+test('explains WebGPU adapter failures without blaming the network', async () => {
+  const { describeLocalLlmError } = await import('./localLlmPolicy');
+  expect(describeLocalLlmError({ code: 'WEBGPU_ADAPTER_UNAVAILABLE' }))
+    .toContain('WebGPU 어댑터');
+});
+
+test('keeps product search available after GPU memory failures', async () => {
+  const { describeLocalLlmError } = await import('./localLlmPolicy');
+  expect(describeLocalLlmError({ code: 'GPU_MEMORY_OR_DEVICE_LOST' }))
+    .toContain('상품 검색은 계속 사용할 수 있습니다');
+});
