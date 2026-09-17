@@ -9,6 +9,23 @@ import ProductGallery from '../components/product/ProductGallery';
 import ProductInfo from '../components/product/ProductInfo';
 import ProductDescription from '../components/product/ProductDescription';
 
+const ProductStrip = ({ title, products, className }) => (
+  <section className={`${className} px-4 pb-10 lg:px-0`}>
+    <h2 className="mb-8 text-xl font-semibold lg:text-[32px]">{title}</h2>
+    <Swiper modules={[FreeMode]} freeMode={true} slidesPerView="auto" spaceBetween={20} className="w-full">
+      {products.map(item => (
+        <SwiperSlide key={item.product_id} className="!w-[44vw] shrink-0 lg:!w-[14.58vw]">
+          <Link to={`/products/view/${item.product_id}`} className="block">
+            <img src={getProductImage(item)} alt={item.product_name} loading="lazy" className="aspect-square w-full bg-neutral-100 object-cover mix-blend-multiply" />
+            <p className="mt-3 truncate text-sm">{item.product_name}</p>
+            <p className="mt-2 text-sm font-semibold">{Number(item.sell_price).toLocaleString('ko-KR')}원</p>
+          </Link>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </section>
+);
+
 const ProductDetailContent = ({ product }) => {
   const id = product.product_id;
   const [color, setColor] = useState(0);
@@ -39,8 +56,6 @@ const ProductDetailContent = ({ product }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     setColor(0);
-    localStorage.setItem('recentProductId', id);
-    
     let recents = [];
     try { recents = JSON.parse(localStorage.getItem('recentProductIds') || '[]'); } catch (e) {}
     recents = recents.filter(rid => rid !== id);
@@ -77,39 +92,8 @@ const ProductDetailContent = ({ product }) => {
           </aside>
           <div className="mt-16 min-w-0 lg:mt-20"><ProductDescription product={product} /></div>
         </div>
-        {popularRanking.length > 0 && (
-          <section className="mt-24 px-4 pb-10 lg:px-0">
-            <h2 className="mb-8 text-xl font-semibold lg:text-[32px]">인기랭킹</h2>
-            <Swiper modules={[FreeMode]} freeMode={true} slidesPerView="auto" spaceBetween={20} className="w-full">
-              {popularRanking.map(item => (
-                <SwiperSlide key={item.product_id} className="!w-[44vw] shrink-0 lg:!w-[14.58vw]">
-                  <Link to={`/products/view/${item.product_id}`} className="block">
-                    <img src={getProductImage(item)} alt={item.product_name} loading="lazy" className="aspect-square w-full bg-neutral-100 object-cover mix-blend-multiply" />
-                    <p className="mt-3 truncate text-sm">{item.product_name}</p>
-                    <p className="mt-2 text-sm font-semibold">{Number(item.sell_price).toLocaleString('ko-KR')}원</p>
-                  </Link>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </section>
-        )}
-
-        {recentlyViewed.length > 0 && (
-          <section className="mt-10 px-4 pb-10 lg:px-0">
-            <h2 className="mb-8 text-xl font-semibold lg:text-[32px]">최근 본 상품</h2>
-            <Swiper modules={[FreeMode]} freeMode={true} slidesPerView="auto" spaceBetween={20} className="w-full">
-              {recentlyViewed.map(item => (
-                <SwiperSlide key={item.product_id} className="!w-[44vw] shrink-0 lg:!w-[14.58vw]">
-                  <Link to={`/products/view/${item.product_id}`} className="block">
-                    <img src={getProductImage(item)} alt={item.product_name} loading="lazy" className="aspect-square w-full bg-neutral-100 object-cover mix-blend-multiply" />
-                    <p className="mt-3 truncate text-sm">{item.product_name}</p>
-                    <p className="mt-2 text-sm font-semibold">{Number(item.sell_price).toLocaleString('ko-KR')}원</p>
-                  </Link>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </section>
-        )}
+        {popularRanking.length > 0 && <ProductStrip title="인기랭킹" products={popularRanking} className="mt-24" />}
+        {recentlyViewed.length > 0 && <ProductStrip title="최근 본 상품" products={recentlyViewed} className="mt-10" />}
       </div>
     </main>
   );

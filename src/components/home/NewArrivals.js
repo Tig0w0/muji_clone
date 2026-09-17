@@ -70,7 +70,7 @@ const NewArrivals = () => {
                               src={getProductImage(product)}
                             />
                             {/* 품절 표시 */}
-                            {(product.total_stock === 0 || product.sale_state === 0) && (
+                            {(product.total_stock === 0 || product.sale_state !== 'ON') && (
                               <div className="text-neutral-0 absolute bottom-0 left-0 z-[10] flex h-full w-full items-center justify-center bg-black/50 py-1.5 text-center uppercase">
                                 <span className="inline-block text-[16px] font-bold text-white lg:text-[20px]">SOLD OUT</span>
                               </div>

@@ -32,7 +32,8 @@ def database_health(session: SessionDep):
 
 @app.get('/api/catalog/bootstrap')
 def catalog_bootstrap(session: SessionDep):
-    products = {p.product_id: p.raw_data for p in session.scalars(select(Product)).all()}
+    product_rows = session.scalars(select(Product)).all()
+    products = {p.product_id: p.raw_data for p in product_rows}
     categories = session.scalars(select(Category).order_by(Category.sort_order)).all()
     links = session.execute(
         select(ProductCategory.category_id, ProductCategory.product_id, ProductCategory.sort_order)
@@ -66,7 +67,6 @@ def catalog_bootstrap(session: SessionDep):
         })
 
     top_belts = session.scalars(select(TopBelt).order_by(TopBelt.sort_order)).all()
-    detail_products = session.scalars(select(Product).where(Product.is_detail.is_(True))).all()
 
     return {
         'topBelt': [item.raw_data for item in top_belts],
@@ -76,5 +76,5 @@ def catalog_bootstrap(session: SessionDep):
         'mainCategoryProducts': main_categories,
         'mainPlans': plan_groups.get('1_PLAN_0', []),
         'fromMujiPlans': plan_groups.get('1_PLAN_1', []),
-        'productDetailsList': [p.detail_data for p in detail_products if p.detail_data],
+        'productDetailsList': [p.detail_data for p in product_rows if p.is_detail and p.detail_data],
     }

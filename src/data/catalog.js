@@ -1,7 +1,7 @@
 
 import { asset } from '../utils/asset';
 
-// Runtime data is loaded from FastAPI/MySQL. JSON files are seed/test inputs only.
+// Runtime data is loaded from FastAPI/Supabase PostgreSQL. JSON files are seed/test inputs only.
 export const topBelt = [];
 export const mainBannersPC = [];
 export const mainBannersMO = [];
@@ -133,22 +133,6 @@ export const getProductDetail = (productId) => {
         ],
     };
 };
-
-// -------------------------------------------------------------
-// Default Export (구조 분해 할당 편의를 위함)
-// -------------------------------------------------------------
-const data = {
-    topBelt,
-    mainBannersPC,
-    mainBannersMO,
-    highlightBanners,
-    mainPlans,
-    mainCategoryProducts,
-    productDetailsList,
-    getProductById
-};
-
-export default data;
 
 export const deliveryGuide = [
   {

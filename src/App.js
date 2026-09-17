@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import BottomNav from './components/layout/BottomNav';
+import AiAssistant from './components/ai/AiAssistant';
 import Main from './pages/Main';
 import Detail from './pages/Detail';
 import Cart from './pages/Cart';
@@ -31,6 +32,7 @@ function App() {
       
       {/* 모바일 환경에서 나타나는 하단 네비게이션 바 */}
       <BottomNav />
+      <AiAssistant />
     </div>
   );
 }
