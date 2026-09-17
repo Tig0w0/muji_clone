@@ -1,5 +1,4 @@
 from sqlalchemy import BigInteger, Boolean, Float, ForeignKey, Integer, JSON, String, Text
-from sqlalchemy.dialects.mysql import LONGTEXT
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .database import Base
@@ -45,7 +44,7 @@ class Plan(Base):
     start_at: Mapped[str | None] = mapped_column(String(32), nullable=True)
     end_at: Mapped[str | None] = mapped_column(String(32), nullable=True)
     thumbnail_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
-    pc_content: Mapped[str | None] = mapped_column(LONGTEXT, nullable=True)
+    pc_content: Mapped[str | None] = mapped_column(Text, nullable=True)
     raw_plan: Mapped[dict] = mapped_column(JSON)
     point: Mapped[list] = mapped_column(JSON)
     raw_entry: Mapped[dict] = mapped_column(JSON)

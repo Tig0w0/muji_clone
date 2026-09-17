@@ -4,7 +4,7 @@ from pathlib import Path
 
 from sqlalchemy import delete, select
 
-from .database import Base, SessionLocal, engine, ensure_database
+from .database import Base, SessionLocal, engine
 from .models import Banner, Category, Plan, Product, ProductCategory, TopBelt
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -67,7 +67,6 @@ def seed(reset=False):
         for item in category.get('products', []):
             products_by_id[int(item['product_id'])] = item
 
-    ensure_database()
     Base.metadata.create_all(engine)
     with SessionLocal() as session:
         has_data = any(session.scalar(select(model).limit(1)) is not None for model in SEED_MODELS)
@@ -131,6 +130,6 @@ def seed(reset=False):
               f'{sum(len(plan_groups.get(k, [])) for k in ("1_PLAN_0", "1_PLAN_1"))} plans.')
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Load bundled source JSON into MySQL.')
+    parser = argparse.ArgumentParser(description='Load bundled source JSON into PostgreSQL.')
     parser.add_argument('--reset', action='store_true', help='delete existing seed tables before loading')
     seed(parser.parse_args().reset)
