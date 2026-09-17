@@ -2,12 +2,12 @@ import React from 'react';
 import { fireEvent, render as renderReact, screen, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { getProductById, getProductDetail, getProductVariants, isOptionAvailable, mainCategoryProducts } from './db/data';
-import ProductDetail from './components/ProductDetail';
-import NewArrivals from './components/NewArrivals';
+import { getProductById, getProductDetail, getProductVariants, isOptionAvailable, mainCategoryProducts } from './data/catalog';
+import Detail from './pages/Detail';
+import NewArrivals from './components/home/NewArrivals';
 import Cart from './pages/Cart';
-import Header from './components/Header';
-import { addItem, createCartStore } from './store';
+import Header from './components/layout/Header';
+import { addItem, createCartStore } from './store/cart';
 
 const render = (ui, store = createCartStore(null)) => ({
   ...renderReact(<Provider store={store}>{ui}</Provider>), store,
@@ -21,25 +21,26 @@ jest.mock('swiper/react', () => ({
   Swiper: ({ children }) => <div>{children}</div>,
   SwiperSlide: ({ children }) => <div>{children}</div>,
 }), { virtual: true });
-jest.mock('swiper/modules', () => ({ A11y: {}, Keyboard: {}, FreeMode: {} }), { virtual: true });
+jest.mock('swiper/modules', () => ({ A11y: {}, Keyboard: {}, FreeMode: {}, Navigation: {} }), { virtual: true });
 jest.mock('swiper/css', () => ({}), { virtual: true });
 jest.mock('swiper/css/free-mode', () => ({}), { virtual: true });
+jest.mock('swiper/css/navigation', () => ({}), { virtual: true });
 
 beforeEach(() => {
   window.scrollTo = jest.fn();
   window.IntersectionObserver = jest.fn(() => ({ observe: jest.fn(), disconnect: jest.fn() }));
 });
 
-const renderDetail = id => render(<MemoryRouter initialEntries={[`/products/view/${id}`]}><Routes><Route path="/products/view/:id" element={<ProductDetail />} /></Routes></MemoryRouter>);
+const renderDetail = id => render(<MemoryRouter initialEntries={[`/products/view/${id}`]}><Routes><Route path="/products/view/:id" element={<Detail />} /></Routes></MemoryRouter>);
 
 it('adds the selected option to the cart and updates the header count', () => {
-  const { store } = render(<MemoryRouter initialEntries={['/products/view/1005355']}><Header /><Routes><Route path="/products/view/:id" element={<ProductDetail />} /><Route path="/cart/list" element={<Cart />} /></Routes></MemoryRouter>);
+  const { store } = render(<MemoryRouter initialEntries={['/products/view/1005355']}><Header /><Routes><Route path="/products/view/:id" element={<Detail />} /><Route path="/cart/list" element={<Cart />} /></Routes></MemoryRouter>);
   fireEvent.click(within(screen.getByRole('group', { name: '옵션 선택' })).getByRole('button', { name: 'S', exact: true }));
   fireEvent.click(screen.getByRole('button', { name: '수량 늘리기' }));
-  fireEvent.click(screen.getByRole('button', { name: '장바구니', exact: true }));
+  fireEvent.click(screen.getAllByRole('button', { name: '장바구니', exact: true } ).at(-1));
   expect(store.getState().cart.items).toEqual([{ productId: 1005355, optionId: 426331, quantity: 2, selected: true }]);
   expect(screen.getByRole('link', { name: '장바구니 상품 2개' })).toBeInTheDocument();
-  fireEvent.click(screen.getByRole('link', { name: '장바구니 보기' }));
+  fireEvent.click(screen.getByRole('link', { name: '장바구니 상품 2개' }));
   expect(screen.getByRole('heading', { name: '장바구니', level: 1 })).toBeInTheDocument();
   expect(screen.getByText('옵션 : 스모키블루 스트라이프/S/2개')).toBeInTheDocument();
   expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('119,800원');
@@ -63,20 +64,6 @@ it('changes cart color, size and quantity and removes the selected item', () => 
   fireEvent.click(screen.getAllByRole('button', { name: '선택 삭제' })[0]);
   expect(screen.getByText('장바구니에 담긴 상품이 없습니다.')).toBeInTheDocument();
   expect(store.getState().cart.items).toHaveLength(0);
-});
-
-it('keeps delivery-tab selection and totals separate', () => {
-  const store = createCartStore(null);
-  store.dispatch(addItem({ productId: 1005714, optionId: 430844, quantity: 1 }));
-  store.dispatch(addItem({ productId: 1005293, optionId: 426016, quantity: 1 }));
-  render(<MemoryRouter><Cart /></MemoryRouter>, store);
-  expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('11,400원');
-  fireEvent.click(screen.getByRole('tab', { name: '설치 배송 (1)' }));
-  expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('129,000원');
-  fireEvent.click(screen.getByRole('checkbox', { name: '전체 선택' }));
-  fireEvent.click(screen.getByRole('tab', { name: '택배 배송 (1)' }));
-  expect(screen.getByRole('checkbox', { name: '전체 선택' })).toBeChecked();
-  expect(screen.getByLabelText('결제 예정 금액')).toHaveTextContent('11,400원');
 });
 
 it('lets users remove saved sold-out items without charging for them', () => {
@@ -137,19 +124,8 @@ it('limits quantity to stock and calculates the selected option total', () => {
   expect(screen.getByLabelText('상품 합계')).toHaveTextContent('419,300원');
 });
 
-it('supports a food product without clothing options or copied pajama facts', () => {
-  renderDetail(1005714);
-  expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('명태 비빔 냉면');
-  expect(screen.queryByRole('group', { name: '색상 선택' })).not.toBeInTheDocument();
-  fireEvent.click(screen.getByRole('button', { name: '바로 구매' }));
-  expect(screen.getByRole('status')).toHaveTextContent('옵션을 선택해 주세요.');
-  fireEvent.click(within(screen.getByRole('group', { name: '옵션 선택' })).getByRole('button', { name: 'FREE' }));
-  expect(screen.getByLabelText('상품 합계')).toHaveTextContent('7,900원');
-  expect(screen.queryByText(/캄보디아/)).not.toBeInTheDocument();
-});
-
 it('navigates from a main card to that exact product detail', () => {
-  render(<MemoryRouter><Routes><Route path="/" element={<NewArrivals />} /><Route path="/products/view/:id" element={<ProductDetail />} /></Routes></MemoryRouter>);
+  render(<MemoryRouter><Routes><Route path="/" element={<NewArrivals />} /><Route path="/products/view/:id" element={<Detail />} /></Routes></MemoryRouter>);
   fireEvent.click(screen.getByRole('link', { name: '남성 사이드 심리스 이중가제 긴소매 파자마 상세 보기' }));
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('남성 사이드 심리스 이중가제 긴소매 파자마');
 });

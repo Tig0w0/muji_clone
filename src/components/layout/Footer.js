@@ -1,7 +1,7 @@
 import React from 'react';
-import { asset } from '../utils/asset';
+import { asset } from '../../utils/asset';
 import { Link, useLocation } from 'react-router-dom';
-import { getProductDetail, getProductImage } from '../db/data';
+import { getProductDetail, getProductImage } from '../../data/catalog';
 
 const Footer = () => {
   useLocation(); // Route 변경 시 재렌더링 유발

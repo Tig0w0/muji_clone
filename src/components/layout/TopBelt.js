@@ -1,7 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import { topBelt as beltData } from '../db/data'; // 이름 불일치 에러 수정
+import { topBelt as beltData } from '../../data/catalog'; // 이름 불일치 에러 수정
 
 import 'swiper/css';
 
@@ -39,8 +39,6 @@ function TopBelt() {
         }}
       >
         {beltData.map((item, index) => {
-          // '$MUJI APP$' 같은 텍스트 처리를 위해 원본 텍스트를 그대로 사용
-          const title = item.belt_title;
           
           return (
             <SwiperSlide 

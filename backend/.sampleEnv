@@ -1,0 +1,5 @@
+# Supabase PostgreSQL (Session Pooler)
+DATABASE_URL="postgresql+psycopg://postgres.qsjiydojhcbrfnlleysj:[YOUR-PASSWORD]@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres"
+
+# Frontend origin allowed by FastAPI CORS
+FRONTEND_ORIGIN=http://localhost:3000

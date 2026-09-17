@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { mainPlans } from '../db/data';
+import { mainPlans } from '../../data/catalog';
 import { MainImage, ProductPreview, PromotionVisual } from './PromotionVisual';
 import './MainEditorial.css';
 

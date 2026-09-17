@@ -1,4 +1,4 @@
-import { addItem, cartItemKey, CART_STORAGE_KEY, createCartStore, getCartLines, getCartTotals, normalizeCartItems, updateItem } from './store';
+import { addItem, cartItemKey, CART_STORAGE_KEY, createCartStore, getCartLines, getCartTotals, normalizeCartItems, updateItem } from './cart';
 
 const pajama = { productId: 1005355, optionId: 426331, quantity: 1 };
 

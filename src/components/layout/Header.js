@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { asset } from '../utils/asset';
+import { asset } from '../../utils/asset';
 import { Link } from 'react-router-dom';
 import { FiChevronRight } from 'react-icons/fi';
 import TopBelt from './TopBelt';

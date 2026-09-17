@@ -1,9 +1,9 @@
 import React from 'react';
-import FromMuji from '../components/FromMuji';
-import Banner from '../components/Banner'; // 메인 비주얼 배너
-import CircleNav from '../components/CircleNav'; // 원형 퀵 메뉴
-import NewArrivals from '../components/NewArrivals'; // 신상품 섹션
-import PlanSection from '../components/PlanSection'; // 엇갈림 기획전 섹션
+import FromMuji from '../components/home/FromMuji';
+import Banner from '../components/home/Banner'; // 메인 비주얼 배너
+import CircleNav from '../components/home/CircleNav'; // 원형 퀵 메뉴
+import NewArrivals from '../components/home/NewArrivals'; // 신상품 섹션
+import PlanSection from '../components/home/PlanSection'; // 엇갈림 기획전 섹션
 
 function Main() {
   return (

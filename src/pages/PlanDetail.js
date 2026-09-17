@@ -1,8 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { asset } from '../utils/asset';
-import { getPlanDetail } from '../db/data';
-import { ProductPreview } from '../components/PromotionVisual';
+import { getPlanDetail } from '../data/catalog';
 import './PlanDetail.css';
 
 /* 날짜 포맷 헬퍼: "2026-07-27 00:00:00" → "2026. 07. 27" */
@@ -15,10 +14,9 @@ const formatDate = (str) => {
 
 /* ── pc_content HTML이 없는 일반 상품 기획전의 기본 레이아웃 ─── */
 const DefaultPlanLayout = ({ entry }) => {
-  const { plan, point = [] } = entry;
+  const { plan } = entry;
   
   // 모든 포인트의 상품들을 하나의 배열로 합치고 중복 제거
-  const products = [...new Map(point.flatMap(item => item.products).map(product => [product.product_id, product])).values()];
 
   return (
     <div className="plan-wrapper">

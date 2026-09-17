@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { deliveryGuide } from '../db/data';
+import { deliveryGuide } from '../../data/catalog';
 
 const tabs = [['product-description', '상세 정보'], ['product-review', '상품 리뷰'], ['product-size', '사이즈 및 소재'], ['product-inquiry', '상품문의'], ['product-delivery', '배송안내']];
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { asset } from '../utils/asset';
+import { asset } from '../../utils/asset';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiHeart, FiUpload, FiMessageSquare, FiStar, FiX, FiSearch } from 'react-icons/fi';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -7,9 +7,9 @@ import { Navigation, FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/free-mode';
-import { getProductImage, isOptionAvailable } from '../db/data';
+import { getProductImage, isOptionAvailable } from '../../data/catalog';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from '../store';
+import { addItem } from '../../store/cart';
 import { createPortal } from 'react-dom';
 
 const money = value => Number(value || 0).toLocaleString('ko-KR');
