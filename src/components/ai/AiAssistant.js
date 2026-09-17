@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom';
 import { FiMessageCircle, FiSend, FiX } from 'react-icons/fi';
 import { catalogProducts, getProductImage } from '../../data/catalog';
 import { formatProductContext, searchProducts } from '../../utils/productSearch';
-import { buildInstantAnswer, generateProductAnswer, loadLocalLlm, LOCAL_LLM_NAME, shouldUseLocalLlm, supportsLocalLlm } from '../../utils/localLlm';
+import {
+  buildInstantAnswer,
+  formatLocalLlmError,
+  generateProductAnswer,
+  loadLocalLlm,
+  LOCAL_LLM_NAME,
+  shouldUseLocalLlm,
+  supportsLocalLlm,
+} from '../../utils/localLlm';
 
 const INITIAL_MESSAGE = {
   role: 'assistant',
@@ -26,6 +34,7 @@ function ProductResults({ products }) {
     </div>
   );
 }
+
 function AiAssistant() {
   const [open, setOpen] = useState(false);
   const [ready, setReady] = useState(false);
@@ -35,35 +44,44 @@ function AiAssistant() {
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
+  const [diagnostics, setDiagnostics] = useState(null);
 
   const startModel = async () => {
     if (ready || loading) return;
     if (!supportsLocalLlm()) {
-      setError('이 브라우저는 WebGPU를 지원하지 않아 로컬 AI를 실행할 수 없습니다.');
+      const unsupported = new Error('WebGPU unavailable');
+      unsupported.code = 'WEBGPU_UNSUPPORTED';
+      setError(formatLocalLlmError(unsupported));
       return;
     }
     setError('');
+    setDiagnostics(null);
     setLoading(true);
     setProgress(0);
     try {
-      await loadLocalLlm(event => {
+      const result = await loadLocalLlm(event => {
+        if (event?.diagnostics) setDiagnostics(event.diagnostics);
+        if (event?.status === 'diagnostics') setDiagnostics(event);
         if (typeof event?.progress === 'number') {
           const value = event.progress <= 1 ? event.progress * 100 : event.progress;
           setProgress(Math.max(0, Math.min(100, Math.round(value))));
         }
       });
+      setDiagnostics(result === true ? null : result);
       setReady(true);
       setProgress(100);
     } catch (e) {
-      setError('AI 모델을 불러오지 못했습니다. 네트워크 상태를 확인해주세요.');
+      setDiagnostics(e?.diagnostics || null);
+      setError(formatLocalLlmError(e));
     } finally {
       setLoading(false);
     }
   };
+
   const submit = async event => {
     event.preventDefault();
     const query = input.trim();
-    if (!query || !ready || loading) return;
+    if (!query || loading) return;
 
     const userMessage = { role: 'user', text: query };
     setMessages(current => [...current, userMessage]);
@@ -88,9 +106,17 @@ function AiAssistant() {
       return;
     }
 
+    const baseText = buildInstantAnswer(matches);
+    if (!ready) {
+      setMessages(current => [...current, {
+        role: 'assistant',
+        text: `${baseText} 로컬 AI가 준비되지 않아 검색 결과만 표시합니다.`,
+      }]);
+      setLoading(false);
+      return;
+    }
+
     const responseIndex = messages.length + 1;
-    const top = matches[0];
-    const baseText = `${top.product_name} — ${price(top)}원 상품을 찾았습니다.`;
     setMessages(current => [...current, { role: 'assistant', text: baseText }]);
     try {
       const answer = await generateProductAnswer({
@@ -104,11 +130,22 @@ function AiAssistant() {
         index === responseIndex ? { ...message, text: `${baseText} ${answer}` } : message
       ));
     } catch (e) {
-      setError('답변 생성 중 오류가 발생했습니다. 다시 시도해주세요.');
+      setDiagnostics(e?.diagnostics || diagnostics);
+      setError(formatLocalLlmError(e));
     } finally {
       setLoading(false);
     }
   };
+
+  const diagnosticsText = diagnostics
+    ? [
+        diagnostics.mode,
+        diagnostics.dtype,
+        diagnostics.shaderF16 === false ? 'shader-f16 미지원' : diagnostics.shaderF16 ? 'shader-f16 지원' : null,
+        diagnostics.vendor || diagnostics.architecture || null,
+      ].filter(Boolean).join(' · ')
+    : '';
+
   return (
     <>
       <button
@@ -133,10 +170,15 @@ function AiAssistant() {
           <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {!ready && (
               <div className="border border-[#e5e5e5] bg-[#fafafa] p-3 text-xs leading-5">
-                <p>최초 실행 시 약 500MB의 AI 모델을 다운로드합니다. 이후에는 브라우저 캐시를 재사용할 수 있습니다.</p>
+                <p>기기에 따라 약 270~550MB의 AI 모델을 다운로드합니다. AI가 실행되지 않아도 기본 상품 검색은 사용할 수 있습니다.</p>
                 <button type="button" onClick={startModel} disabled={loading} className="mt-3 w-full bg-[#333] text-white py-2 disabled:opacity-50">
                   {loading ? `AI 모델 준비 중${progress ? ` ${progress}%` : '...'}` : 'AI 시작하기'}
                 </button>
+              </div>
+            )}
+            {diagnosticsText && (
+              <div className="text-[10px] leading-4 text-[#666] bg-[#f7f7f7] px-2 py-1.5">
+                진단: {diagnosticsText}
               </div>
             )}
             {messages.map((message, index) => (
@@ -158,11 +200,11 @@ function AiAssistant() {
             <input
               value={input}
               onChange={event => setInput(event.target.value)}
-              disabled={!ready || loading}
-              placeholder={ready ? '찾는 상품을 입력하세요' : 'AI 모델을 먼저 시작해주세요'}
+              disabled={loading}
+              placeholder={ready ? '찾는 상품을 입력하세요' : 'AI 없이도 상품 검색이 가능합니다'}
               className="flex-1 min-w-0 border border-[#ccc] px-3 py-2 text-xs outline-none focus:border-[#777] disabled:bg-[#f5f5f5]"
             />
-            <button type="submit" disabled={!ready || loading || !input.trim()} className="w-10 flex items-center justify-center bg-[#7f0019] text-white disabled:opacity-40" aria-label="메시지 보내기">
+            <button type="submit" disabled={loading || !input.trim()} className="w-10 flex items-center justify-center bg-[#7f0019] text-white disabled:opacity-40" aria-label="메시지 보내기">
               <FiSend size={16} />
             </button>
           </form>
