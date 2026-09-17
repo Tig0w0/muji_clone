@@ -9,12 +9,11 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-// 1. JSON 파일에서 원본 데이터 불러오기
 import { mainBannersPC, mainBannersMO } from '../../data/catalog';
 
 function Banner() {
   
-  // PC / MO 배너 데이터 추출
+
   const pcSlides = mainBannersPC;
   const moSlides = mainBannersMO;
 

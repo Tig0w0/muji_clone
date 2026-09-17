@@ -1,32 +1,15 @@
 
-// 사용자님이 수집해주신 원본 JSON 데이터 임포트
-import productDetailData from '../json/products_info.json'; // 상세 상품 정보
-import planData from '../json/main_plan.json';              // 기획전 리스트
-import bannerData from '../json/main_banner_and_products.json'; // 메인 배너 및 메인 상품 리스트
-import beltData from '../json/main_top_belt.json';          // 최상단 띠 배너
 import { asset } from '../utils/asset';
 
-// -------------------------------------------------------------
-// 1. 배너 및 레이아웃 데이터 추출
-// -------------------------------------------------------------
-// 최상단 띠 배너 ($MUJI APP$ 다운받고...)
-export const topBelt = beltData.data?.["1_DISPLAY_MAIN_TOP_BELT"] || [];
-export const mainBannersPC = bannerData.data?.["1_BANNER_MAIN_TOP_PC"] || [];
-export const mainBannersMO = bannerData.data?.["1_BANNER_MAIN_TOP_MO"] || [];
+// Runtime data is loaded from FastAPI/MySQL. JSON files are seed/test inputs only.
+export const topBelt = [];
+export const mainBannersPC = [];
+export const mainBannersMO = [];
+export const highlightBanners = [];
+export const mainPlans = [];
+export const fromMujiPlans = [];
 
-// 하이라이트 배너 바
-export const highlightBanners = bannerData.data?.["1_BANNER_HIGHLIGHT_BAR_PC"] || [];
-
-// -------------------------------------------------------------
-// 2. 상품 및 카테고리 데이터 추출
-// -------------------------------------------------------------
-// 메인 페이지 노출용 기획전 (1_PLAN_0, 1_PLAN_1)
-export const mainPlans = planData.data?.["1_PLAN_0"] || [];
-export const fromMujiPlans = planData.data?.["1_PLAN_1"] || [];
-
-// plan_id로 기획전 데이터를 바로 조회합니다.
-const allPlans = [...mainPlans, ...fromMujiPlans];
-const plansById = new Map(allPlans.map(entry => [String(entry.plan.plan_id), entry]));
+const plansById = new Map();
 
 export const getPlanDetail = (id) => {
   const planId = String(id);
@@ -54,23 +37,54 @@ export const getPlanDetail = (id) => {
 };
 // 메인 페이지 탭별 카테고리 상품 리스트
 // 구조: { A: { name: "남성", products: [...] }, B: { name: "여성", products: [...] }, ... }
-export const mainCategoryProducts = bannerData.data?.["1_DISPLAY_MAIN_PRODUCT"] || {};
+export const mainCategoryProducts = {};
+export const productDetailsList = [];
 
-// 상품 상세 데이터 (product_id로 모든 상세 옵션과 갤러리 이미지 확인 가능)
-export const productDetailsList = productDetailData.data?.rows || [];
-
-// 기획전에도 상품이 있으므로 함께 조회합니다. 메인 목록(main_banner_and_products.json)을 최우선으로 사용합니다.
 const collectProducts = (value) => {
     if (!value || typeof value !== 'object') return [];
     if (value.product_id && value.product_name) return [value];
     return Object.values(value).flatMap(collectProducts);
 };
-export const catalogProducts = [...new Map([
-    ...productDetailsList,
-    ...collectProducts(planData.data),
-    ...Object.values(mainCategoryProducts).flatMap(category => category.products),
-].map(product => [Number(product.product_id), product])).values()];
-const productsById = new Map(catalogProducts.map(product => [Number(product.product_id), product]));
+export const catalogProducts = [];
+const productsById = new Map();
+
+const replaceArray = (target, value = []) => target.splice(0, target.length, ...value);
+const replaceObject = (target, value = {}) => {
+    Object.keys(target).forEach(key => delete target[key]);
+    Object.assign(target, value);
+};
+const rebuildIndexes = () => {
+    plansById.clear();
+    [...mainPlans, ...fromMujiPlans].forEach(entry => plansById.set(String(entry.plan.plan_id), entry));
+    const products = [...new Map([
+        ...productDetailsList,
+        ...collectProducts([...mainPlans, ...fromMujiPlans]),
+        ...Object.values(mainCategoryProducts).flatMap(category => category.products || []),
+    ].map(product => [Number(product.product_id), product])).values()];
+    replaceArray(catalogProducts, products);
+    productsById.clear();
+    catalogProducts.forEach(product => productsById.set(Number(product.product_id), product));
+};
+
+export const hydrateData = payload => {
+    replaceArray(topBelt, payload.topBelt);
+    replaceArray(mainBannersPC, payload.mainBannersPC);
+    replaceArray(mainBannersMO, payload.mainBannersMO);
+    replaceArray(highlightBanners, payload.highlightBanners);
+    replaceArray(mainPlans, payload.mainPlans);
+    replaceArray(fromMujiPlans, payload.fromMujiPlans);
+    replaceObject(mainCategoryProducts, payload.mainCategoryProducts);
+    replaceArray(productDetailsList, payload.productDetailsList);
+    rebuildIndexes();
+};
+
+export const initializeData = async () => {
+    if (process.env.NODE_ENV === 'test') return;
+    const base = (process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8000').replace(/\/$/, '');
+    const response = await fetch(`${base}/api/catalog/bootstrap`);
+    if (!response.ok) throw new Error(`API ${response.status}`);
+    hydrateData(await response.json());
+};
 
 export const getProductById = (productId) => productsById.get(Number(productId)) || null;
 
