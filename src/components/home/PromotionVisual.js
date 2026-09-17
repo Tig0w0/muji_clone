@@ -7,8 +7,8 @@ export function MainImage({ src, alt, ...props }) {
   const base = process.env.PUBLIC_URL || '';
   const localPath = imagePaths[src] ? `${base}${imagePaths[src]}` : productImageUrl(src);
   return <img {...props} src={localPath} alt={alt} loading="lazy" onError={event => {
-    const fallback = productImageUrl(src);
-    if (event.currentTarget.src !== fallback) event.currentTarget.src = fallback;
+    event.currentTarget.onerror = null;
+    event.currentTarget.src = productImageUrl(src);
   }} />;
 }
 
