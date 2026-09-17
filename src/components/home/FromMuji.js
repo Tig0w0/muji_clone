@@ -1,5 +1,5 @@
 import React from 'react';
-import { fromMujiPlans } from '../db/data';
+import { fromMujiPlans } from '../../data/catalog';
 import { PromotionVisual } from './PromotionVisual';
 import './MainEditorial.css';
 

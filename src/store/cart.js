@@ -1,5 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { getProductById, getProductImage, getProductVariants, isOptionAvailable } from './db/data';
+import { getProductById, getProductImage, getProductVariants, isOptionAvailable } from '../data/catalog';
 
 export const CART_STORAGE_KEY = 'muji.cart.v1';
 export const cartItemKey = (productId, optionId) => `${productId}:${optionId}`;

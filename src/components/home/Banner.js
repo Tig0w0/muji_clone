@@ -1,5 +1,5 @@
 import React from 'react';
-import { asset } from '../utils/asset';
+import { asset } from '../../utils/asset';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { Link } from 'react-router-dom';
@@ -10,13 +10,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 // 1. JSON 파일에서 원본 데이터 불러오기
-import bannerJson from '../json/main_banner_and_products.json';
+import { mainBannersPC, mainBannersMO } from '../../data/catalog';
 
 function Banner() {
   
   // PC / MO 배너 데이터 추출
-  const pcSlides = bannerJson.data['1_BANNER_MAIN_TOP_PC'] || [];
-  const moSlides = bannerJson.data['1_BANNER_MAIN_TOP_MO'] || [];
+  const pcSlides = mainBannersPC;
+  const moSlides = mainBannersMO;
 
   // 공통 Swiper 옵션 (양옆 슬라이드 살짝 보이게 설정)
   const swiperOptions = {

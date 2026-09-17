@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { asset } from '../utils/asset';
+import { asset } from '../../utils/asset';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 import { Link } from 'react-router-dom';
-import { mainCategoryProducts, getProductImage } from '../db/data';
+import { mainCategoryProducts, getProductImage } from '../../data/catalog';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 

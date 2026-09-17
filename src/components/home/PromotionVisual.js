@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getProductImage, productImageUrl } from '../db/data';
-import imagePaths from '../db/mainImagePaths.json';
+import { getProductImage, productImageUrl } from '../../data/catalog';
+import imagePaths from '../../data/mainImagePaths.json';
 
 export function MainImage({ src, alt, ...props }) {
   const base = process.env.PUBLIC_URL || '';

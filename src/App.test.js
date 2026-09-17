@@ -2,12 +2,12 @@ import React from 'react';
 import { fireEvent, render as renderReact, screen, within } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { getProductById, getProductDetail, getProductVariants, isOptionAvailable, mainCategoryProducts } from './db/data';
+import { getProductById, getProductDetail, getProductVariants, isOptionAvailable, mainCategoryProducts } from './data/catalog';
 import Detail from './pages/Detail';
-import NewArrivals from './components/NewArrivals';
+import NewArrivals from './components/home/NewArrivals';
 import Cart from './pages/Cart';
-import Header from './components/Header';
-import { addItem, createCartStore } from './store';
+import Header from './components/layout/Header';
+import { addItem, createCartStore } from './store/cart';
 
 const render = (ui, store = createCartStore(null)) => ({
   ...renderReact(<Provider store={store}>{ui}</Provider>), store,

@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { asset } from '../utils/asset';
-import { getPlanDetail } from '../db/data';
+import { getPlanDetail } from '../data/catalog';
 import './PlanDetail.css';
 
 /* 날짜 포맷 헬퍼: "2026-07-27 00:00:00" → "2026. 07. 27" */

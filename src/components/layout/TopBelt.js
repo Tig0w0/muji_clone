@@ -1,7 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import { topBelt as beltData } from '../db/data'; // 이름 불일치 에러 수정
+import { topBelt as beltData } from '../../data/catalog'; // 이름 불일치 에러 수정
 
 import 'swiper/css';
 

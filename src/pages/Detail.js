@@ -4,10 +4,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import { getProductDetail, getProductCategory, getProductImage, catalogProducts } from '../db/data';
-import ProductGallery from '../components/ProductGallery';
-import ProductInfo from '../components/ProductInfo';
-import ProductDescription from '../components/ProductDescription';
+import { getProductDetail, getProductCategory, getProductImage, catalogProducts } from '../data/catalog';
+import ProductGallery from '../components/product/ProductGallery';
+import ProductInfo from '../components/product/ProductInfo';
+import ProductDescription from '../components/product/ProductDescription';
 
 const ProductDetailContent = ({ product }) => {
   const id = product.product_id;

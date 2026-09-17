@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import BottomNav from './components/BottomNav';
+import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
+import BottomNav from './components/layout/BottomNav';
 import Main from './pages/Main';
 import Detail from './pages/Detail';
 import Cart from './pages/Cart';

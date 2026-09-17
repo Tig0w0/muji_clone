@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import { asset } from '../utils/asset';
+import { asset } from '../../utils/asset';
 import { Link } from 'react-router-dom';
-import { mainCategoryProducts, productDetailsList, getProductById } from '../db/data';
+import { mainCategoryProducts, productDetailsList, getProductById } from '../../data/catalog';
 
 const initialNavItems = [
   { title: "신상품", link: "#", img: "circlenav_01.png" },
