@@ -1,3 +1,6 @@
+import { cleanModelReason } from './localLlmPolicy';
+export { buildInstantAnswer, shouldUseLocalLlm } from './localLlmPolicy';
+
 export const LOCAL_LLM_NAME = 'Gemma 3 270M';
 let worker = null;
 let nextId = 1;
@@ -25,7 +28,8 @@ const getWorker = () => {
     };
   }
   return worker;
-};const runWorkerTask = (type, payload = {}, callbacks = {}) => new Promise((resolve, reject) => {
+};
+const runWorkerTask = (type, payload = {}, callbacks = {}) => new Promise((resolve, reject) => {
   const id = nextId++;
   pending.set(id, { resolve, reject, ...callbacks });
   getWorker().postMessage({ type, id, ...payload });
@@ -36,16 +40,13 @@ export const loadLocalLlm = onProgress => {
   return runWorkerTask('load', {}, { onProgress });
 };
 
-export const generateProductAnswer = ({ query, products, onToken }) => {
-  if (!supportsLocalLlm()) return Promise.reject(new Error('WEBGPU_UNSUPPORTED'));
-  return runWorkerTask('generate', { query, products }, { onToken });
-};
-
-export const shouldUseLocalLlm = query => /추천|비교|어울|선물|좋은|편한|어떤|왜|고민/.test(String(query || ''));
-
-export const buildInstantAnswer = products => {
-  const first = products[0];
-  if (!first) return '조건에 맞는 상품을 찾지 못했습니다.';
-  const price = Number(first.sell_price ?? first.retail_price ?? 0).toLocaleString('ko-KR');
-  return `${first.product_name} — ${price}원 상품을 찾았습니다.`;
+export const generateProductAnswer = async ({ query, products, onToken }) => {
+  if (!supportsLocalLlm()) throw new Error('WEBGPU_UNSUPPORTED');
+  const answer = await runWorkerTask('generate', { query, products }, {
+    onToken: text => {
+      const cleaned = cleanModelReason(text, products);
+      if (cleaned) onToken?.(cleaned);
+    },
+  });
+  return cleanModelReason(answer, products) || '추천 조건에 잘 맞는 상품입니다.';
 };
