@@ -37,13 +37,14 @@ const NewArrivals = () => {
             {/* 카테고리 탭 영역 */}
             <div className="scrollbar-hide mb-4 flex gap-[16px] overflow-x-auto whitespace-nowrap pr-[16px] max-lg:text-[14px] lg:mb-[28px] lg:gap-[24px] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {categories.map((cat) => (
-                <p
+                <button
+                  type="button"
                   key={cat.key}
                   onClick={() => setActiveTab(cat.key)}
                   className={`cursor-pointer transition-colors ${activeTab === cat.key ? 'text-neutral-900 font-bold' : 'text-neutral-500 hover:text-neutral-700'}`}
                 >
                   {cat.name}
-                </p>
+                </button>
               ))}
             </div>
 

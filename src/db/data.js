@@ -1,4 +1,5 @@
-// 사용자님이 수집해주신 원본 JSON 데이터 임포트
+
+// 사용자님이 수집해주신 원본 JSON 데이터 임포트
 import productDetailData from '../json/products_info.json'; // 상세 상품 정보
 import planData from '../json/main_plan.json';              // 기획전 리스트
 import bannerData from '../json/main_banner_and_products.json'; // 메인 배너 및 메인 상품 리스트
@@ -32,18 +33,20 @@ export const getPlanDetail = (id) => {
   const found = plansById.get(planId);
   if (found) return found;
 
-  // 메인 슬라이더 기획전(389, 332)이 main_plan.json에 누락되어 있으므로, 
-  // 포트폴리오용으로 정상 작동을 보여주기 위해 배너 이미지와 텍스트를 조합한 데이터를 생성합니다.
-  if (planId === '389') {
+  // Main-banner plan IDs are not included in main_plan.json.
+  // Build a minimal detail entry from the existing banner data instead of hardcoding IDs.
+  const banner = [...mainBannersPC, ...mainBannersMO].find(item =>
+    String(item.banner_image_link || '').endsWith(`/plan/view/${planId}`)
+  );
+  if (banner) {
     return {
-      plan: { plan_id: 389, name: '자연, 피부에 닿다', plan_thumbnail_image_full: '/images/banner/main_banner_01_pc.jpg' },
-      point: []
-    };
-  }
-  if (planId === '332') {
-    return {
-      plan: { plan_id: 332, name: '여름의 온도를 낮추는 시원한 패브릭', sub_name: '부드러운 냉감과 산뜻한 서커 침장 시리즈', plan_thumbnail_image_full: '/images/banner/main_banner_02_pc.jpg' },
-      point: []
+      plan: {
+        plan_id: Number(planId),
+        name: banner.banner_title || banner.banner_sub_title || 'MUJI',
+        sub_name: banner.banner_sub_title || '',
+        plan_thumbnail_image_full: banner.banner_image_url,
+      },
+      point: [],
     };
   }
 
@@ -120,7 +123,7 @@ export const getProductDetail = (productId) => {
 // -------------------------------------------------------------
 // Default Export (구조 분해 할당 편의를 위함)
 // -------------------------------------------------------------
-export default {
+const data = {
     topBelt,
     mainBannersPC,
     mainBannersMO,
@@ -130,6 +133,8 @@ export default {
     productDetailsList,
     getProductById
 };
+
+export default data;
 
 export const deliveryGuide = [
   {

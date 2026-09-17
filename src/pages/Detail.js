@@ -49,9 +49,9 @@ const ProductDetailContent = ({ product }) => {
     localStorage.setItem('recentProductIds', JSON.stringify(recents));
   }, [id]);
 
-  const recentProductIds = useMemo(() => {
+  const recentProductIds = (() => {
     try { return JSON.parse(localStorage.getItem('recentProductIds') || '[]'); } catch (e) { return []; }
-  }, [id]);
+  })();
 
   const recentlyViewed = recentProductIds.filter(rid => rid !== id).map(getProductDetail).filter(Boolean);
   const popularRanking = useMemo(() => {
