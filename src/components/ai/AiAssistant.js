@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiMessageCircle, FiSend, FiX } from 'react-icons/fi';
 import { catalogProducts, getProductImage } from '../../data/catalog';
 import { formatProductContext, searchProducts } from '../../utils/productSearch';
-import { generateProductAnswer, loadLocalLlm, LOCAL_LLM_NAME, supportsLocalLlm } from '../../utils/localLlm';
+import { buildInstantAnswer, generateProductAnswer, loadLocalLlm, LOCAL_LLM_NAME, shouldUseLocalLlm, supportsLocalLlm } from '../../utils/localLlm';
 
 const INITIAL_MESSAGE = {
   role: 'assistant',
@@ -78,6 +78,12 @@ function AiAssistant() {
         role: 'assistant',
         text: '정확히 맞는 상품을 찾지 못했습니다. 상품 종류나 가격 조건을 조금 더 간단하게 입력해주세요.',
       }]);
+      setLoading(false);
+      return;
+    }
+
+    if (!shouldUseLocalLlm(query)) {
+      setMessages(current => [...current, { role: 'assistant', text: buildInstantAnswer(matches) }]);
       setLoading(false);
       return;
     }

@@ -1,73 +1,51 @@
-const MODEL_ID = 'onnx-community/Qwen2.5-0.5B-Instruct';
-export const LOCAL_LLM_NAME = 'Qwen2.5 0.5B';
-let generatorPromise = null;
-let TextStreamerClass = null;
+export const LOCAL_LLM_NAME = 'Gemma 3 270M';
+let worker = null;
+let nextId = 1;
+const pending = new Map();
 
-export const supportsLocalLlm = () => typeof navigator !== 'undefined' && Boolean(navigator.gpu);
+export const supportsLocalLlm = () => typeof navigator !== 'undefined' && Boolean(navigator.gpu) && typeof Worker !== 'undefined';
 
-const getModelDtype = async () => {
-  const adapter = await navigator.gpu.requestAdapter();
-  if (!adapter) throw new Error('WEBGPU_ADAPTER_UNAVAILABLE');
-  return adapter.features.has('shader-f16') ? 'q4f16' : 'q8';
+const getWorker = () => {
+  if (!worker) {
+    worker = new Worker(new URL('./localLlm.worker.js', import.meta.url));
+    worker.onmessage = event => {
+      const { id, type, text, event: progressEvent, message } = event.data || {};
+      const task = pending.get(id);
+      if (!task) return;
+      if (type === 'progress') task.onProgress?.(progressEvent);
+      if (type === 'token') task.onToken?.(text);
+      if (type === 'ready' || type === 'result') {
+        pending.delete(id);
+        task.resolve(type === 'result' ? text : true);
+      }
+      if (type === 'error') {
+        pending.delete(id);
+        task.reject(new Error(message || 'LOCAL_LLM_ERROR'));
+      }
+    };
+  }
+  return worker;
+};const runWorkerTask = (type, payload = {}, callbacks = {}) => new Promise((resolve, reject) => {
+  const id = nextId++;
+  pending.set(id, { resolve, reject, ...callbacks });
+  getWorker().postMessage({ type, id, ...payload });
+});
+
+export const loadLocalLlm = onProgress => {
+  if (!supportsLocalLlm()) return Promise.reject(new Error('WEBGPU_UNSUPPORTED'));
+  return runWorkerTask('load', {}, { onProgress });
 };
 
-export const loadLocalLlm = async onProgress => {
-  if (!supportsLocalLlm()) throw new Error('WEBGPU_UNSUPPORTED');
-  if (!generatorPromise) {
-    generatorPromise = getModelDtype().then(async dtype => {
-      const transformers = await import('@huggingface/transformers');
-      TextStreamerClass = transformers.TextStreamer;
-      return transformers.pipeline('text-generation', MODEL_ID, {
-        device: 'webgpu',
-        dtype,
-        progress_callback: event => onProgress?.({ ...event, dtype }),
-      });
-    }).catch(error => {
-      generatorPromise = null;
-      throw error;
-    });
-  }
-  return generatorPromise;
-};const cleanAnswer = value => String(value || '')
-  .replace(/<think>[\s\S]*?<\/think>/gi, '')
-  .replace(/<\/?think>/gi, '')
-  .trim();
+export const generateProductAnswer = ({ query, products, onToken }) => {
+  if (!supportsLocalLlm()) return Promise.reject(new Error('WEBGPU_UNSUPPORTED'));
+  return runWorkerTask('generate', { query, products }, { onToken });
+};
 
-const buildMessages = ({ query, products }) => [
-  {
-    role: 'system',
-    content: [
-      '당신은 MUJI 상품 안내 도우미입니다.',
-      '제공된 상품 데이터만 사용하세요.',
-      '질문에 이 상품이 맞는 이유만 한국어 12단어 이내로 작성하세요.',
-      '상품명과 가격은 반복하지 마세요.',
-      '추측하거나 없는 정보를 만들지 마세요.',
-    ].join(' '),
-  },
-  {
-    role: 'user',
-    content: `질문: ${query}\n상품: ${JSON.stringify(products)}\n이유:`,
-  },
-];
+export const shouldUseLocalLlm = query => /추천|비교|어울|선물|좋은|편한|어떤|왜|고민/.test(String(query || ''));
 
-export const generateProductAnswer = async ({ query, products, onToken }) => {
-  const generator = await loadLocalLlm();
-  let streamed = '';
-  const streamer = onToken && TextStreamerClass ? new TextStreamerClass(generator.tokenizer, {
-    skip_prompt: true,
-    skip_special_tokens: true,
-    callback_function: chunk => {
-      streamed += chunk;
-      onToken(cleanAnswer(streamed));
-    },
-  }) : undefined;
-  const output = await generator(buildMessages({ query, products }), {
-    max_new_tokens: 16,
-    do_sample: false,
-    tokenizer_encode_kwargs: { enable_thinking: false },
-    ...(streamer ? { streamer } : {}),
-  });
-
-  const finalText = cleanAnswer(output?.[0]?.generated_text?.at?.(-1)?.content);
-  return finalText || cleanAnswer(streamed) || '조건에 맞는 이유를 확인했습니다.';
+export const buildInstantAnswer = products => {
+  const first = products[0];
+  if (!first) return '조건에 맞는 상품을 찾지 못했습니다.';
+  const price = Number(first.sell_price ?? first.retail_price ?? 0).toLocaleString('ko-KR');
+  return `${first.product_name} — ${price}원 상품을 찾았습니다.`;
 };
