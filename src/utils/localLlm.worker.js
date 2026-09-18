@@ -112,6 +112,21 @@ const cleanAnswer = value => String(value || '')
   .replace(/<\/?think>/gi, '')
   .trim();
 
+const extractJsonObject = value => {
+  const text = cleanAnswer(value);
+  const fenced = text.match(/\{[\s\S]*\}/);
+  if (!fenced) return null;
+  try { return JSON.parse(fenced[0]); } catch { return null; }
+};
+
+const buildIntentMessages = query => [
+  {
+    role: 'system',
+    content: '사용자의 MUJI 상품 검색 의도를 JSON 하나로만 변환하세요. 설명은 쓰지 마세요. 스키마: {"gender":"","category":"","min_price":null,"max_price":null,"colors":[],"keywords":[]}. gender는 남성 여성 아동 중 하나 또는 빈 문자열. category는 사용자가 찾는 상품 종류를 짧게 정규화하세요. 예: 남자=남성 여자=여성 잠옷=파자마. "5만원대"는 min_price=50000 max_price=59999. "5만원 이하"는 max_price=50000. 모르는 값은 빈 문자열 null 빈 배열을 사용하세요.',
+  },
+  { role: 'user', content: query },
+];
+
 const buildMessages = ({ query, products }) => [
   {
     role: 'system',
@@ -122,6 +137,19 @@ const buildMessages = ({ query, products }) => [
     content: `질문: ${query}\n상품: ${JSON.stringify(products)}\n답변:`,
   },
 ];
+
+const interpret = async ({ id, query }) => {
+  const generator = await loadModel(id);
+  const output = await generator(buildIntentMessages(query), {
+    max_new_tokens: 96,
+    do_sample: false,
+  });
+  const raw = output?.[0]?.generated_text?.at?.(-1)?.content || '';
+  const intent = extractJsonObject(raw) || {
+    gender: '', category: '', min_price: null, max_price: null, colors: [], keywords: [],
+  };
+  self.postMessage({ type: 'intent', id, intent });
+};
 
 const generate = async ({ id, query, products }) => {
   const generator = await loadModel(id);
@@ -151,6 +179,8 @@ self.onmessage = async event => {
     if (type === 'load') {
       await loadModel(id);
       self.postMessage({ type: 'ready', id, diagnostics: currentDiagnostics });
+    } else if (type === 'interpret') {
+      await interpret(event.data);
     } else if (type === 'generate') {
       await generate(event.data);
     }
