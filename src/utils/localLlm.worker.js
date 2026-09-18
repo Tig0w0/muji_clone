@@ -4,7 +4,6 @@ const IS_LOCAL_DEV = ['localhost', '127.0.0.1'].includes(self.location.hostname)
 const MODEL_BASE_URL = new URL('../../models/', self.location.href).href;
 const LOCAL_MODEL_URL = `${MODEL_BASE_URL}${MODEL_ID}/`;
 let generatorPromise = null;
-let TextStreamerClass = null;
 let currentDiagnostics = null;
 
 const adapterInfo = adapter => {
@@ -89,7 +88,6 @@ const loadModel = async id => {
         transformers.env.remoteHost = MODEL_BASE_URL;
         transformers.env.remotePathTemplate = '{model}/';
       }
-      TextStreamerClass = transformers.TextStreamer;
       const reportProgress = event => {
         if (event?.file) diagnostics.lastFile = event.file;
         if (event?.status) diagnostics.lastStatus = event.status;
@@ -127,10 +125,13 @@ const cleanAnswer = value => String(value || '')
 
 const sanitizeConsultantAnswer = value => {
   let text = cleanAnswer(value)
+    .replace(/^```(?:json)?/i, '')
+    .replace(/```$/i, '')
     .replace(/(?:\*\*?\s*\d+[.)]?\s*){3,}/g, '')
     .replace(/(?:\d+[.)]\s*){4,}/g, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
+  if (/^\s*[{[]/.test(text) || /"(?:tool|arguments)"\s*:/.test(text)) return '';
   if (text.length > 260) text = text.slice(0, 260).replace(/\s+\S*$/, '') + '…';
   return text;
 };
@@ -183,34 +184,14 @@ const planToolCall = async ({ id, query, history, previousIntent, categories }) 
 
 const generateFromTool = async ({ id, query, toolCall, toolResult, intent }) => {
   const generator = await loadModel(id);
-  let streamed = '';
-
-  const tokenizer = generator?.tokenizer;
-  const canStream = Boolean(tokenizer?.all_special_ids && TextStreamerClass);
-  const streamer = canStream
-    ? new TextStreamerClass(tokenizer, {
-        skip_prompt: true,
-        skip_special_tokens: true,
-        callback_function: chunk => {
-          streamed += chunk;
-          self.postMessage({ type: 'token', id, text: sanitizeConsultantAnswer(streamed) });
-        },
-      })
-    : null;
-
-  const options = {
+  const output = await generator(buildAnswerMessages({ query, toolCall, toolResult, intent }), {
     max_new_tokens: 72,
     do_sample: false,
     repetition_penalty: 1.15,
     no_repeat_ngram_size: 3,
-  };
-  if (streamer) options.streamer = streamer;
-
-  const output = await generator(buildAnswerMessages({ query, toolCall, toolResult, intent }), options);
+  });
   const generated = output?.[0]?.generated_text;
-  const finalText = sanitizeConsultantAnswer(Array.isArray(generated) ? generated.at(-1)?.content : generated)
-    || sanitizeConsultantAnswer(streamed)
-    || '조건에 맞는 상품을 확인해보세요.';
+  const finalText = sanitizeConsultantAnswer(Array.isArray(generated) ? generated.at(-1)?.content : generated);
   self.postMessage({ type: 'result', id, text: finalText });
 };
 

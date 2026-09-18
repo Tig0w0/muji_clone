@@ -1,8 +1,10 @@
 import {
+  buildToolFallbackAnswer,
   executeProductTool,
   fallbackProductToolCall,
   getCatalogCategoryNames,
   normalizeProductToolCall,
+  routeAssistantQuery,
 } from './productTools';
 
 const products = [
@@ -90,4 +92,35 @@ test('provides a deterministic fallback tool call when the small model fails', (
       category: '티셔츠',
     },
   });
+});
+
+
+test('routes greetings without invoking product tools', () => {
+  expect(routeAssistantQuery('안녕', {})).toMatchObject({ mode: 'chat' });
+});
+
+test('routes broad food requests to live food categories', () => {
+  const route = routeAssistantQuery('뭐 맛있는거 없을까', {});
+  expect(route.mode).toBe('tool');
+  expect(route.toolCall).toMatchObject({
+    tool: 'search_products',
+    arguments: {
+      category_any: ['스낵', '간편조리'],
+    },
+  });
+});
+
+test('rejects hallucinated tools by normalizing them to search_products', () => {
+  const call = normalizeProductToolCall({
+    tool: 'search_images',
+    arguments: { query: '과자' },
+  }, '과자', {});
+  expect(call.tool).toBe('search_products');
+  expect(call.arguments.category).toBe('스낵');
+});
+
+test('builds a safe fallback sentence without exposing tool JSON', () => {
+  const text = buildToolFallbackAnswer({ products: [products[1], products[0]], result: {} });
+  expect(text).toContain('후보');
+  expect(text).not.toContain('{');
 });
