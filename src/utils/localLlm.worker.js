@@ -142,43 +142,46 @@ const extractJsonObject = value => {
   try { return JSON.parse(fenced[0]); } catch { return null; }
 };
 
-const buildIntentMessages = ({ query, history = [], previousIntent = {} }) => [
+const buildToolCallMessages = ({ query, history = [], previousIntent = {}, categories = [] }) => [
   {
     role: 'system',
-    content: '당신은 MUJI 쇼핑 상담원의 검색 의도 분석기입니다. JSON 하나만 출력하세요. 스키마: {"gender":"","category":"","min_price":null,"max_price":null,"colors":[],"keywords":[],"purpose":"","style":""}. 이전 조건과 현재 발화를 함께 보고 새로 확인된 값만 정확히 채우세요. gender는 남성 여성 아동 또는 빈 문자열. category는 셔츠 티셔츠 팬츠 파자마 가구 주방용품 생활용품 문구 뷰티 간편조리 스낵 등 실제 상품 종류를 짧게 정규화하세요. 남자=남성 여자=여성 잠옷=파자마. 5만원대는 50000~59999. 모르면 빈 값으로 두세요.',
+    content: '당신은 쇼핑 상담용 도구 선택기입니다. 반드시 JSON 하나만 출력하세요. 설명 문장과 마크다운은 금지합니다. 사용 가능한 도구: search_products, list_categories, get_product, compare_products. 대부분의 상품 추천/검색에는 search_products를 사용하세요. search_products 스키마: {"tool":"search_products","arguments":{"query":"","gender":"","category":"","min_price":null,"max_price":null,"colors":[],"keywords":[],"purpose":"","style":"","limit":6}}. 카테고리를 모를 때만 list_categories를 사용하세요. 상품 ID가 명확할 때만 get_product 또는 compare_products를 사용하세요. 현재 사용 가능한 카테고리 이름을 참고하세요.',
   },
   {
     role: 'user',
-    content: `이전 조건: ${JSON.stringify(previousIntent)}\n최근 대화: ${JSON.stringify(history.slice(-4))}\n현재 말: ${query}`,
+    content: `카테고리: ${JSON.stringify(categories)}\n이전 조건: ${JSON.stringify(previousIntent)}\n최근 대화: ${JSON.stringify(history.slice(-4))}\n현재 요청: ${query}`,
   },
 ];
 
-const buildMessages = ({ query, products, intent = {} }) => [
+const buildAnswerMessages = ({ query, toolCall, toolResult, intent = {} }) => [
   {
     role: 'system',
-    content: '당신은 MUJI 온라인 쇼핑 상담원입니다. 한국어로 2~4문장만 자연스럽게 답하세요. 번호 목록과 마크다운 굵게 표시는 쓰지 마세요. 사용자의 문장을 그대로 반복하지 마세요. 같은 문장이나 단어를 반복하지 마세요. 제공된 상품 데이터 밖의 소재 성능이나 기능은 지어내지 마세요. 상품 후보가 있으면 현재 조건에 맞는 이유를 짧게 설명하고 다음 선택에 도움이 되는 질문을 하나 덧붙이세요. 상품 후보가 없으면 필요한 조건 하나만 질문하세요.',
+    content: '당신은 MUJI 온라인 쇼핑 상담원입니다. 한국어로 2~4문장만 답하세요. JSON, 코드, 마크다운 목록은 출력하지 마세요. 사용자 문장을 그대로 반복하지 마세요. 반드시 제공된 도구 실행 결과만 근거로 답하세요. 상품이 있으면 1~3개를 간단히 비교하고 다음 선택에 도움이 되는 질문을 하나 덧붙이세요. 상품이 없으면 조건을 하나 더 물어보세요.',
   },
   {
     role: 'user',
-    content: `현재 요청: ${query}\n현재 조건: ${JSON.stringify(intent)}\n상품 후보: ${JSON.stringify(products)}\n답변:`,
+    content: `현재 요청: ${query}\n실행한 도구: ${JSON.stringify(toolCall)}\n현재 조건: ${JSON.stringify(intent)}\n도구 결과: ${JSON.stringify(toolResult)}\n답변:`,
   },
 ];
 
-const interpret = async ({ id, query, history, previousIntent }) => {
+const planToolCall = async ({ id, query, history, previousIntent, categories }) => {
   const generator = await loadModel(id);
-  const output = await generator(buildIntentMessages({ query, history, previousIntent }), {
-    max_new_tokens: 120,
+  const output = await generator(buildToolCallMessages({ query, history, previousIntent, categories }), {
+    max_new_tokens: 140,
     do_sample: false,
+    repetition_penalty: 1.08,
+    no_repeat_ngram_size: 3,
   });
   const generated = output?.[0]?.generated_text;
   const raw = Array.isArray(generated) ? generated.at(-1)?.content : generated;
-  const intent = extractJsonObject(raw) || {
-    gender: '', category: '', min_price: null, max_price: null, colors: [], keywords: [], purpose: '', style: '',
+  const toolCall = extractJsonObject(raw) || {
+    tool: 'search_products',
+    arguments: { query, limit: 6 },
   };
-  self.postMessage({ type: 'intent', id, intent });
+  self.postMessage({ type: 'tool_call', id, toolCall });
 };
 
-const generate = async ({ id, query, products, intent }) => {
+const generateFromTool = async ({ id, query, toolCall, toolResult, intent }) => {
   const generator = await loadModel(id);
   let streamed = '';
 
@@ -196,14 +199,14 @@ const generate = async ({ id, query, products, intent }) => {
     : null;
 
   const options = {
-    max_new_tokens: 64,
+    max_new_tokens: 72,
     do_sample: false,
     repetition_penalty: 1.15,
     no_repeat_ngram_size: 3,
   };
   if (streamer) options.streamer = streamer;
 
-  const output = await generator(buildMessages({ query, products, intent }), options);
+  const output = await generator(buildAnswerMessages({ query, toolCall, toolResult, intent }), options);
   const generated = output?.[0]?.generated_text;
   const finalText = sanitizeConsultantAnswer(Array.isArray(generated) ? generated.at(-1)?.content : generated)
     || sanitizeConsultantAnswer(streamed)
@@ -217,10 +220,10 @@ self.onmessage = async event => {
     if (type === 'load') {
       await loadModel(id);
       self.postMessage({ type: 'ready', id, diagnostics: currentDiagnostics });
-    } else if (type === 'interpret') {
-      await interpret(event.data);
-    } else if (type === 'generate') {
-      await generate(event.data);
+    } else if (type === 'plan_tool') {
+      await planToolCall(event.data);
+    } else if (type === 'generate_from_tool') {
+      await generateFromTool(event.data);
     }
   } catch (error) {
     self.postMessage({
