@@ -14,6 +14,18 @@ const adapterInfo = adapter => {
   };
 };
 
+const preflightModelData = async dtype => {
+  if (dtype !== 'q4f16') return 'skipped';
+  const url = `https://huggingface.co/${MODEL_ID}/resolve/main/onnx/model_q4f16.onnx_data`;
+  const response = await fetch(url, { headers: { Range: 'bytes=0-1023' } });
+  if (!response.ok && response.status !== 206) {
+    const error = new Error(`Model data preflight failed: HTTP ${response.status}`);
+    error.code = 'MODEL_DATA_PREFLIGHT_FAILED';
+    throw error;
+  }
+  await response.arrayBuffer();
+  return 'ok';
+};
 const inspectWebGpu = async () => {
   if (!navigator.gpu) {
     const error = new Error('WebGPU is unavailable.');
@@ -30,19 +42,16 @@ const inspectWebGpu = async () => {
   }
   const shaderF16 = adapter.features.has('shader-f16');
   const mobile = /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
-  // On Android Chrome the q4f16 graph references a separate ~273 MB data file.
-  // Prefer the current single-file fp16 graph on mobile when f16 shaders are available.
-  const dtype = shaderF16 ? (mobile ? 'fp16' : 'q4f16') : 'q8';
+  const dtype = shaderF16 ? 'q4f16' : 'q8';
   return {
     mode: adapter.features.has('core-features-and-limits') ? 'core' : 'standard',
     shaderF16,
     dtype,
-    estimatedModelMb: dtype === 'fp16' ? 323 : dtype === 'q4f16' ? 273 : 545,
+    estimatedModelMb: dtype === 'q4f16' ? 273 : 545,
     mobile,
     ...adapterInfo(adapter),
   };
 };
-
 const classifyError = error => {
   if (error?.code) return error.code;
   const message = String(error?.message || error || '');
@@ -57,6 +66,9 @@ const loadModel = async id => {
     generatorPromise = inspectWebGpu().then(async diagnostics => {
       currentDiagnostics = diagnostics;
       self.postMessage({ type: 'progress', id, event: { status: 'diagnostics', ...diagnostics } });
+      diagnostics.preflight = await preflightModelData(diagnostics.dtype);
+      self.postMessage({ type: 'progress', id, event: { status: 'preflight', ...diagnostics } });
+
       const transformers = await import('@huggingface/transformers');
       TextStreamerClass = transformers.TextStreamer;
       return transformers.pipeline('text-generation', MODEL_ID, {
@@ -75,7 +87,6 @@ const loadModel = async id => {
   }
   return generatorPromise;
 };
-
 const cleanAnswer = value => String(value || '')
   .replace(/<think>[\s\S]*?<\/think>/gi, '')
   .replace(/<\/?think>/gi, '')

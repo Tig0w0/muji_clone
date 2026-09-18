@@ -29,6 +29,7 @@ export const describeLocalLlmError = error => {
   if (code === 'WEBGPU_UNSUPPORTED') return '이 브라우저에서는 WebGPU 로컬 AI를 사용할 수 없습니다. 상품 검색은 계속 사용할 수 있습니다.';
   if (code === 'WEBGPU_ADAPTER_UNAVAILABLE') return '사용 가능한 WebGPU 어댑터를 찾지 못했습니다. 상품 검색은 계속 사용할 수 있습니다.';
   if (code === 'WEBGPU_COMPATIBILITY_ONLY') return '이 기기는 WebGPU 호환 모드만 사용할 수 있어 현재 AI 모델을 실행할 수 없습니다. 상품 검색은 계속 사용할 수 있습니다.';
+  if (code === 'MODEL_DATA_PREFLIGHT_FAILED') return '모델 데이터 파일에 접근하지 못했습니다. 모바일 네트워크 또는 CDN 경로를 확인해주세요. 상품 검색은 계속 사용할 수 있습니다.';
   if (code === 'MODEL_DOWNLOAD_FAILED') return 'AI 모델 파일을 다운로드하지 못했습니다. 네트워크를 확인해주세요. 상품 검색은 계속 사용할 수 있습니다.';
   if (code === 'GPU_MEMORY_OR_DEVICE_LOST') return '기기 메모리 또는 GPU 리소스가 부족해 로컬 AI를 시작하지 못했습니다. 상품 검색은 계속 사용할 수 있습니다.';
   if (code === 'WEBGPU_RUNTIME_ERROR') return '이 기기의 WebGPU 환경에서 모델 초기화에 실패했습니다. 상품 검색은 계속 사용할 수 있습니다.';
