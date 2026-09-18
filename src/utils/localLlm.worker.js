@@ -154,20 +154,29 @@ const interpret = async ({ id, query }) => {
 const generate = async ({ id, query, products }) => {
   const generator = await loadModel(id);
   let streamed = '';
-  const streamer = new TextStreamerClass(generator.tokenizer, {
-    skip_prompt: true,
-    skip_special_tokens: true,
-    callback_function: chunk => {
-      streamed += chunk;
-      self.postMessage({ type: 'token', id, text: cleanAnswer(streamed) });
-    },
-  });
-  const output = await generator(buildMessages({ query, products }), {
+
+  const tokenizer = generator?.tokenizer;
+  const canStream = Boolean(tokenizer?.all_special_ids && TextStreamerClass);
+  const streamer = canStream
+    ? new TextStreamerClass(tokenizer, {
+        skip_prompt: true,
+        skip_special_tokens: true,
+        callback_function: chunk => {
+          streamed += chunk;
+          self.postMessage({ type: 'token', id, text: cleanAnswer(streamed) });
+        },
+      })
+    : null;
+
+  const options = {
     max_new_tokens: 24,
     do_sample: false,
-    streamer,
-  });
-  const finalText = cleanAnswer(output?.[0]?.generated_text?.at?.(-1)?.content)
+  };
+  if (streamer) options.streamer = streamer;
+
+  const output = await generator(buildMessages({ query, products }), options);
+  const generated = output?.[0]?.generated_text;
+  const finalText = cleanAnswer(Array.isArray(generated) ? generated.at(-1)?.content : generated)
     || cleanAnswer(streamed)
     || '조건에 맞는 상품을 확인해보세요.';
   self.postMessage({ type: 'result', id, text: finalText });
