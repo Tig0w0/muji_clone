@@ -49,9 +49,11 @@ const getWorker = () => {
       if (!task) return;
       if (type === 'progress') task.onProgress?.(progressEvent);
       if (type === 'token') task.onToken?.(text);
-      if (type === 'ready' || type === 'result') {
+      if (type === 'ready' || type === 'result' || type === 'intent') {
         pending.delete(id);
-        task.resolve(type === 'result' ? text : (diagnostics || true));
+        if (type === 'result') task.resolve(text);
+        else if (type === 'intent') task.resolve(event.data?.intent || null);
+        else task.resolve(diagnostics || true);
       }
       if (type === 'error') {
         pending.delete(id);
@@ -114,6 +116,15 @@ export const loadLocalLlm = onProgress => {
   });
 
   return loadPromise;
+};
+
+export const interpretProductIntent = async query => {
+  if (!supportsLocalLlm()) {
+    const error = new Error('WebGPU or Web Worker is unavailable.');
+    error.code = 'WEBGPU_UNSUPPORTED';
+    throw error;
+  }
+  return runWorkerTask('interpret', { query });
 };
 
 export const generateProductAnswer = async ({ query, products, onToken }) => {
