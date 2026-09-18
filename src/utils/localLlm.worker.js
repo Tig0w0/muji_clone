@@ -82,9 +82,12 @@ const loadModel = async id => {
 
       const transformers = await import('@huggingface/transformers');
       if (!IS_LOCAL_DEV) {
-        transformers.env.localModelPath = MODEL_BASE_URL;
-        transformers.env.allowLocalModels = true;
-        transformers.env.allowRemoteModels = false;
+        // Transformers.js 4.3 metadata probing skips HTTP URLs configured as localModelPath.
+        // Treat our same-origin GitHub Pages model directory as a custom remote host instead.
+        transformers.env.allowLocalModels = false;
+        transformers.env.allowRemoteModels = true;
+        transformers.env.remoteHost = MODEL_BASE_URL;
+        transformers.env.remotePathTemplate = '{model}/';
       }
       TextStreamerClass = transformers.TextStreamer;
       const reportProgress = event => {
@@ -97,26 +100,12 @@ const loadModel = async id => {
         });
       };
 
-      diagnostics.lastStatus = 'tokenizer';
-      self.postMessage({
-        type: 'progress',
-        id,
-        event: { status: 'tokenizer', dtype: diagnostics.dtype, diagnostics: { ...diagnostics } },
-      });
-      const tokenizer = await transformers.AutoTokenizer.from_pretrained(MODEL_ID, {
-        progress_callback: reportProgress,
-      });
-
       const generator = await transformers.pipeline('text-generation', MODEL_ID, {
         device: 'webgpu',
         dtype: diagnostics.dtype,
         progress_callback: reportProgress,
       });
 
-      // In production local-only mode, Transformers.js 4.3 can fail to auto-detect
-      // tokenizer files during pipeline discovery. Attach the explicitly loaded
-      // tokenizer so text-generation and TextStreamer can both use it.
-      generator.tokenizer = tokenizer;
       diagnostics.lastStatus = 'ready';
       self.postMessage({
         type: 'progress',
@@ -143,39 +132,43 @@ const extractJsonObject = value => {
   try { return JSON.parse(fenced[0]); } catch { return null; }
 };
 
-const buildIntentMessages = query => [
+const buildIntentMessages = ({ query, history = [], previousIntent = {} }) => [
   {
     role: 'system',
-    content: '사용자의 MUJI 상품 검색 의도를 JSON 하나로만 변환하세요. 설명은 쓰지 마세요. 스키마: {"gender":"","category":"","min_price":null,"max_price":null,"colors":[],"keywords":[]}. gender는 남성 여성 아동 중 하나 또는 빈 문자열. category는 사용자가 찾는 상품 종류를 짧게 정규화하세요. 예: 남자=남성 여자=여성 잠옷=파자마. "5만원대"는 min_price=50000 max_price=59999. "5만원 이하"는 max_price=50000. 모르는 값은 빈 문자열 null 빈 배열을 사용하세요.',
-  },
-  { role: 'user', content: query },
-];
-
-const buildMessages = ({ query, products }) => [
-  {
-    role: 'system',
-    content: '당신은 MUJI 상품 안내 도우미입니다. 제공된 상품 데이터만 사용하세요. 상품명에 직접 적힌 정보만 근거로 한국어 추천 이유를 8단어 이내 한 문장으로 작성하세요. 쉼표를 쓰지 말고 반드시 마침표로 끝내세요. 상품명과 가격은 반복하지 마세요.',
+    content: '당신은 MUJI 쇼핑 상담원의 검색 의도 분석기입니다. JSON 하나만 출력하세요. 스키마: {"gender":"","category":"","min_price":null,"max_price":null,"colors":[],"keywords":[],"purpose":"","style":""}. 이전 조건과 현재 발화를 함께 보고 새로 확인된 값만 정확히 채우세요. gender는 남성 여성 아동 또는 빈 문자열. category는 셔츠 티셔츠 팬츠 파자마 가구 주방용품 생활용품 문구 뷰티 간편조리 스낵 등 실제 상품 종류를 짧게 정규화하세요. 남자=남성 여자=여성 잠옷=파자마. 5만원대는 50000~59999. 모르면 빈 값으로 두세요.',
   },
   {
     role: 'user',
-    content: `질문: ${query}\n상품: ${JSON.stringify(products)}\n답변:`,
+    content: `이전 조건: ${JSON.stringify(previousIntent)}\n최근 대화: ${JSON.stringify(history.slice(-4))}\n현재 말: ${query}`,
   },
 ];
 
-const interpret = async ({ id, query }) => {
+const buildMessages = ({ query, products, history = [], intent = {} }) => [
+  {
+    role: 'system',
+    content: '당신은 MUJI 온라인 쇼핑 상담원입니다. 한국어로 짧고 자연스럽게 상담하세요. 제공된 상품 데이터 밖의 소재 성능이나 기능을 지어내지 마세요. 상품 후보가 있으면 사용자의 용도 예산 취향에 맞춰 1~3개를 비교해 추천하고 다음 선택에 도움이 되는 한 문장을 덧붙이세요. 상품 후보가 없거나 조건이 너무 넓으면 성별 상품종류 예산 스타일 중 가장 필요한 정보 하나만 친절하게 질문하세요. 이전 대화의 조건을 이어받으세요.',
+  },
+  {
+    role: 'user',
+    content: `최근 대화: ${JSON.stringify(history.slice(-6))}\n현재 질문: ${query}\n누적 조건: ${JSON.stringify(intent)}\n상품 후보: ${JSON.stringify(products)}\n답변:`,
+  },
+];
+
+const interpret = async ({ id, query, history, previousIntent }) => {
   const generator = await loadModel(id);
-  const output = await generator(buildIntentMessages(query), {
-    max_new_tokens: 96,
+  const output = await generator(buildIntentMessages({ query, history, previousIntent }), {
+    max_new_tokens: 120,
     do_sample: false,
   });
-  const raw = output?.[0]?.generated_text?.at?.(-1)?.content || '';
+  const generated = output?.[0]?.generated_text;
+  const raw = Array.isArray(generated) ? generated.at(-1)?.content : generated;
   const intent = extractJsonObject(raw) || {
-    gender: '', category: '', min_price: null, max_price: null, colors: [], keywords: [],
+    gender: '', category: '', min_price: null, max_price: null, colors: [], keywords: [], purpose: '', style: '',
   };
   self.postMessage({ type: 'intent', id, intent });
 };
 
-const generate = async ({ id, query, products }) => {
+const generate = async ({ id, query, products, history, intent }) => {
   const generator = await loadModel(id);
   let streamed = '';
 
@@ -193,12 +186,12 @@ const generate = async ({ id, query, products }) => {
     : null;
 
   const options = {
-    max_new_tokens: 24,
+    max_new_tokens: 96,
     do_sample: false,
   };
   if (streamer) options.streamer = streamer;
 
-  const output = await generator(buildMessages({ query, products }), options);
+  const output = await generator(buildMessages({ query, products, history, intent }), options);
   const generated = output?.[0]?.generated_text;
   const finalText = cleanAnswer(Array.isArray(generated) ? generated.at(-1)?.content : generated)
     || cleanAnswer(streamed)

@@ -16,8 +16,31 @@ import {
 
 const INITIAL_MESSAGE = {
   role: 'assistant',
-  text: '원하는 상품을 자연스럽게 말씀해주세요. 예: “5만원 이하 남성 셔츠 찾아줘”',
+  text: '찾는 상품이 정해져 있지 않아도 괜찮아요. 용도, 예산, 스타일을 말씀해주시면 함께 좁혀볼게요.',
 };
+
+const EMPTY_INTENT = {
+  gender: '',
+  category: '',
+  min_price: null,
+  max_price: null,
+  colors: [],
+  keywords: [],
+  purpose: '',
+  style: '',
+};
+
+const mergeIntent = (previous, next) => ({
+  ...previous,
+  ...Object.fromEntries(Object.entries(next || {}).filter(([, value]) =>
+    value !== '' && value !== null && value !== undefined && !(Array.isArray(value) && value.length === 0)
+  )),
+});
+
+const compactHistory = messages => messages
+  .filter(message => message?.text)
+  .slice(-6)
+  .map(({ role, text }) => ({ role, text }));
 
 const price = product => Number(product.sell_price ?? product.retail_price ?? 0).toLocaleString('ko-KR');
 
@@ -51,6 +74,7 @@ function AiAssistant() {
   const [progress, setProgress] = useState(0);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
+  const [intentContext, setIntentContext] = useState(EMPTY_INTENT);
   const [error, setError] = useState('');
   const [errorDetail, setErrorDetail] = useState('');
   const [diagnostics, setDiagnostics] = useState(null);
@@ -105,6 +129,7 @@ function AiAssistant() {
     const query = input.trim();
     if (!query || loading) return;
 
+    const history = compactHistory(messages);
     const userMessage = { role: 'user', text: query };
     setMessages(current => [...current, userMessage]);
     setInput('');
@@ -112,54 +137,64 @@ function AiAssistant() {
     setError('');
     setErrorDetail('');
 
-    let matches = [];
-    try {
-      if (ready) {
-        const intent = await interpretProductIntent(query);
-        matches = searchProductsByIntent(catalogProducts, intent);
-      }
-      if (!matches.length) matches = searchProducts(catalogProducts, query);
-    } catch (e) {
-      matches = searchProducts(catalogProducts, query);
-    }
-
-    if (!matches.length) {
+    if (!ready) {
+      const matches = searchProducts(catalogProducts, query);
       setMessages(current => [...current, {
         role: 'assistant',
-        text: '조건에 맞는 상품을 찾지 못했습니다. 다른 표현이나 가격 범위로 다시 말씀해주세요.',
+        text: matches.length
+          ? `${buildInstantAnswer(matches)} AI가 준비되면 용도와 취향을 함께 고려한 상담도 받을 수 있습니다.`
+          : '지금은 기본 상품 검색만 사용할 수 있습니다. AI가 준비되면 용도와 예산을 함께 상담해드릴게요.',
+        products: matches.slice(0, 3),
       }]);
       setLoading(false);
       return;
     }
 
-    const baseText = buildInstantAnswer(matches);
+    let nextIntent = intentContext;
+    let matches = [];
+    try {
+      const parsed = await interpretProductIntent({
+        query,
+        history,
+        previousIntent: intentContext,
+      });
+      nextIntent = mergeIntent(intentContext, parsed);
+      setIntentContext(nextIntent);
+      matches = searchProductsByIntent(catalogProducts, nextIntent, 6);
+      if (!matches.length) matches = searchProducts(catalogProducts, query, 6);
+    } catch (e) {
+      matches = searchProducts(catalogProducts, query, 6);
+    }
+
     const responseIndex = messages.length + 1;
     setMessages(current => [...current, {
       role: 'assistant',
-      text: ready ? baseText : `${baseText} 로컬 AI가 준비되지 않아 기본 검색 결과를 표시합니다.`,
+      text: matches.length ? '조건을 바탕으로 몇 가지를 골라보고 있어요.' : '조금 더 취향을 확인해볼게요.',
       products: matches.slice(0, 3),
     }]);
-
-    if (!ready) {
-      setLoading(false);
-      return;
-    }
 
     try {
       const answer = await generateProductAnswer({
         query,
         products: formatProductContext(matches),
+        history: [...history, userMessage],
+        intent: nextIntent,
         onToken: text => setMessages(current => current.map((message, index) =>
-          index === responseIndex ? { ...message, text: `${baseText} ${text}` } : message
+          index === responseIndex ? { ...message, text } : message
         )),
       });
       setMessages(current => current.map((message, index) =>
-        index === responseIndex ? { ...message, text: `${baseText} ${answer}` } : message
+        index === responseIndex ? { ...message, text: answer } : message
       ));
     } catch (e) {
       setDiagnostics(e?.diagnostics || diagnostics);
       setError(formatLocalLlmError(e));
       setErrorDetail([e?.code, e?.message].filter(Boolean).join(' · '));
+      setMessages(current => current.map((message, index) =>
+        index === responseIndex && !message.text
+          ? { ...message, text: matches.length ? buildInstantAnswer(matches) : '조건을 조금 더 구체적으로 말씀해주세요.' }
+          : message
+      ));
     } finally {
       setLoading(false);
     }
@@ -191,8 +226,8 @@ function AiAssistant() {
         <section className="fixed right-4 bottom-52 lg:bottom-40 z-[10900] w-[calc(100vw-2rem)] max-w-[380px] h-[560px] max-h-[70vh] bg-white border border-[#ddd] shadow-2xl flex flex-col">
           <header className="px-4 py-3 border-b flex items-center justify-between">
             <div>
-              <div className="text-sm font-semibold">AI 상품 도우미</div>
-              <div className="text-[11px] text-[#777]">브라우저에서 로컬 AI 실행</div>
+              <div className="text-sm font-semibold">AI 쇼핑 상담</div>
+              <div className="text-[11px] text-[#777]">용도·예산·취향을 함께 좁혀드려요</div>
             </div>
             <span className="text-[10px] text-[#777]">{LOCAL_LLM_NAME}</span>
           </header>
@@ -228,7 +263,7 @@ function AiAssistant() {
               </div>
             ))}
 
-            {loading && ready && <div className="text-xs text-[#777]">상품을 확인하고 답변을 만들고 있습니다...</div>}
+            {loading && ready && <div className="text-xs text-[#777]">조건을 정리하고 상품을 비교하고 있습니다...</div>}
             {error && (
               <div className="text-xs text-[#b3261e] bg-[#fff4f2] p-2">
                 <div>{error}</div>
@@ -244,7 +279,7 @@ function AiAssistant() {
               value={input}
               onChange={event => setInput(event.target.value)}
               disabled={loading}
-              placeholder={ready ? '찾는 상품을 입력하세요' : 'AI 없이도 상품 검색이 가능합니다'}
+              placeholder={ready ? '용도나 고민을 편하게 말씀해주세요' : 'AI 없이도 기본 검색은 가능합니다'}
               className="flex-1 min-w-0 border border-[#ccc] px-3 py-2 text-xs outline-none focus:border-[#777] disabled:bg-[#f5f5f5]"
             />
             <button type="submit" disabled={loading || !input.trim()} className="w-10 flex items-center justify-center bg-[#7f0019] text-white disabled:opacity-40" aria-label="메시지 보내기">

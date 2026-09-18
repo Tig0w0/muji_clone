@@ -33,6 +33,6 @@ test('retrieves products from structured LLM intent', () => {
 
 test('passes only minimal grounded facts to the model', () => {
   expect(formatProductContext([products[0]])).toEqual([
-    { name: '남성 검정 셔츠', price: 39900 },
+    { name: '남성 검정 셔츠', price: 39900, categories: [], colors: ['검정'] },
   ]);
 });

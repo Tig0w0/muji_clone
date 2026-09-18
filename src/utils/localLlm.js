@@ -118,22 +118,22 @@ export const loadLocalLlm = onProgress => {
   return loadPromise;
 };
 
-export const interpretProductIntent = async query => {
+export const interpretProductIntent = async ({ query, history = [], previousIntent = {} }) => {
   if (!supportsLocalLlm()) {
     const error = new Error('WebGPU or Web Worker is unavailable.');
     error.code = 'WEBGPU_UNSUPPORTED';
     throw error;
   }
-  return runWorkerTask('interpret', { query });
+  return runWorkerTask('interpret', { query, history, previousIntent });
 };
 
-export const generateProductAnswer = async ({ query, products, onToken }) => {
+export const generateProductAnswer = async ({ query, products, history = [], intent = {}, onToken }) => {
   if (!supportsLocalLlm()) {
     const error = new Error('WebGPU or Web Worker is unavailable.');
     error.code = 'WEBGPU_UNSUPPORTED';
     throw error;
   }
-  const answer = await runWorkerTask('generate', { query, products }, {
+  const answer = await runWorkerTask('generate', { query, products, history, intent }, {
     onToken: text => {
       const cleaned = cleanModelReason(text, products);
       if (cleaned) onToken?.(cleaned);
