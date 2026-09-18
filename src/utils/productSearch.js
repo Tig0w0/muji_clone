@@ -80,7 +80,7 @@ const CATEGORY_PATTERNS = [
   ['문구', /문구|노트|펜|스탠드/],
   ['뷰티', /뷰티|로션|스킨|화장|바디/],
   ['간편조리', /간편조리|카레|국수|국|탕/],
-  ['스낵', /스낵|과자|캔디|구미|크래커/],
+  ['스낵', /스낵|간식|과자|캔디|구미|크래커|쿠키|초콜릿/],
 ];
 
 export const extractDeterministicIntent = query => {
@@ -104,6 +104,55 @@ export const extractDeterministicIntent = query => {
     purpose,
     style: '',
   };
+};
+
+const EMPTY_SHOPPING_INTENT = {
+  gender: '',
+  category: '',
+  min_price: null,
+  max_price: null,
+  colors: [],
+  keywords: [],
+  purpose: '',
+  style: '',
+};
+
+const CONTINUATION_PATTERN = /그럼|그러면|그중|그거|그걸|그쪽|말고|대신|또|더|이어서|그대로|비슷한|다른 색|다른 가격/;
+
+const meaningfulEntries = intent => Object.entries(intent || {}).filter(([, value]) =>
+  value !== '' && value !== null && value !== undefined && !(Array.isArray(value) && value.length === 0)
+);
+
+const mergeNonEmpty = (base, next) => ({
+  ...base,
+  ...Object.fromEntries(meaningfulEntries(next)),
+});
+
+export const mergeShoppingIntent = (previous = {}, parsed = {}, deterministic = {}, query = '') => {
+  const previousCategory = normalizeCatalogText(previous.category || '');
+  const explicitCategory = normalizeCatalogText(deterministic.category || '');
+  const isContinuation = CONTINUATION_PATTERN.test(normalize(query));
+
+  const topicChanged = Boolean(
+    explicitCategory
+    && !isContinuation
+    && (
+      (previousCategory && explicitCategory !== previousCategory)
+      || (!previousCategory && (previous.gender || previous.purpose || previous.style))
+    )
+  );
+
+  let next = topicChanged ? { ...EMPTY_SHOPPING_INTENT } : { ...EMPTY_SHOPPING_INTENT, ...previous };
+  next = mergeNonEmpty(next, parsed);
+  next = mergeNonEmpty(next, deterministic);
+
+  // Non-apparel categories should never inherit a stale clothing gender.
+  if (explicitCategory && !['셔츠', '티셔츠', '팬츠', '파자마', '가방'].includes(explicitCategory)) {
+    next.gender = canonicalGender(deterministic.gender);
+  }
+
+  if (topicChanged && !deterministic.purpose) next.purpose = '';
+  return next;
 };
 
 const hasRetrievalSignal = ({ gender, category, colors, keywords, minPrice, maxPrice }) =>
