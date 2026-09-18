@@ -56,11 +56,32 @@ const replaceObject = (target, value = {}) => {
 const rebuildIndexes = () => {
     plansById.clear();
     [...mainPlans, ...fromMujiPlans].forEach(entry => plansById.set(String(entry.plan.plan_id), entry));
+
+    const categoryNamesByProductId = new Map();
+    Object.values(mainCategoryProducts).forEach(category => {
+        const categoryName = category?.name;
+        (category?.products || []).forEach(product => {
+            const productId = Number(product.product_id);
+            if (!productId || !categoryName) return;
+            const names = categoryNamesByProductId.get(productId) || [];
+            categoryNamesByProductId.set(productId, [...new Set([...names, categoryName])]);
+        });
+    });
+
     const products = [...new Map([
         ...productDetailsList,
         ...collectProducts([...mainPlans, ...fromMujiPlans]),
         ...Object.values(mainCategoryProducts).flatMap(category => category.products || []),
-    ].map(product => [Number(product.product_id), product])).values()];
+    ].map(product => [Number(product.product_id), product])).values()]
+        .map(product => {
+            const existingCategories = Array.isArray(product.categories) ? product.categories : [];
+            const indexedCategories = categoryNamesByProductId.get(Number(product.product_id)) || [];
+            return {
+                ...product,
+                categories: [...new Set([...existingCategories, ...indexedCategories])],
+            };
+        });
+
     replaceArray(catalogProducts, products);
     productsById.clear();
     catalogProducts.forEach(product => productsById.set(Number(product.product_id), product));
@@ -124,7 +145,10 @@ export const getProductDetail = (productId) => {
     const category = getProductCategory(productId);
     return {
         ...product, variants,
-        categories: category ? [category.name] : [],
+        categories: [...new Set([
+            ...(product.categories || []),
+            ...(category?.name ? [category.name] : []),
+        ])],
         images: variants[0]?.images.length ? variants[0].images : (product.thumbnail_list || []).map(productImageUrl),
         facts: [
             ['품명 및 모델명', `${product.product_name} / ${product.code}`],
