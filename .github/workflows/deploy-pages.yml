@@ -33,6 +33,7 @@ jobs:
         run: npm run build
         env:
           CI: false
+          PUBLIC_URL: /muji_clone
           REACT_APP_API_BASE_URL: https://muji-clone-api.onrender.com
 
       - name: Stage local AI model
