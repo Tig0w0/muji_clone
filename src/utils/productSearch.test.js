@@ -1,5 +1,6 @@
 import {
   extractDeterministicIntent,
+  mergeShoppingIntent,
   formatProductContext,
   searchProducts,
   searchProductsByIntent,
@@ -55,4 +56,51 @@ test('extracts explicit Korean shopping constraints without relying on the LLM',
   const result = searchProductsByIntent(products, extractDeterministicIntent('선물용 남자 옷 추천해줘'));
   expect(result.length).toBeGreaterThan(0);
   expect(result.every(item => item.product_name.includes('남성'))).toBe(true);
+});
+
+
+test('recognizes 간식 as the snack category', () => {
+  expect(extractDeterministicIntent('간식 추천해줘')).toMatchObject({
+    category: '스낵',
+  });
+});
+
+test('resets stale clothing context when the user switches to snacks', () => {
+  const previous = {
+    gender: '남성',
+    category: '셔츠',
+    min_price: null,
+    max_price: null,
+    colors: [],
+    keywords: [],
+    purpose: '선물',
+    style: '',
+  };
+  const deterministic = extractDeterministicIntent('간식 추천해줘');
+  const next = mergeShoppingIntent(previous, {}, deterministic, '간식 추천해줘');
+
+  expect(next).toMatchObject({
+    gender: '',
+    category: '스낵',
+    purpose: '',
+  });
+});
+
+test('keeps context for an explicit continuation', () => {
+  const previous = {
+    gender: '남성',
+    category: '셔츠',
+    min_price: null,
+    max_price: 50000,
+    colors: [],
+    keywords: [],
+    purpose: '선물',
+    style: '',
+  };
+  const deterministic = extractDeterministicIntent('그럼 팬츠로 보여줘');
+  const next = mergeShoppingIntent(previous, {}, deterministic, '그럼 팬츠로 보여줘');
+
+  expect(next.gender).toBe('남성');
+  expect(next.category).toBe('팬츠');
+  expect(next.max_price).toBe(50000);
 });

@@ -4,6 +4,7 @@ import { FiMessageCircle, FiSend, FiX } from 'react-icons/fi';
 import { catalogProducts, getProductImage } from '../../data/catalog';
 import {
   extractDeterministicIntent,
+  mergeShoppingIntent,
   formatProductContext,
   searchProducts,
   searchProductsByIntent,
@@ -34,13 +35,6 @@ const EMPTY_INTENT = {
   purpose: '',
   style: '',
 };
-
-const mergeIntent = (previous, next) => ({
-  ...previous,
-  ...Object.fromEntries(Object.entries(next || {}).filter(([, value]) =>
-    value !== '' && value !== null && value !== undefined && !(Array.isArray(value) && value.length === 0)
-  )),
-});
 
 const compactHistory = messages => messages
   .filter(message => message?.text)
@@ -164,7 +158,7 @@ function AiAssistant() {
         history,
         previousIntent: intentContext,
       });
-      nextIntent = mergeIntent(mergeIntent(intentContext, parsed), deterministic);
+      nextIntent = mergeShoppingIntent(intentContext, parsed, deterministic, query);
       setIntentContext(nextIntent);
       matches = searchProductsByIntent(catalogProducts, nextIntent, 6);
 
@@ -179,7 +173,7 @@ function AiAssistant() {
       }
     } catch (e) {
       const deterministic = extractDeterministicIntent(query);
-      nextIntent = mergeIntent(intentContext, deterministic);
+      nextIntent = mergeShoppingIntent(intentContext, {}, deterministic, query);
       setIntentContext(nextIntent);
       matches = searchProductsByIntent(catalogProducts, nextIntent, 6);
       if (!matches.length) matches = searchProducts(catalogProducts, query, 6);
