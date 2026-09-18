@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMessageCircle, FiSend, FiX } from 'react-icons/fi';
 import { catalogProducts, getProductImage } from '../../data/catalog';
-import { formatProductContext, searchProducts } from '../../utils/productSearch';
+import { formatProductContext, searchProducts, searchProductsByIntent } from '../../utils/productSearch';
 import {
   buildInstantAnswer,
   formatLocalLlmError,
   generateProductAnswer,
+  interpretProductIntent,
   loadLocalLlm,
   LOCAL_LLM_NAME,
-  shouldUseLocalLlm,
   subscribeLocalLlmStatus,
   supportsLocalLlm,
 } from '../../utils/localLlm';
@@ -21,15 +21,23 @@ const INITIAL_MESSAGE = {
 
 const price = product => Number(product.sell_price ?? product.retail_price ?? 0).toLocaleString('ko-KR');
 
-function ProductResults({ products }) {
+function ProductResults({ products = [] }) {
   if (!products.length) return null;
   return (
-    <div className="grid grid-cols-3 gap-2 mt-3">
+    <div className="mt-2 grid grid-cols-3 gap-1.5 max-w-[300px]">
       {products.slice(0, 3).map(product => (
-        <Link key={product.product_id} to={`/products/view/${product.product_id}`} className="block text-left">
-          <img src={getProductImage(product)} alt="" className="w-full aspect-square object-cover bg-[#f5f5f5]" />
-          <div className="mt-1 text-[11px] leading-4 line-clamp-2">{product.product_name}</div>
-          <div className="text-[11px] font-semibold mt-0.5">{price(product)}원</div>
+        <Link
+          key={product.product_id}
+          to={`/products/view/${product.product_id}`}
+          className="min-w-0 border border-[#e5e5e5] bg-white p-1.5 text-left"
+        >
+          <img
+            src={getProductImage(product)}
+            alt=""
+            className="w-full aspect-square object-cover bg-[#f5f5f5]"
+          />
+          <div className="mt-1 text-[10px] leading-3 line-clamp-2 min-h-[24px]">{product.product_name}</div>
+          <div className="mt-0.5 text-[10px] font-semibold">{price(product)}원</div>
         </Link>
       ))}
     </div>
@@ -43,7 +51,6 @@ function AiAssistant() {
   const [progress, setProgress] = useState(0);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
-  const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
   const [errorDetail, setErrorDetail] = useState('');
   const [diagnostics, setDiagnostics] = useState(null);
@@ -105,35 +112,39 @@ function AiAssistant() {
     setError('');
     setErrorDetail('');
 
-    const matches = searchProducts(catalogProducts, query);
-    setProducts(matches);
+    let matches = [];
+    try {
+      if (ready) {
+        const intent = await interpretProductIntent(query);
+        matches = searchProductsByIntent(catalogProducts, intent);
+      }
+      if (!matches.length) matches = searchProducts(catalogProducts, query);
+    } catch (e) {
+      matches = searchProducts(catalogProducts, query);
+    }
+
     if (!matches.length) {
       setMessages(current => [...current, {
         role: 'assistant',
-        text: '정확히 맞는 상품을 찾지 못했습니다. 상품 종류나 가격 조건을 조금 더 간단하게 입력해주세요.',
+        text: '조건에 맞는 상품을 찾지 못했습니다. 다른 표현이나 가격 범위로 다시 말씀해주세요.',
       }]);
-      setLoading(false);
-      return;
-    }
-
-    if (!shouldUseLocalLlm(query)) {
-      setMessages(current => [...current, { role: 'assistant', text: buildInstantAnswer(matches) }]);
       setLoading(false);
       return;
     }
 
     const baseText = buildInstantAnswer(matches);
+    const responseIndex = messages.length + 1;
+    setMessages(current => [...current, {
+      role: 'assistant',
+      text: ready ? baseText : `${baseText} 로컬 AI가 준비되지 않아 기본 검색 결과를 표시합니다.`,
+      products: matches.slice(0, 3),
+    }]);
+
     if (!ready) {
-      setMessages(current => [...current, {
-        role: 'assistant',
-        text: `${baseText} 로컬 AI가 준비되지 않아 검색 결과만 표시합니다.`,
-      }]);
       setLoading(false);
       return;
     }
 
-    const responseIndex = messages.length + 1;
-    setMessages(current => [...current, { role: 'assistant', text: baseText }]);
     try {
       const answer = await generateProductAnswer({
         query,
@@ -213,6 +224,7 @@ function AiAssistant() {
                 }`}>
                   {message.text}
                 </div>
+                {message.role === 'assistant' && <ProductResults products={message.products} />}
               </div>
             ))}
 
@@ -225,7 +237,6 @@ function AiAssistant() {
                 )}
               </div>
             )}
-            <ProductResults products={products} />
           </div>
 
           <form onSubmit={submit} className="border-t p-3 flex gap-2">
