@@ -134,7 +134,6 @@ export const generateProductToolAnswer = async ({
   toolResult,
   intent = {},
   products = [],
-  onToken,
 }) => {
   if (!supportsLocalLlm()) {
     const error = new Error('WebGPU or Web Worker is unavailable.');
@@ -146,13 +145,8 @@ export const generateProductToolAnswer = async ({
     toolCall,
     toolResult,
     intent,
-  }, {
-    onToken: text => {
-      const cleaned = cleanModelReason(text, products);
-      if (cleaned) onToken?.(cleaned);
-    },
   });
-  return cleanModelReason(answer, products) || '추천 조건에 맞는 상품을 확인해보세요.';
+  return cleanModelReason(answer, products);
 };
 
 export const formatLocalLlmError = error => describeLocalLlmError(error);
