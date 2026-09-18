@@ -125,6 +125,16 @@ const cleanAnswer = value => String(value || '')
   .replace(/<\/?think>/gi, '')
   .trim();
 
+const sanitizeConsultantAnswer = value => {
+  let text = cleanAnswer(value)
+    .replace(/(?:\*\*?\s*\d+[.)]?\s*){3,}/g, '')
+    .replace(/(?:\d+[.)]\s*){4,}/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+  if (text.length > 260) text = text.slice(0, 260).replace(/\s+\S*$/, '') + '…';
+  return text;
+};
+
 const extractJsonObject = value => {
   const text = cleanAnswer(value);
   const fenced = text.match(/\{[\s\S]*\}/);
@@ -146,7 +156,7 @@ const buildIntentMessages = ({ query, history = [], previousIntent = {} }) => [
 const buildMessages = ({ query, products, history = [], intent = {} }) => [
   {
     role: 'system',
-    content: '당신은 MUJI 온라인 쇼핑 상담원입니다. 한국어로 짧고 자연스럽게 상담하세요. 제공된 상품 데이터 밖의 소재 성능이나 기능을 지어내지 마세요. 상품 후보가 있으면 사용자의 용도 예산 취향에 맞춰 1~3개를 비교해 추천하고 다음 선택에 도움이 되는 한 문장을 덧붙이세요. 상품 후보가 없거나 조건이 너무 넓으면 성별 상품종류 예산 스타일 중 가장 필요한 정보 하나만 친절하게 질문하세요. 이전 대화의 조건을 이어받으세요.',
+    content: '당신은 MUJI 온라인 쇼핑 상담원입니다. 한국어로 2~4문장만 자연스럽게 답하세요. 번호 목록과 마크다운 굵게 표시는 쓰지 마세요. 같은 단어나 번호를 반복하지 마세요. 제공된 상품 데이터 밖의 소재 성능이나 기능을 지어내지 마세요. 상품 후보가 있으면 사용자의 용도 예산 취향에 맞춰 1~3개를 짧게 비교하고 다음 선택에 도움이 되는 질문을 하나 덧붙이세요. 상품 후보가 없거나 조건이 너무 넓으면 성별 상품종류 예산 스타일 중 가장 필요한 정보 하나만 질문하세요. 이전 대화의 조건을 이어받으세요.',
   },
   {
     role: 'user',
@@ -180,21 +190,21 @@ const generate = async ({ id, query, products, history, intent }) => {
         skip_special_tokens: true,
         callback_function: chunk => {
           streamed += chunk;
-          self.postMessage({ type: 'token', id, text: cleanAnswer(streamed) });
+          self.postMessage({ type: 'token', id, text: sanitizeConsultantAnswer(streamed) });
         },
       })
     : null;
 
   const options = {
-    max_new_tokens: 96,
+    max_new_tokens: 64,
     do_sample: false,
   };
   if (streamer) options.streamer = streamer;
 
   const output = await generator(buildMessages({ query, products, history, intent }), options);
   const generated = output?.[0]?.generated_text;
-  const finalText = cleanAnswer(Array.isArray(generated) ? generated.at(-1)?.content : generated)
-    || cleanAnswer(streamed)
+  const finalText = sanitizeConsultantAnswer(Array.isArray(generated) ? generated.at(-1)?.content : generated)
+    || sanitizeConsultantAnswer(streamed)
     || '조건에 맞는 상품을 확인해보세요.';
   self.postMessage({ type: 'result', id, text: finalText });
 };
