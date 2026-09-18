@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMessageCircle, FiSend, FiX } from 'react-icons/fi';
-import { catalogProducts, getProductImage } from '../../data/catalog';
 import {
-  extractDeterministicIntent,
-  mergeShoppingIntent,
-  formatProductContext,
-  searchProducts,
-  searchProductsByIntent,
-} from '../../utils/productSearch';
+  catalogProducts,
+  getProductById,
+  getProductImage,
+  mainCategoryProducts,
+} from '../../data/catalog';
+import { searchProducts } from '../../utils/productSearch';
+import {
+  executeProductTool,
+  fallbackProductToolCall,
+  getCatalogCategoryNames,
+} from '../../utils/productTools';
 import {
   buildInstantAnswer,
   formatLocalLlmError,
-  generateProductAnswer,
-  interpretProductIntent,
+  generateProductToolAnswer,
+  planProductTool,
   loadLocalLlm,
   LOCAL_LLM_NAME,
   subscribeLocalLlmStatus,
@@ -141,57 +145,63 @@ function AiAssistant() {
       setMessages(current => [...current, {
         role: 'assistant',
         text: matches.length
-          ? `${buildInstantAnswer(matches)} AI가 준비되면 용도와 취향을 함께 고려한 상담도 받을 수 있습니다.`
-          : '지금은 기본 상품 검색만 사용할 수 있습니다. AI가 준비되면 용도와 예산을 함께 상담해드릴게요.',
+          ? `${buildInstantAnswer(matches)} AI가 준비되면 상품 목록을 직접 조회하며 상담할 수 있습니다.`
+          : '지금은 기본 상품 검색만 사용할 수 있습니다. AI가 준비되면 상품 목록을 직접 조회하며 상담해드릴게요.',
         products: matches.slice(0, 3),
       }]);
       setLoading(false);
       return;
     }
 
-    let nextIntent = intentContext;
-    let matches = [];
+    let toolCall;
     try {
-      const deterministic = extractDeterministicIntent(query);
-      const parsed = await interpretProductIntent({
+      toolCall = await planProductTool({
         query,
         history,
         previousIntent: intentContext,
+        categories: getCatalogCategoryNames(mainCategoryProducts),
       });
-      nextIntent = mergeShoppingIntent(intentContext, parsed, deterministic, query);
-      setIntentContext(nextIntent);
-      matches = searchProductsByIntent(catalogProducts, nextIntent, 6);
-
-      const hasDeterministicSignal = Boolean(
-        deterministic.gender
-        || deterministic.category
-        || deterministic.min_price !== null
-        || deterministic.max_price !== null
-      );
-      if (!matches.length && !hasDeterministicSignal) {
-        matches = searchProducts(catalogProducts, query, 6);
-      }
     } catch (e) {
-      const deterministic = extractDeterministicIntent(query);
-      nextIntent = mergeShoppingIntent(intentContext, {}, deterministic, query);
-      setIntentContext(nextIntent);
-      matches = searchProductsByIntent(catalogProducts, nextIntent, 6);
-      if (!matches.length) matches = searchProducts(catalogProducts, query, 6);
+      toolCall = fallbackProductToolCall(query, intentContext);
     }
 
+    let execution;
+    try {
+      execution = executeProductTool({
+        toolCall,
+        query,
+        previousIntent: intentContext,
+        catalogProducts,
+        mainCategoryProducts,
+        getProductById,
+      });
+    } catch (e) {
+      execution = executeProductTool({
+        toolCall: fallbackProductToolCall(query, intentContext),
+        query,
+        previousIntent: intentContext,
+        catalogProducts,
+        mainCategoryProducts,
+        getProductById,
+      });
+    }
+
+    setIntentContext(execution.nextIntent || intentContext);
+    const matches = execution.products || [];
     const responseIndex = messages.length + 1;
     setMessages(current => [...current, {
       role: 'assistant',
-      text: matches.length ? '조건을 바탕으로 몇 가지를 골라보고 있어요.' : '조금 더 취향을 확인해볼게요.',
+      text: matches.length ? '현재 상품 목록을 조회해서 후보를 찾았어요.' : '현재 상품 목록을 확인하고 있어요.',
       products: matches.slice(0, 3),
     }]);
 
     try {
-      const answer = await generateProductAnswer({
+      const answer = await generateProductToolAnswer({
         query,
-        products: formatProductContext(matches),
-        history: [...history, userMessage],
-        intent: nextIntent,
+        toolCall: execution.toolCall,
+        toolResult: execution.result,
+        intent: execution.nextIntent || intentContext,
+        products: matches,
         onToken: text => setMessages(current => current.map((message, index) =>
           index === responseIndex ? { ...message, text } : message
         )),
@@ -204,8 +214,13 @@ function AiAssistant() {
       setError(formatLocalLlmError(e));
       setErrorDetail([e?.code, e?.message].filter(Boolean).join(' · '));
       setMessages(current => current.map((message, index) =>
-        index === responseIndex && !message.text
-          ? { ...message, text: matches.length ? buildInstantAnswer(matches) : '조건을 조금 더 구체적으로 말씀해주세요.' }
+        index === responseIndex
+          ? {
+              ...message,
+              text: matches.length
+                ? buildInstantAnswer(matches)
+                : '조건에 맞는 상품을 찾지 못했습니다. 다른 조건을 말씀해주세요.',
+            }
           : message
       ));
     } finally {
@@ -276,7 +291,7 @@ function AiAssistant() {
               </div>
             ))}
 
-            {loading && ready && <div className="text-xs text-[#777]">조건을 정리하고 상품을 비교하고 있습니다...</div>}
+            {loading && ready && <div className="text-xs text-[#777]">AI가 현재 상품 목록을 조회하고 있습니다...</div>}
             {error && (
               <div className="text-xs text-[#b3261e] bg-[#fff4f2] p-2">
                 <div>{error}</div>
