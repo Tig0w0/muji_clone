@@ -15,8 +15,12 @@ const adapterInfo = adapter => {
 };
 
 const preflightModelData = async dtype => {
-  if (dtype !== 'q4f16') return 'skipped';
-  const url = `https://huggingface.co/${MODEL_ID}/resolve/main/onnx/model_q4f16.onnx_data`;
+  const dataFile = dtype === 'q4f16'
+    ? 'model_q4f16.onnx_data'
+    : dtype === 'q4'
+      ? 'model_q4.onnx_data'
+      : 'model_quantized.onnx_data';
+  const url = `https://huggingface.co/${MODEL_ID}/resolve/main/onnx/${dataFile}`;
   const response = await fetch(url, { headers: { Range: 'bytes=0-1023' } });
   if (!response.ok && response.status !== 206) {
     const error = new Error(`Model data preflight failed: HTTP ${response.status}`);
@@ -42,12 +46,12 @@ const inspectWebGpu = async () => {
   }
   const shaderF16 = adapter.features.has('shader-f16');
   const mobile = /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
-  const dtype = shaderF16 ? 'q4f16' : 'q8';
+  const dtype = shaderF16 ? 'q4f16' : 'q4';
   return {
     mode: adapter.features.has('core-features-and-limits') ? 'core' : 'standard',
     shaderF16,
     dtype,
-    estimatedModelMb: dtype === 'q4f16' ? 273 : 545,
+    estimatedModelMb: dtype === 'q4f16' ? 273 : 323,
     mobile,
     ...adapterInfo(adapter),
   };
