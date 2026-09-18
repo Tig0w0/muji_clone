@@ -68,6 +68,47 @@ const searchableText = product => normalizeCatalogText([
   ...(product.categories || []), ...(product.options?.color || []), ...(product.options?.size || []),
 ].flat().join(' '));
 
+const CATEGORY_PATTERNS = [
+  ['티셔츠', /티\s*셔츠|t\s*셔츠/i],
+  ['셔츠', /셔츠/],
+  ['팬츠', /팬츠|바지/],
+  ['파자마', /파자마|잠옷/],
+  ['가방', /가방|백/],
+  ['가구', /가구|의자|스툴|선반/],
+  ['주방용품', /주방|컵|그릇|보틀|조리/],
+  ['생활용품', /생활용품|타월|수건|청소/],
+  ['문구', /문구|노트|펜|스탠드/],
+  ['뷰티', /뷰티|로션|스킨|화장|바디/],
+  ['간편조리', /간편조리|카레|국수|국|탕/],
+  ['스낵', /스낵|과자|캔디|구미|크래커/],
+];
+
+export const extractDeterministicIntent = query => {
+  const normalized = normalizeCatalogText(query);
+  const { minPrice, maxPrice } = extractPriceRange(query);
+  const matchedCategory = CATEGORY_PATTERNS.find(([, pattern]) => pattern.test(normalized))?.[0] || '';
+
+  let purpose = '';
+  if (/선물|생일|기념일|집들이/.test(normalized)) purpose = '선물';
+  else if (/출근|회사|오피스/.test(normalized)) purpose = '출근';
+  else if (/여행|출장/.test(normalized)) purpose = '여행';
+  else if (/자취|이사/.test(normalized)) purpose = '자취';
+
+  return {
+    gender: canonicalGender(normalized),
+    category: matchedCategory,
+    min_price: minPrice,
+    max_price: maxPrice,
+    colors: [],
+    keywords: [],
+    purpose,
+    style: '',
+  };
+};
+
+const hasRetrievalSignal = ({ gender, category, colors, keywords, minPrice, maxPrice }) =>
+  Boolean(gender || category || colors.length || keywords.length || minPrice !== null || maxPrice !== null);
+
 export const searchProductsByIntent = (products, intent = {}, limit = 6) => {
   const gender = canonicalGender(intent.gender);
   const category = normalizeCatalogText(intent.category || '');
@@ -75,6 +116,8 @@ export const searchProductsByIntent = (products, intent = {}, limit = 6) => {
   const keywords = stringList(intent.keywords);
   const minPrice = numberOrNull(intent.min_price ?? intent.minPrice);
   const maxPrice = numberOrNull(intent.max_price ?? intent.maxPrice);
+
+  if (!hasRetrievalSignal({ gender, category, colors, keywords, minPrice, maxPrice })) return [];
 
   return products
     .filter(isAvailable)
@@ -96,7 +139,7 @@ export const searchProductsByIntent = (products, intent = {}, limit = 6) => {
       return { product, score };
     })
     .filter(Boolean)
-    .sort((a, b) => b.score - a.score || getPrice(a.product) - getPrice(b.product))
+    .sort((a, b) => b.score - a.score)
     .slice(0, limit)
     .map(({ product }) => product);
 };
