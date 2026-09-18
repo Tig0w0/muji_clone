@@ -128,4 +128,6 @@ export const searchProducts = (products, query, limit = 6) => {
 export const formatProductContext = products => products.slice(0, 3).map(product => ({
   name: product.product_name,
   price: getPrice(product),
+  categories: product.categories || [],
+  colors: product.options?.color || [],
 }));
