@@ -29,12 +29,33 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Restore previous Pages JS chunks
+        uses: actions/cache@v4
+        with:
+          path: .pages-js-history
+          key: pages-js-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            pages-js-${{ runner.os }}-
+
       - name: Build
         run: npm run build
         env:
           CI: false
           PUBLIC_URL: /muji_clone
           REACT_APP_API_BASE_URL: https://muji-clone-api.onrender.com
+
+      - name: Preserve previous Pages JS chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .pages-js-history build/static/js
+          if compgen -G ".pages-js-history/*" > /dev/null; then
+            cp -n .pages-js-history/* build/static/js/ || true
+          fi
+          rm -rf .pages-js-history/*
+          cp build/static/js/* .pages-js-history/
+          echo "JS chunks kept:"
+          ls -1 build/static/js | tail -n 30
 
       - name: Stage local AI model
         shell: bash
