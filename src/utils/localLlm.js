@@ -49,10 +49,11 @@ const getWorker = () => {
       if (!task) return;
       if (type === 'progress') task.onProgress?.(progressEvent);
       if (type === 'token') task.onToken?.(text);
-      if (type === 'ready' || type === 'result' || type === 'intent') {
+      if (type === 'ready' || type === 'result' || type === 'intent' || type === 'tool_call') {
         pending.delete(id);
         if (type === 'result') task.resolve(text);
         else if (type === 'intent') task.resolve(event.data?.intent || null);
+        else if (type === 'tool_call') task.resolve(event.data?.toolCall || null);
         else task.resolve(diagnostics || true);
       }
       if (type === 'error') {
@@ -118,28 +119,40 @@ export const loadLocalLlm = onProgress => {
   return loadPromise;
 };
 
-export const interpretProductIntent = async ({ query, history = [], previousIntent = {} }) => {
+export const planProductTool = async ({ query, history = [], previousIntent = {}, categories = [] }) => {
   if (!supportsLocalLlm()) {
     const error = new Error('WebGPU or Web Worker is unavailable.');
     error.code = 'WEBGPU_UNSUPPORTED';
     throw error;
   }
-  return runWorkerTask('interpret', { query, history, previousIntent });
+  return runWorkerTask('plan_tool', { query, history, previousIntent, categories });
 };
 
-export const generateProductAnswer = async ({ query, products, history = [], intent = {}, onToken }) => {
+export const generateProductToolAnswer = async ({
+  query,
+  toolCall,
+  toolResult,
+  intent = {},
+  products = [],
+  onToken,
+}) => {
   if (!supportsLocalLlm()) {
     const error = new Error('WebGPU or Web Worker is unavailable.');
     error.code = 'WEBGPU_UNSUPPORTED';
     throw error;
   }
-  const answer = await runWorkerTask('generate', { query, products, history, intent }, {
+  const answer = await runWorkerTask('generate_from_tool', {
+    query,
+    toolCall,
+    toolResult,
+    intent,
+  }, {
     onToken: text => {
       const cleaned = cleanModelReason(text, products);
       if (cleaned) onToken?.(cleaned);
     },
   });
-  return cleanModelReason(answer, products) || '추천 조건에 잘 맞는 상품입니다.';
+  return cleanModelReason(answer, products) || '추천 조건에 맞는 상품을 확인해보세요.';
 };
 
 export const formatLocalLlmError = error => describeLocalLlmError(error);
