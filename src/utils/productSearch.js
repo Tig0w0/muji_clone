@@ -104,6 +104,7 @@ export const searchProductsByIntent = (products, intent = {}, limit = 6) => {
 export const searchProducts = (products, query, limit = 6) => {
   const tokens = tokenize(query);
   const { minPrice, maxPrice } = extractPriceRange(query);
+  const minMatches = tokens.length > 1 ? 2 : 1;
 
   return products
     .filter(isAvailable)
@@ -116,7 +117,7 @@ export const searchProducts = (products, query, limit = 6) => {
       return { product, score, matched: matched.length };
     })
     .filter(({ product, score, matched }) => score > 0
-      && (tokens.length === 0 || matched > 0)
+      && (tokens.length === 0 || matched >= minMatches)
       && (minPrice === null || getPrice(product) >= minPrice)
       && (maxPrice === null || getPrice(product) <= maxPrice))
     .sort((a, b) => b.score - a.score || getPrice(a.product) - getPrice(b.product))
