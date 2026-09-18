@@ -4,8 +4,28 @@ export { buildInstantAnswer, describeLocalLlmError, shouldUseLocalLlm } from './
 export const LOCAL_LLM_NAME = 'Gemma 3 270M';
 let worker = null;
 let nextId = 1;
+let loadPromise = null;
 const pending = new Map();
+const statusListeners = new Set();
 
+let modelStatus = {
+  state: 'idle',
+  progress: 0,
+  diagnostics: null,
+  error: null,
+};
+
+const setModelStatus = patch => {
+  modelStatus = { ...modelStatus, ...patch };
+  statusListeners.forEach(listener => listener(modelStatus));
+};
+
+export const getLocalLlmStatus = () => modelStatus;
+export const subscribeLocalLlmStatus = listener => {
+  statusListeners.add(listener);
+  listener(modelStatus);
+  return () => statusListeners.delete(listener);
+};
 export const supportsLocalLlm = () => typeof navigator !== 'undefined'
   && Boolean(navigator.gpu)
   && typeof Worker !== 'undefined';
@@ -50,13 +70,50 @@ const runWorkerTask = (type, payload = {}, callbacks = {}) => new Promise((resol
   pending.set(id, { resolve, reject, ...callbacks });
   getWorker().postMessage({ type, id, ...payload });
 });
+
 export const loadLocalLlm = onProgress => {
   if (!supportsLocalLlm()) {
     const error = new Error('WebGPU or Web Worker is unavailable.');
     error.code = 'WEBGPU_UNSUPPORTED';
+    setModelStatus({ state: 'error', error });
     return Promise.reject(error);
   }
-  return runWorkerTask('load', {}, { onProgress });
+
+  if (modelStatus.state === 'ready') {
+    return Promise.resolve(modelStatus.diagnostics || true);
+  }
+
+  if (loadPromise) return loadPromise;
+
+  setModelStatus({ state: 'loading', progress: 0, error: null });
+  loadPromise = runWorkerTask('load', {}, {
+    onProgress: event => {
+      const raw = typeof event?.progress === 'number' ? event.progress : null;
+      const progress = raw === null ? modelStatus.progress : Math.round(raw <= 1 ? raw * 100 : raw);
+      const diagnostics = event?.diagnostics || (event?.status === 'diagnostics' || event?.status === 'preflight' ? event : modelStatus.diagnostics);
+      setModelStatus({
+        state: 'loading',
+        progress: Math.max(0, Math.min(100, progress)),
+        diagnostics,
+      });
+      onProgress?.(event);
+    },
+  }).then(result => {
+    const diagnostics = result === true ? modelStatus.diagnostics : result;
+    setModelStatus({ state: 'ready', progress: 100, diagnostics, error: null });
+    return result;
+  }).catch(error => {
+    setModelStatus({
+      state: 'error',
+      diagnostics: error?.diagnostics || modelStatus.diagnostics,
+      error,
+    });
+    throw error;
+  }).finally(() => {
+    loadPromise = null;
+  });
+
+  return loadPromise;
 };
 
 export const generateProductAnswer = async ({ query, products, onToken }) => {
