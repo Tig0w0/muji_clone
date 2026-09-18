@@ -1,44 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
+  <meta name="theme-color" content="#ffffff" />
   <meta name="description" content="기분 좋은 생활을 제안하는 무인양품입니다." />
-
-
-  <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
   <title>무인양품 클론</title>
+  <style>
+    #bootstrap-loader {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 24px; box-sizing: border-box; background: #fff; color: #222;
+      font-family: Arial, "Noto Sans KR", sans-serif; text-align: center;
+    }
+    #bootstrap-loader .box { width: min(360px, 100%); }
+    #bootstrap-loader .brand { font-size: 22px; font-weight: 700; margin-bottom: 28px; }
+    #bootstrap-loader .spinner {
+      width: 30px; height: 30px; margin: 0 auto 22px; border: 3px solid #e8e8e8;
+      border-top-color: #7f0019; border-radius: 50%; animation: bootstrap-spin .8s linear infinite;
+    }
+    #bootstrap-loader .title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    #bootstrap-loader .note { font-size: 12px; line-height: 1.7; color: #777; }
+    @keyframes bootstrap-spin { to { transform: rotate(360deg); } }
+  </style>
 </head>
-
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+  <noscript>이 사이트를 사용하려면 JavaScript를 활성화해주세요.</noscript>
+  <div id="root">
+    <div id="bootstrap-loader" role="status" aria-live="polite">
+      <div class="box">
+        <div class="brand">MUJI 無印良品</div>
+        <div class="spinner" aria-hidden="true"></div>
+        <div class="title">상품 데이터를 불러오는 중입니다.</div>
+        <div class="note">
+          무료 백엔드가 절전 상태라면 첫 접속에 약 1분 정도 걸릴 수 있습니다.<br />
+          서버가 준비되면 자동으로 쇼핑몰이 열립니다.
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
-
 </html>

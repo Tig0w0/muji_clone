@@ -29,21 +29,24 @@ const inspectWebGpu = async () => {
     throw error;
   }
   const shaderF16 = adapter.features.has('shader-f16');
-  const diagnostics = {
+  const mobile = /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent);
+  // On Android Chrome the q4f16 graph references a separate ~273 MB data file.
+  // Prefer the current single-file fp16 graph on mobile when f16 shaders are available.
+  const dtype = shaderF16 ? (mobile ? 'fp16' : 'q4f16') : 'q8';
+  return {
     mode: adapter.features.has('core-features-and-limits') ? 'core' : 'standard',
     shaderF16,
-    dtype: shaderF16 ? 'q4f16' : 'q8',
-    estimatedModelMb: shaderF16 ? 273 : 545,
-    mobile: /Android|iPhone|iPad|Mobile/i.test(navigator.userAgent),
+    dtype,
+    estimatedModelMb: dtype === 'fp16' ? 323 : dtype === 'q4f16' ? 273 : 545,
+    mobile,
     ...adapterInfo(adapter),
   };
-  return diagnostics;
 };
 
 const classifyError = error => {
   if (error?.code) return error.code;
   const message = String(error?.message || error || '');
-  if (/fetch|network|http|download/i.test(message)) return 'MODEL_DOWNLOAD_FAILED';
+  if (/fetch|network|http|download|failed to load/i.test(message)) return 'MODEL_DOWNLOAD_FAILED';
   if (/memory|allocation|buffer|device lost|out of memory/i.test(message)) return 'GPU_MEMORY_OR_DEVICE_LOST';
   if (/webgpu|gpu|shader|adapter/i.test(message)) return 'WEBGPU_RUNTIME_ERROR';
   return 'MODEL_LOAD_FAILED';
@@ -88,6 +91,7 @@ const buildMessages = ({ query, products }) => [
     content: `질문: ${query}\n상품: ${JSON.stringify(products)}\n답변:`,
   },
 ];
+
 const generate = async ({ id, query, products }) => {
   const generator = await loadModel(id);
   let streamed = '';
