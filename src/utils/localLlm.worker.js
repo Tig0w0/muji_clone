@@ -90,11 +90,15 @@ const loadModel = async id => {
       return transformers.pipeline('text-generation', MODEL_ID, {
         device: 'webgpu',
         dtype: diagnostics.dtype,
-        progress_callback: event => self.postMessage({
-          type: 'progress',
-          id,
-          event: { ...event, dtype: diagnostics.dtype, diagnostics },
-        }),
+        progress_callback: event => {
+          if (event?.file) diagnostics.lastFile = event.file;
+          if (event?.status) diagnostics.lastStatus = event.status;
+          self.postMessage({
+            type: 'progress',
+            id,
+            event: { ...event, dtype: diagnostics.dtype, diagnostics: { ...diagnostics } },
+          });
+        },
       });
     }).catch(error => {
       generatorPromise = null;
