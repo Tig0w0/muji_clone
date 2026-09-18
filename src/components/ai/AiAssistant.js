@@ -36,13 +36,6 @@ const EMPTY_INTENT = {
   style: '',
 };
 
-const mergeIntent = (previous, next) => ({
-  ...previous,
-  ...Object.fromEntries(Object.entries(next || {}).filter(([, value]) =>
-    value !== '' && value !== null && value !== undefined && !(Array.isArray(value) && value.length === 0)
-  )),
-});
-
 const compactHistory = messages => messages
   .filter(message => message?.text)
   .slice(-6)
