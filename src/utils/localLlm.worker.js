@@ -4,7 +4,6 @@ const IS_LOCAL_DEV = ['localhost', '127.0.0.1'].includes(self.location.hostname)
 const MODEL_BASE_URL = new URL('../../models/', self.location.href).href;
 const LOCAL_MODEL_URL = `${MODEL_BASE_URL}${MODEL_ID}/`;
 let generatorPromise = null;
-let TextStreamerClass = null;
 let currentDiagnostics = null;
 
 const adapterInfo = adapter => {
@@ -89,7 +88,6 @@ const loadModel = async id => {
         transformers.env.remoteHost = MODEL_BASE_URL;
         transformers.env.remotePathTemplate = '{model}/';
       }
-      TextStreamerClass = transformers.TextStreamer;
       const reportProgress = event => {
         if (event?.file) diagnostics.lastFile = event.file;
         if (event?.status) diagnostics.lastStatus = event.status;
