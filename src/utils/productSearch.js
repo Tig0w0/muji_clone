@@ -104,7 +104,7 @@ export const searchProductsByIntent = (products, intent = {}, limit = 6) => {
 export const searchProducts = (products, query, limit = 6) => {
   const tokens = tokenize(query);
   const { minPrice, maxPrice } = extractPriceRange(query);
-  const minMatches = tokens.length > 1 ? 2 : 1;
+  const minMatches = Math.max(1, tokens.length);
 
   return products
     .filter(isAvailable)
