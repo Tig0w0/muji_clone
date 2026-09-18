@@ -87,19 +87,43 @@ const loadModel = async id => {
         transformers.env.allowRemoteModels = false;
       }
       TextStreamerClass = transformers.TextStreamer;
-      return transformers.pipeline('text-generation', MODEL_ID, {
+      const reportProgress = event => {
+        if (event?.file) diagnostics.lastFile = event.file;
+        if (event?.status) diagnostics.lastStatus = event.status;
+        self.postMessage({
+          type: 'progress',
+          id,
+          event: { ...event, dtype: diagnostics.dtype, diagnostics: { ...diagnostics } },
+        });
+      };
+
+      diagnostics.lastStatus = 'tokenizer';
+      self.postMessage({
+        type: 'progress',
+        id,
+        event: { status: 'tokenizer', dtype: diagnostics.dtype, diagnostics: { ...diagnostics } },
+      });
+      const tokenizer = await transformers.AutoTokenizer.from_pretrained(MODEL_ID, {
+        progress_callback: reportProgress,
+      });
+
+      const generator = await transformers.pipeline('text-generation', MODEL_ID, {
         device: 'webgpu',
         dtype: diagnostics.dtype,
-        progress_callback: event => {
-          if (event?.file) diagnostics.lastFile = event.file;
-          if (event?.status) diagnostics.lastStatus = event.status;
-          self.postMessage({
-            type: 'progress',
-            id,
-            event: { ...event, dtype: diagnostics.dtype, diagnostics: { ...diagnostics } },
-          });
-        },
+        progress_callback: reportProgress,
       });
+
+      // In production local-only mode, Transformers.js 4.3 can fail to auto-detect
+      // tokenizer files during pipeline discovery. Attach the explicitly loaded
+      // tokenizer so text-generation and TextStreamer can both use it.
+      generator.tokenizer = tokenizer;
+      diagnostics.lastStatus = 'ready';
+      self.postMessage({
+        type: 'progress',
+        id,
+        event: { status: 'ready', dtype: diagnostics.dtype, diagnostics: { ...diagnostics } },
+      });
+      return generator;
     }).catch(error => {
       generatorPromise = null;
       throw error;
