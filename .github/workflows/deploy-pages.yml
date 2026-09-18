@@ -35,6 +35,47 @@ jobs:
           CI: false
           REACT_APP_API_BASE_URL: https://muji-clone-api.onrender.com
 
+      - name: Stage local AI model
+        shell: bash
+        run: |
+          set -euo pipefail
+          MODEL_DIR="build/models/onnx-community/gemma-3-270m-it-ONNX"
+          HF_BASE="https://huggingface.co/onnx-community/gemma-3-270m-it-ONNX/resolve/main"
+          RELEASE_BASE="https://github.com/Tig0w0/muji_clone/releases/download/ai-model-gemma3-270m-v1"
+
+          mkdir -p "$MODEL_DIR/onnx"
+
+          for file in \
+            added_tokens.json \
+            chat_template.jinja \
+            config.json \
+            generation_config.json \
+            special_tokens_map.json \
+            tokenizer.json \
+            tokenizer.model \
+            tokenizer_config.json
+          do
+            curl -L --fail --retry 3 --retry-all-errors \
+              "$HF_BASE/$file" \
+              -o "$MODEL_DIR/$file"
+          done
+
+          for file in model_q4.onnx model_q4f16.onnx
+          do
+            curl -L --fail --retry 3 --retry-all-errors \
+              "$HF_BASE/onnx/$file" \
+              -o "$MODEL_DIR/onnx/$file"
+          done
+
+          for file in model_q4.onnx_data model_q4f16.onnx_data
+          do
+            curl -L --fail --retry 3 --retry-all-errors \
+              "$RELEASE_BASE/$file" \
+              -o "$MODEL_DIR/onnx/$file"
+          done
+
+          du -sh build "$MODEL_DIR"
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
