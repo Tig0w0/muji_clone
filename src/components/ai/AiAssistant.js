@@ -9,9 +9,11 @@ import {
 } from '../../data/catalog';
 import { searchProducts } from '../../utils/productSearch';
 import {
+  buildToolFallbackAnswer,
   executeProductTool,
   fallbackProductToolCall,
   getCatalogCategoryNames,
+  routeAssistantQuery,
 } from '../../utils/productTools';
 import {
   buildInstantAnswer,
@@ -140,6 +142,13 @@ function AiAssistant() {
     setError('');
     setErrorDetail('');
 
+    const route = routeAssistantQuery(query, intentContext);
+    if (route.mode === 'chat') {
+      setMessages(current => [...current, { role: 'assistant', text: route.text }]);
+      setLoading(false);
+      return;
+    }
+
     if (!ready) {
       const matches = searchProducts(catalogProducts, query);
       setMessages(current => [...current, {
@@ -153,16 +162,18 @@ function AiAssistant() {
       return;
     }
 
-    let toolCall;
-    try {
-      toolCall = await planProductTool({
-        query,
-        history,
-        previousIntent: intentContext,
-        categories: getCatalogCategoryNames(mainCategoryProducts),
-      });
-    } catch (e) {
-      toolCall = fallbackProductToolCall(query, intentContext);
+    let toolCall = route.toolCall;
+    if (!toolCall) {
+      try {
+        toolCall = await planProductTool({
+          query,
+          history,
+          previousIntent: intentContext,
+          categories: getCatalogCategoryNames(mainCategoryProducts),
+        });
+      } catch (e) {
+        toolCall = fallbackProductToolCall(query, intentContext);
+      }
     }
 
     let execution;
@@ -189,9 +200,10 @@ function AiAssistant() {
     setIntentContext(execution.nextIntent || intentContext);
     const matches = execution.products || [];
     const responseIndex = messages.length + 1;
+    const fallbackText = buildToolFallbackAnswer(execution);
     setMessages(current => [...current, {
       role: 'assistant',
-      text: matches.length ? '현재 상품 목록을 조회해서 후보를 찾았어요.' : '현재 상품 목록을 확인하고 있어요.',
+      text: matches.length ? '현재 상품 목록을 조회해서 후보를 찾았어요.' : fallbackText,
       products: matches.slice(0, 3),
     }]);
 
@@ -202,26 +214,16 @@ function AiAssistant() {
         toolResult: execution.result,
         intent: execution.nextIntent || intentContext,
         products: matches,
-        onToken: text => setMessages(current => current.map((message, index) =>
-          index === responseIndex ? { ...message, text } : message
-        )),
       });
       setMessages(current => current.map((message, index) =>
-        index === responseIndex ? { ...message, text: answer } : message
+        index === responseIndex ? { ...message, text: answer || fallbackText } : message
       ));
     } catch (e) {
       setDiagnostics(e?.diagnostics || diagnostics);
       setError(formatLocalLlmError(e));
       setErrorDetail([e?.code, e?.message].filter(Boolean).join(' · '));
       setMessages(current => current.map((message, index) =>
-        index === responseIndex
-          ? {
-              ...message,
-              text: matches.length
-                ? buildInstantAnswer(matches)
-                : '조건에 맞는 상품을 찾지 못했습니다. 다른 조건을 말씀해주세요.',
-            }
-          : message
+        index === responseIndex ? { ...message, text: fallbackText } : message
       ));
     } finally {
       setLoading(false);
