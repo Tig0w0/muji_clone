@@ -1,4 +1,9 @@
-import { formatProductContext, searchProducts, searchProductsByIntent } from './productSearch';
+import {
+  extractDeterministicIntent,
+  formatProductContext,
+  searchProducts,
+  searchProductsByIntent,
+} from './productSearch';
 
 const products = [
   { product_id: 1, product_name: '남성 검정 셔츠', sell_price: 39900, sale_state: 'ON', total_stock: 3, options: { color: ['검정'] } },
@@ -35,4 +40,19 @@ test('passes only minimal grounded facts to the model', () => {
   expect(formatProductContext([products[0]])).toEqual([
     { name: '남성 검정 셔츠', price: 39900, categories: [], colors: ['검정'] },
   ]);
+});
+
+
+test('does not return the entire catalog for an empty LLM intent', () => {
+  expect(searchProductsByIntent(products, {})).toEqual([]);
+});
+
+test('extracts explicit Korean shopping constraints without relying on the LLM', () => {
+  expect(extractDeterministicIntent('선물용 남자 옷 추천해줘')).toMatchObject({
+    gender: '남성',
+    purpose: '선물',
+  });
+  const result = searchProductsByIntent(products, extractDeterministicIntent('선물용 남자 옷 추천해줘'));
+  expect(result.length).toBeGreaterThan(0);
+  expect(result.every(item => item.product_name.includes('남성'))).toBe(true);
 });

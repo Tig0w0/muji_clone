@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMessageCircle, FiSend, FiX } from 'react-icons/fi';
 import { catalogProducts, getProductImage } from '../../data/catalog';
-import { formatProductContext, searchProducts, searchProductsByIntent } from '../../utils/productSearch';
+import {
+  extractDeterministicIntent,
+  formatProductContext,
+  searchProducts,
+  searchProductsByIntent,
+} from '../../utils/productSearch';
 import {
   buildInstantAnswer,
   formatLocalLlmError,
@@ -153,17 +158,31 @@ function AiAssistant() {
     let nextIntent = intentContext;
     let matches = [];
     try {
+      const deterministic = extractDeterministicIntent(query);
       const parsed = await interpretProductIntent({
         query,
         history,
         previousIntent: intentContext,
       });
-      nextIntent = mergeIntent(intentContext, parsed);
+      nextIntent = mergeIntent(mergeIntent(intentContext, parsed), deterministic);
+      setIntentContext(nextIntent);
+      matches = searchProductsByIntent(catalogProducts, nextIntent, 6);
+
+      const hasDeterministicSignal = Boolean(
+        deterministic.gender
+        || deterministic.category
+        || deterministic.min_price !== null
+        || deterministic.max_price !== null
+      );
+      if (!matches.length && !hasDeterministicSignal) {
+        matches = searchProducts(catalogProducts, query, 6);
+      }
+    } catch (e) {
+      const deterministic = extractDeterministicIntent(query);
+      nextIntent = mergeIntent(intentContext, deterministic);
       setIntentContext(nextIntent);
       matches = searchProductsByIntent(catalogProducts, nextIntent, 6);
       if (!matches.length) matches = searchProducts(catalogProducts, query, 6);
-    } catch (e) {
-      matches = searchProducts(catalogProducts, query, 6);
     }
 
     const responseIndex = messages.length + 1;
