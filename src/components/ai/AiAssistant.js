@@ -45,6 +45,7 @@ function AiAssistant() {
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
+  const [errorDetail, setErrorDetail] = useState('');
   const [diagnostics, setDiagnostics] = useState(null);
 
   useEffect(() => subscribeLocalLlmStatus(status => {
@@ -53,6 +54,9 @@ function AiAssistant() {
     setProgress(status.progress || 0);
     setDiagnostics(status.diagnostics || null);
     setError(status.state === 'error' && status.error ? formatLocalLlmError(status.error) : '');
+    setErrorDetail(status.state === 'error' && status.error
+      ? [status.error.code, status.error.message].filter(Boolean).join(' · ')
+      : '');
   }), []);
 
   const startModel = async () => {
@@ -64,6 +68,7 @@ function AiAssistant() {
       return;
     }
     setError('');
+    setErrorDetail('');
     setDiagnostics(null);
     setLoading(true);
     setProgress(0);
@@ -82,6 +87,7 @@ function AiAssistant() {
     } catch (e) {
       setDiagnostics(e?.diagnostics || null);
       setError(formatLocalLlmError(e));
+      setErrorDetail([e?.code, e?.message].filter(Boolean).join(' · '));
     } finally {
       setLoading(false);
     }
@@ -97,6 +103,7 @@ function AiAssistant() {
     setInput('');
     setLoading(true);
     setError('');
+    setErrorDetail('');
 
     const matches = searchProducts(catalogProducts, query);
     setProducts(matches);
@@ -141,6 +148,7 @@ function AiAssistant() {
     } catch (e) {
       setDiagnostics(e?.diagnostics || diagnostics);
       setError(formatLocalLlmError(e));
+      setErrorDetail([e?.code, e?.message].filter(Boolean).join(' · '));
     } finally {
       setLoading(false);
     }
@@ -152,6 +160,8 @@ function AiAssistant() {
         diagnostics.dtype,
         diagnostics.shaderF16 === false ? 'shader-f16 미지원' : diagnostics.shaderF16 ? 'shader-f16 지원' : null,
         diagnostics.vendor || diagnostics.architecture || null,
+        diagnostics.lastFile ? `파일 ${diagnostics.lastFile}` : null,
+        diagnostics.lastStatus ? `상태 ${diagnostics.lastStatus}` : null,
       ].filter(Boolean).join(' · ')
     : '';
 
@@ -207,7 +217,14 @@ function AiAssistant() {
             ))}
 
             {loading && ready && <div className="text-xs text-[#777]">상품을 확인하고 답변을 만들고 있습니다...</div>}
-            {error && <div className="text-xs text-[#b3261e] bg-[#fff4f2] p-2">{error}</div>}
+            {error && (
+              <div className="text-xs text-[#b3261e] bg-[#fff4f2] p-2">
+                <div>{error}</div>
+                {errorDetail && (
+                  <div className="mt-1 text-[10px] leading-4 break-all text-[#7a3b35]">세부: {errorDetail}</div>
+                )}
+              </div>
+            )}
             <ProductResults products={products} />
           </div>
 
