@@ -1,5 +1,8 @@
 /* eslint-disable no-restricted-globals */
 const MODEL_ID = 'onnx-community/gemma-3-270m-it-ONNX';
+const IS_LOCAL_DEV = ['localhost', '127.0.0.1'].includes(self.location.hostname);
+const MODEL_BASE_URL = new URL('../../models/', self.location.href).href;
+const LOCAL_MODEL_URL = `${MODEL_BASE_URL}${MODEL_ID}/`;
 let generatorPromise = null;
 let TextStreamerClass = null;
 let currentDiagnostics = null;
@@ -20,14 +23,18 @@ const preflightModelData = async dtype => {
     : dtype === 'q4'
       ? 'model_q4.onnx_data'
       : 'model_quantized.onnx_data';
-  const url = `https://huggingface.co/${MODEL_ID}/resolve/main/onnx/${dataFile}`;
-  const response = await fetch(url, { headers: { Range: 'bytes=0-1023' } });
+  const url = IS_LOCAL_DEV
+    ? `https://huggingface.co/${MODEL_ID}/resolve/main/onnx/${dataFile}`
+    : `${LOCAL_MODEL_URL}onnx/${dataFile}`;
+  const response = IS_LOCAL_DEV
+    ? await fetch(url, { headers: { Range: 'bytes=0-1023' } })
+    : await fetch(url, { method: 'HEAD', cache: 'no-store' });
   if (!response.ok && response.status !== 206) {
     const error = new Error(`Model data preflight failed: HTTP ${response.status}`);
     error.code = 'MODEL_DATA_PREFLIGHT_FAILED';
     throw error;
   }
-  await response.arrayBuffer();
+  if (IS_LOCAL_DEV) await response.arrayBuffer();
   return 'ok';
 };
 const inspectWebGpu = async () => {
@@ -74,6 +81,11 @@ const loadModel = async id => {
       self.postMessage({ type: 'progress', id, event: { status: 'preflight', ...diagnostics } });
 
       const transformers = await import('@huggingface/transformers');
+      if (!IS_LOCAL_DEV) {
+        transformers.env.localModelPath = MODEL_BASE_URL;
+        transformers.env.allowLocalModels = true;
+        transformers.env.allowRemoteModels = false;
+      }
       TextStreamerClass = transformers.TextStreamer;
       return transformers.pipeline('text-generation', MODEL_ID, {
         device: 'webgpu',
