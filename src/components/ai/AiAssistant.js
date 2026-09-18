@@ -151,14 +151,14 @@ function AiAssistant() {
       <button
         type="button"
         onClick={() => setOpen(value => !value)}
-        className="fixed right-4 bottom-20 lg:bottom-6 z-50 w-12 h-12 rounded-full bg-[#7f0019] text-white shadow-lg flex items-center justify-center"
+        className="fixed right-16 bottom-20 lg:right-4 lg:bottom-6 z-[11000] w-12 h-12 rounded-full bg-[#7f0019] text-white shadow-lg flex items-center justify-center"
         aria-label={open ? 'AI 상품 도우미 닫기' : 'AI 상품 도우미 열기'}
       >
         {open ? <FiX size={20} /> : <FiMessageCircle size={21} />}
       </button>
 
       {open && (
-        <section className="fixed right-4 bottom-36 lg:bottom-20 z-50 w-[calc(100vw-2rem)] max-w-[380px] h-[560px] max-h-[70vh] bg-white border border-[#ddd] shadow-2xl flex flex-col">
+        <section className="fixed right-4 bottom-36 lg:bottom-20 z-[10900] w-[calc(100vw-2rem)] max-w-[380px] h-[560px] max-h-[70vh] bg-white border border-[#ddd] shadow-2xl flex flex-col">
           <header className="px-4 py-3 border-b flex items-center justify-between">
             <div>
               <div className="text-sm font-semibold">AI 상품 도우미</div>
@@ -170,7 +170,7 @@ function AiAssistant() {
           <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {!ready && (
               <div className="border border-[#e5e5e5] bg-[#fafafa] p-3 text-xs leading-5">
-                <p>기기에 따라 약 270~550MB의 AI 모델을 다운로드합니다. AI가 실행되지 않아도 기본 상품 검색은 사용할 수 있습니다.</p>
+                <p>기기에 따라 약 270~330MB의 AI 모델을 다운로드합니다. AI가 실행되지 않아도 기본 상품 검색은 사용할 수 있습니다.</p>
                 <button type="button" onClick={startModel} disabled={loading} className="mt-3 w-full bg-[#333] text-white py-2 disabled:opacity-50">
                   {loading ? `AI 모델 준비 중${progress ? ` ${progress}%` : '...'}` : 'AI 시작하기'}
                 </button>
