@@ -163,10 +163,11 @@ export const searchProductsByIntent = (products, intent = {}, limit = 6) => {
   const category = normalizeCatalogText(intent.category || '');
   const colors = stringList(intent.colors);
   const keywords = stringList(intent.keywords);
+  const keywordAny = stringList(intent.keyword_any ?? intent.keywordAny);
   const minPrice = numberOrNull(intent.min_price ?? intent.minPrice);
   const maxPrice = numberOrNull(intent.max_price ?? intent.maxPrice);
 
-  if (!hasRetrievalSignal({ gender, category, colors, keywords, minPrice, maxPrice })) return [];
+  if (!hasRetrievalSignal({ gender, category, colors, keywords: [...keywords, ...keywordAny], minPrice, maxPrice })) return [];
 
   return products
     .filter(isAvailable)
@@ -176,10 +177,12 @@ export const searchProductsByIntent = (products, intent = {}, limit = 6) => {
       if (gender && !text.includes(gender)) return null;
       if (category && !text.includes(category)) return null;
       if (colors.length && !colors.some(color => text.includes(color))) return null;
+      if (keywordAny.length && !keywordAny.some(keyword => text.includes(keyword))) return null;
       if (minPrice !== null && price < minPrice) return null;
       if (maxPrice !== null && price > maxPrice) return null;
 
-      const keywordMatches = keywords.filter(keyword => text.includes(keyword)).length;
+      const keywordMatches = keywords.filter(keyword => text.includes(keyword)).length
+        + keywordAny.filter(keyword => text.includes(keyword)).length;
       let score = 1 + keywordMatches * 2;
       if (gender) score += 3;
       if (category) score += 6;

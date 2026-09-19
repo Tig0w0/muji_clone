@@ -10,6 +10,50 @@ const ALLOWED_TOOLS = new Set(['search_products', 'list_categories', 'get_produc
 const GREETING_PATTERN = /^(안녕(?:하세요)?|반가워|ㅎㅇ|하이|hello|hi)[!?.~\s]*$/i;
 const FOOD_BROAD_PATTERN = /맛있|먹을\s*(?:거|것)|먹거리|뭐\s*먹|간식|과자|스낵|디저트/i;
 const BATHROOM_PATTERN = /욕실|욕실용품|목욕|세면|샤워|배스|bath/i;
+const VIRTUAL_PRODUCT_GROUPS = [
+  {
+    id: 'underwear',
+    pattern: /속옷|이너웨어|언더웨어|브라|캐미솔|브리프|쇼츠|팬티/i,
+    keyword_any: ['속옷', '이너웨어', '언더웨어', '브라', '캐미솔', '브리프', '쇼츠', '팬티'],
+  },
+  {
+    id: 'socks',
+    pattern: /양말|삭스|socks?/i,
+    keyword_any: ['양말', '삭스'],
+  },
+  {
+    id: 'shoes',
+    pattern: /신발|슈즈|운동화|스니커즈|슬리퍼|샌들|구두/i,
+    keyword_any: ['신발', '슈즈', '운동화', '스니커즈', '슬리퍼', '샌들', '구두'],
+  },
+  {
+    id: 'hats',
+    pattern: /모자|캡|버킷햇|비니/i,
+    keyword_any: ['모자', '캡', '버킷햇', '비니'],
+  },
+  {
+    id: 'bedding',
+    pattern: /침구|이불|베개|베갯잇|패드|시트|매트리스/i,
+    category_any: ['패브릭', '생활용품'],
+    keyword_any: ['침구', '이불', '베개', '베갯잇', '패드', '시트', '매트리스'],
+  },
+  {
+    id: 'storage',
+    pattern: /수납|정리함|수납함|박스|바구니|바스켓|케이스/i,
+    category_any: ['수납/정리', '생활용품'],
+    keyword_any: ['수납', '정리함', '수납함', '박스', '바구니', '바스켓', '케이스'],
+  },
+  {
+    id: 'cleaning',
+    pattern: /청소|클리너|브러시|걸레|먼지|빗자루|스퀴지/i,
+    category_any: ['생활용품'],
+    keyword_any: ['청소', '클리너', '브러시', '걸레', '먼지', '빗자루', '스퀴지'],
+  },
+];
+
+const getVirtualProductGroup = query =>
+  VIRTUAL_PRODUCT_GROUPS.find(group => group.pattern.test(String(query || ''))) || null;
+
 const getPrice = product => Number(product?.sell_price ?? product?.retail_price ?? 0);
 
 export const getCatalogCategoryNames = mainCategoryProducts =>
@@ -27,6 +71,7 @@ export const normalizeProductToolCall = (call, query, previousIntent = {}) => {
     gender: args.gender || '',
     category: args.category || '',
     category_any: Array.isArray(args.category_any) ? args.category_any : [],
+    keyword_any: Array.isArray(args.keyword_any) ? args.keyword_any : [],
     min_price: args.min_price ?? null,
     max_price: args.max_price ?? null,
     colors: Array.isArray(args.colors) ? args.colors : [],
@@ -37,11 +82,13 @@ export const normalizeProductToolCall = (call, query, previousIntent = {}) => {
   const merged = mergeShoppingIntent(previousIntent, parsed, deterministic, query);
 
   const categoryAny = Array.isArray(args.category_any) ? args.category_any.filter(Boolean) : [];
+  const keywordAny = Array.isArray(args.keyword_any) ? args.keyword_any.filter(Boolean) : [];
   return {
     tool: 'search_products',
     arguments: {
       ...merged,
       category_any: categoryAny,
+      keyword_any: keywordAny,
       query: String(args.query || query || '').trim(),
       limit: clampLimit(args.limit),
     },
@@ -59,9 +106,11 @@ export const routeAssistantQuery = (query, previousIntent = {}) => {
   }
 
   const deterministic = extractDeterministicIntent(text);
+  const virtualGroup = getVirtualProductGroup(text);
   const hasExplicitShoppingSignal = Boolean(
     deterministic.gender
     || deterministic.category
+    || virtualGroup
     || deterministic.min_price !== null
     || deterministic.max_price !== null
     || /추천|찾아|보여|비교|상품|제품|선물|사고|구매|입을|쓸|필요/.test(text)
@@ -102,6 +151,25 @@ export const routeAssistantQuery = (query, previousIntent = {}) => {
           category: '',
           purpose: '',
           category_any: ['생활용품', '뷰티'],
+          query: text,
+          limit: 6,
+        },
+      },
+    };
+  }
+
+  if (virtualGroup) {
+    const cleanIntent = mergeShoppingIntent({}, {}, deterministic, text);
+    return {
+      mode: 'tool',
+      toolCall: {
+        tool: 'search_products',
+        arguments: {
+          ...cleanIntent,
+          category: '',
+          purpose: '',
+          category_any: virtualGroup.category_any || [],
+          keyword_any: virtualGroup.keyword_any || [],
           query: text,
           limit: 6,
         },
@@ -180,13 +248,18 @@ export const executeProductTool = ({
 
   const nextIntent = args;
   const categoryAny = Array.isArray(args.category_any) ? args.category_any.filter(Boolean) : [];
+  const keywordAny = Array.isArray(args.keyword_any) ? args.keyword_any.filter(Boolean) : [];
   let products = categoryAny.length
     ? categoryAny
-        .flatMap(category => searchProductsByIntent(catalogProducts, { ...nextIntent, category }, clampLimit(args.limit)))
+        .flatMap(category => searchProductsByIntent(
+          catalogProducts,
+          { ...nextIntent, category, keyword_any: keywordAny },
+          clampLimit(args.limit),
+        ))
         .filter((product, index, array) => array.findIndex(item => Number(item.product_id) === Number(product.product_id)) === index)
         .slice(0, clampLimit(args.limit))
-    : searchProductsByIntent(catalogProducts, nextIntent, clampLimit(args.limit));
-  if (!products.length && args.query) {
+    : searchProductsByIntent(catalogProducts, { ...nextIntent, keyword_any: keywordAny }, clampLimit(args.limit));
+  if (!products.length && args.query && !keywordAny.length) {
     products = searchProducts(catalogProducts, args.query, clampLimit(args.limit));
   }
 

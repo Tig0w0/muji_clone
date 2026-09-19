@@ -26,17 +26,36 @@ const products = [
     categories: ['스낵'],
     options: { color: [], size: [] },
   },
+  {
+    product_id: 3,
+    product_name: '부드러운 브라 캐미솔',
+    sell_price: 24900,
+    sale_state: 'ON',
+    total_stock: 6,
+    categories: ['여성'],
+    options: { color: ['흰색'], size: ['M'] },
+  },
+  {
+    product_id: 4,
+    product_name: '슬러브 치노 와이드 팬츠',
+    sell_price: 49900,
+    sale_state: 'ON',
+    total_stock: 7,
+    categories: ['여성'],
+    options: { color: ['차콜'], size: ['M'] },
+  },
 ];
 
 const categories = {
   A: { name: '남성', products: [products[0]] },
+  B: { name: '여성', products: [products[2], products[3]] },
   N: { name: '스낵', products: [products[1]] },
 };
 
 const getProductById = id => products.find(product => Number(product.product_id) === Number(id)) || null;
 
 test('lists live catalog categories', () => {
-  expect(getCatalogCategoryNames(categories)).toEqual(['남성', '스낵']);
+  expect(getCatalogCategoryNames(categories)).toEqual(['남성', '여성', '스낵']);
 });
 
 test('normalizes an AI search tool call with deterministic user constraints', () => {
@@ -143,4 +162,41 @@ test('routes bathroom requests across 생활용품 and 뷰티 without stale clot
       category_any: ['생활용품', '뷰티'],
     },
   });
+});
+
+
+test('routes 여성 속옷 to the underwear virtual group while keeping gender', () => {
+  const route = routeAssistantQuery('여성 속옷 추천해줘', {});
+  expect(route.mode).toBe('tool');
+  expect(route.toolCall).toMatchObject({
+    tool: 'search_products',
+    arguments: {
+      gender: '여성',
+      keyword_any: expect.arrayContaining(['브라', '캐미솔', '팬티']),
+    },
+  });
+
+  const result = executeProductTool({
+    toolCall: route.toolCall,
+    query: '여성 속옷 추천해줘',
+    previousIntent: {},
+    catalogProducts: products,
+    mainCategoryProducts: categories,
+    getProductById,
+  });
+
+  expect(result.products.map(product => product.product_id)).toEqual([3]);
+});
+
+test('virtual group filtering does not fall back to unrelated products', () => {
+  const route = routeAssistantQuery('여성 양말 추천해줘', {});
+  const result = executeProductTool({
+    toolCall: route.toolCall,
+    query: '여성 양말 추천해줘',
+    previousIntent: {},
+    catalogProducts: products,
+    mainCategoryProducts: categories,
+    getProductById,
+  });
+  expect(result.products).toEqual([]);
 });
