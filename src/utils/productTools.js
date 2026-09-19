@@ -159,7 +159,9 @@ export const routeAssistantQuery = (query, previousIntent = {}) => {
   }
 
   if (virtualGroup) {
-    const cleanIntent = mergeShoppingIntent({}, {}, deterministic, text);
+    // A virtual group is usually a refinement (e.g. "속옷 종류로"). Keep useful
+    // constraints such as gender/budget, but replace stale category/keyword filters.
+    const cleanIntent = mergeShoppingIntent(previousIntent, {}, deterministic, text);
     return {
       mode: 'tool',
       toolCall: {
@@ -167,7 +169,8 @@ export const routeAssistantQuery = (query, previousIntent = {}) => {
         arguments: {
           ...cleanIntent,
           category: '',
-          purpose: '',
+          keywords: [],
+          purpose: deterministic.purpose || cleanIntent.purpose || '',
           category_any: virtualGroup.category_any || [],
           keyword_any: virtualGroup.keyword_any || [],
           query: text,
