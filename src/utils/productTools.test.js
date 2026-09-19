@@ -124,3 +124,23 @@ test('builds a safe fallback sentence without exposing tool JSON', () => {
   expect(text).toContain('후보');
   expect(text).not.toContain('{');
 });
+
+
+test('routes bathroom requests across 생활용품 and 뷰티 without stale clothing context', () => {
+  const route = routeAssistantQuery('욕실용품 추천해줘', {
+    gender: '남성',
+    category: '셔츠',
+    purpose: '선물',
+  });
+
+  expect(route.mode).toBe('tool');
+  expect(route.toolCall).toMatchObject({
+    tool: 'search_products',
+    arguments: {
+      gender: '',
+      category: '',
+      purpose: '',
+      category_any: ['생활용품', '뷰티'],
+    },
+  });
+});

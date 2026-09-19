@@ -9,6 +9,7 @@ const clampLimit = value => Math.max(1, Math.min(8, Number(value) || 6));
 const ALLOWED_TOOLS = new Set(['search_products', 'list_categories', 'get_product', 'compare_products']);
 const GREETING_PATTERN = /^(안녕(?:하세요)?|반가워|ㅎㅇ|하이|hello|hi)[!?.~\s]*$/i;
 const FOOD_BROAD_PATTERN = /맛있|먹을\s*(?:거|것)|먹거리|뭐\s*먹|간식|과자|스낵|디저트/i;
+const BATHROOM_PATTERN = /욕실|욕실용품|목욕|세면|샤워|배스|bath/i;
 const getPrice = product => Number(product?.sell_price ?? product?.retail_price ?? 0);
 
 export const getCatalogCategoryNames = mainCategoryProducts =>
@@ -82,6 +83,25 @@ export const routeAssistantQuery = (query, previousIntent = {}) => {
         arguments: {
           ...mergeShoppingIntent(previousIntent, {}, deterministic, text),
           category_any: ['스낵', '간편조리'],
+          query: text,
+          limit: 6,
+        },
+      },
+    };
+  }
+
+  if (BATHROOM_PATTERN.test(text)) {
+    const cleanIntent = mergeShoppingIntent({}, {}, deterministic, text);
+    return {
+      mode: 'tool',
+      toolCall: {
+        tool: 'search_products',
+        arguments: {
+          ...cleanIntent,
+          gender: '',
+          category: '',
+          purpose: '',
+          category_any: ['생활용품', '뷰티'],
           query: text,
           limit: 6,
         },

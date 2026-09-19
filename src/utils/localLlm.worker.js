@@ -127,11 +127,21 @@ const sanitizeConsultantAnswer = value => {
   let text = cleanAnswer(value)
     .replace(/^```(?:json)?/i, '')
     .replace(/```$/i, '')
-    .replace(/(?:\*\*?\s*\d+[.)]?\s*){3,}/g, '')
-    .replace(/(?:\d+[.)]\s*){4,}/g, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
-  if (/^\s*[{[]/.test(text) || /"(?:tool|arguments)"\s*:/.test(text)) return '';
+
+  const numbered = text.match(/(?:^|\s)\d+[.)]\s*/g) || [];
+  const boldMarks = text.match(/\*\*/g) || [];
+  const repeatedFragments = /(\S.{0,20})\1{2,}/.test(text);
+
+  if (
+    /^\s*[{[]/.test(text)
+    || /"(?:tool|arguments)"\s*:/.test(text)
+    || numbered.length >= 3
+    || boldMarks.length >= 4
+    || repeatedFragments
+  ) return '';
+
   if (text.length > 260) text = text.slice(0, 260).replace(/\s+\S*$/, '') + '…';
   return text;
 };
