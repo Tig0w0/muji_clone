@@ -55,7 +55,7 @@ const categories = {
 const getProductById = id => products.find(product => Number(product.product_id) === Number(id)) || null;
 
 test('lists live catalog categories', () => {
-  expect(getCatalogCategoryNames(categories)).toEqual(['남성', '스낵']);
+  expect(getCatalogCategoryNames(categories)).toEqual(['남성', '여성', '스낵']);
 });
 
 test('normalizes an AI search tool call with deterministic user constraints', () => {
