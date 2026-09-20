@@ -153,14 +153,20 @@ const extractJsonObject = value => {
   try { return JSON.parse(fenced[0]); } catch { return null; }
 };
 
-const buildToolCallMessages = ({ query, history = [], previousIntent = {}, categories = [] }) => [
+const buildToolCallMessages = ({
+  query,
+  history = [],
+  previousIntent = {},
+  previousProducts = [],
+  categories = [],
+}) => [
   {
     role: 'system',
     content: '당신은 쇼핑 상담용 도구 선택기입니다. 반드시 JSON 하나만 출력하세요. 설명 문장과 마크다운은 금지합니다. 사용 가능한 도구: search_products, list_categories, get_product, compare_products. 대부분의 상품 추천/검색에는 search_products를 사용하세요. search_products 스키마: {"tool":"search_products","arguments":{"query":"","gender":"","category":"","min_price":null,"max_price":null,"colors":[],"keywords":[],"purpose":"","style":"","limit":6}}. 카테고리를 모를 때만 list_categories를 사용하세요. 상품 ID가 명확할 때만 get_product 또는 compare_products를 사용하세요. 현재 사용 가능한 카테고리 이름을 참고하세요.',
   },
   {
     role: 'user',
-    content: `카테고리: ${JSON.stringify(categories)}\n이전 조건: ${JSON.stringify(previousIntent)}\n최근 대화: ${JSON.stringify(history.slice(-4))}\n현재 요청: ${query}`,
+    content: `카테고리: ${JSON.stringify(categories)}\n이전 조건: ${JSON.stringify(previousIntent)}\n직전 상품: ${JSON.stringify(previousProducts.slice(0, 6))}\n최근 대화: ${JSON.stringify(history.slice(-4))}\n현재 요청: ${query}`,
   },
 ];
 
@@ -175,9 +181,22 @@ const buildAnswerMessages = ({ query, toolCall, toolResult, intent = {} }) => [
   },
 ];
 
-const planToolCall = async ({ id, query, history, previousIntent, categories }) => {
+const planToolCall = async ({
+  id,
+  query,
+  history,
+  previousIntent,
+  previousProducts,
+  categories,
+}) => {
   const generator = await loadModel(id);
-  const output = await generator(buildToolCallMessages({ query, history, previousIntent, categories }), {
+  const output = await generator(buildToolCallMessages({
+    query,
+    history,
+    previousIntent,
+    previousProducts,
+    categories,
+  }), {
     max_new_tokens: 140,
     do_sample: false,
     repetition_penalty: 1.08,

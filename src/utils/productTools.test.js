@@ -200,3 +200,65 @@ test('virtual group filtering does not fall back to unrelated products', () => {
   });
   expect(result.products).toEqual([]);
 });
+
+
+test('keeps inferred female context when refining previous results to underwear', () => {
+  const previousProducts = [products[2], products[3]];
+  const route = routeAssistantQuery('속옷 종류로', {}, previousProducts);
+
+  expect(route.mode).toBe('tool');
+  expect(route.toolCall).toMatchObject({
+    tool: 'search_products',
+    arguments: {
+      gender: '여성',
+      keyword_any: expect.arrayContaining(['브라', '캐미솔']),
+    },
+  });
+
+  const result = executeProductTool({
+    toolCall: route.toolCall,
+    query: '속옷 종류로',
+    previousIntent: {},
+    catalogProducts: products,
+    mainCategoryProducts: categories,
+    getProductById,
+  });
+
+  expect(result.products.map(product => product.product_id)).toEqual([3]);
+});
+
+test('resolves first-product follow-up against the previous cards', () => {
+  const route = routeAssistantQuery('첫 번째 상품 자세히 알려줘', {}, [products[2], products[3]]);
+  expect(route).toMatchObject({
+    mode: 'tool',
+    toolCall: {
+      tool: 'get_product',
+      arguments: { product_id: 3 },
+    },
+  });
+});
+
+test('resolves comparison follow-up against previous card positions', () => {
+  const route = routeAssistantQuery('1번이랑 2번 비교해줘', {}, [products[2], products[3]]);
+  expect(route).toMatchObject({
+    mode: 'tool',
+    toolCall: {
+      tool: 'compare_products',
+      arguments: { product_ids: [3, 4] },
+    },
+  });
+});
+
+test('uses the cheapest previous card as the ceiling for a cheaper follow-up', () => {
+  const route = routeAssistantQuery('좀 더 싼 걸로 보여줘', { gender: '여성' }, [products[2], products[3]]);
+  expect(route.mode).toBe('tool');
+  expect(route.toolCall.tool).toBe('search_products');
+  expect(route.toolCall.arguments.max_price).toBe(24899);
+  expect(route.toolCall.arguments.exclude_ids).toEqual([3, 4]);
+});
+
+test('excludes previous cards when asking for different options', () => {
+  const route = routeAssistantQuery('다른 걸로 보여줘', { gender: '여성' }, [products[2], products[3]]);
+  expect(route.mode).toBe('tool');
+  expect(route.toolCall.arguments.exclude_ids).toEqual([3, 4]);
+});

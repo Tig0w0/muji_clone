@@ -55,6 +55,49 @@ const getVirtualProductGroup = query =>
   VIRTUAL_PRODUCT_GROUPS.find(group => group.pattern.test(String(query || ''))) || null;
 
 const getPrice = product => Number(product?.sell_price ?? product?.retail_price ?? 0);
+const FOLLOWUP_PATTERN = /그중|그거|그걸|이거|저거|첫\s*번째|두\s*번째|세\s*번째|[123]번|다른\s*(?:거|것|걸|상품)|더\s*(?:싼|저렴|비싼)|좀\s*더/i;
+
+const productId = product => Number(product?.product_id ?? product?.id);
+const productCategories = product => Array.isArray(product?.categories) ? product.categories : [];
+
+const inferSharedGender = products => {
+  if (!products.length) return '';
+  return ['여성', '남성', '아동'].find(gender =>
+    products.every(product =>
+      productCategories(product).includes(gender)
+      || String(product?.product_name || product?.name || '').includes(gender)
+    )
+  ) || '';
+};
+
+const enrichIntentFromSession = (intent = {}, products = []) => {
+  if (intent.gender) return intent;
+  const inferredGender = inferSharedGender(products);
+  return inferredGender ? { ...intent, gender: inferredGender } : intent;
+};
+
+const ordinalIndex = text => {
+  if (/(?:첫\s*번째|1번|첫\s*상품|맨\s*처음)/.test(text)) return 0;
+  if (/(?:두\s*번째|2번|둘째)/.test(text)) return 1;
+  if (/(?:세\s*번째|3번|셋째)/.test(text)) return 2;
+  return -1;
+};
+
+const referencedIndexes = text => {
+  const indexes = [];
+  if (/(?:첫\s*번째|1번|첫\s*상품)/.test(text)) indexes.push(0);
+  if (/(?:두\s*번째|2번|둘째)/.test(text)) indexes.push(1);
+  if (/(?:세\s*번째|3번|셋째)/.test(text)) indexes.push(2);
+  return [...new Set(indexes)];
+};
+
+export const summarizeProductsForContext = products => (products || []).slice(0, 3).map((product, index) => ({
+  position: index + 1,
+  id: productId(product),
+  name: product.product_name || product.name || '',
+  price: getPrice(product),
+  categories: productCategories(product),
+}));
 
 export const getCatalogCategoryNames = mainCategoryProducts =>
   [...new Set(Object.values(mainCategoryProducts || {}).map(category => category?.name).filter(Boolean))];
@@ -72,6 +115,7 @@ export const normalizeProductToolCall = (call, query, previousIntent = {}) => {
     category: args.category || '',
     category_any: Array.isArray(args.category_any) ? args.category_any : [],
     keyword_any: Array.isArray(args.keyword_any) ? args.keyword_any : [],
+    exclude_ids: Array.isArray(args.exclude_ids) ? args.exclude_ids.map(Number).filter(Boolean) : [],
     min_price: args.min_price ?? null,
     max_price: args.max_price ?? null,
     colors: Array.isArray(args.colors) ? args.colors : [],
@@ -83,20 +127,24 @@ export const normalizeProductToolCall = (call, query, previousIntent = {}) => {
 
   const categoryAny = Array.isArray(args.category_any) ? args.category_any.filter(Boolean) : [];
   const keywordAny = Array.isArray(args.keyword_any) ? args.keyword_any.filter(Boolean) : [];
+  const excludeIds = Array.isArray(args.exclude_ids) ? args.exclude_ids.map(Number).filter(Boolean) : [];
   return {
     tool: 'search_products',
     arguments: {
       ...merged,
       category_any: categoryAny,
       keyword_any: keywordAny,
+      exclude_ids: excludeIds,
       query: String(args.query || query || '').trim(),
       limit: clampLimit(args.limit),
     },
   };
 };
 
-export const routeAssistantQuery = (query, previousIntent = {}) => {
+export const routeAssistantQuery = (query, previousIntent = {}, previousProducts = []) => {
   const text = String(query || '').trim();
+  const sessionIntent = enrichIntentFromSession(previousIntent, previousProducts);
+  const previousSummary = summarizeProductsForContext(previousProducts);
 
   if (GREETING_PATTERN.test(text)) {
     return {
@@ -107,6 +155,62 @@ export const routeAssistantQuery = (query, previousIntent = {}) => {
 
   const deterministic = extractDeterministicIntent(text);
   const virtualGroup = getVirtualProductGroup(text);
+
+  if (previousSummary.length && /비교/.test(text)) {
+    const indexes = referencedIndexes(text);
+    const selected = (indexes.length >= 2 ? indexes : [0, 1])
+      .map(index => previousSummary[index]?.id)
+      .filter(Boolean);
+    if (selected.length >= 2) {
+      return {
+        mode: 'tool',
+        toolCall: { tool: 'compare_products', arguments: { product_ids: selected } },
+      };
+    }
+  }
+
+  if (previousSummary.length && /(자세히|상세|정보|어때|알려)/.test(text)) {
+    const index = ordinalIndex(text);
+    if (index >= 0 && previousSummary[index]?.id) {
+      return {
+        mode: 'tool',
+        toolCall: { tool: 'get_product', arguments: { product_id: previousSummary[index].id } },
+      };
+    }
+  }
+
+  if (previousSummary.length && /(더\s*(?:싼|저렴)|가격\s*(?:낮|내려)|좀\s*더\s*저렴)/.test(text)) {
+    const prices = previousSummary.map(product => product.price).filter(price => price > 0);
+    const maxPrice = prices.length ? Math.max(0, Math.min(...prices) - 1) : sessionIntent.max_price;
+    return {
+      mode: 'tool',
+      toolCall: {
+        tool: 'search_products',
+        arguments: {
+          ...sessionIntent,
+          max_price: maxPrice ?? null,
+          exclude_ids: previousSummary.map(product => product.id),
+          query: text,
+          limit: 6,
+        },
+      },
+    };
+  }
+
+  if (previousSummary.length && /다른\s*(?:거|것|걸|상품)|다른\s*걸로/.test(text)) {
+    return {
+      mode: 'tool',
+      toolCall: {
+        tool: 'search_products',
+        arguments: {
+          ...sessionIntent,
+          exclude_ids: previousSummary.map(product => product.id),
+          query: text,
+          limit: 6,
+        },
+      },
+    };
+  }
   const hasExplicitShoppingSignal = Boolean(
     deterministic.gender
     || deterministic.category
@@ -114,6 +218,7 @@ export const routeAssistantQuery = (query, previousIntent = {}) => {
     || deterministic.min_price !== null
     || deterministic.max_price !== null
     || /추천|찾아|보여|비교|상품|제품|선물|사고|구매|입을|쓸|필요/.test(text)
+    || (previousSummary.length && FOLLOWUP_PATTERN.test(text))
     || FOOD_BROAD_PATTERN.test(text)
   );
 
@@ -130,7 +235,7 @@ export const routeAssistantQuery = (query, previousIntent = {}) => {
       toolCall: {
         tool: 'search_products',
         arguments: {
-          ...mergeShoppingIntent(previousIntent, {}, deterministic, text),
+          ...mergeShoppingIntent(sessionIntent, {}, deterministic, text),
           category_any: ['스낵', '간편조리'],
           query: text,
           limit: 6,
@@ -161,7 +266,7 @@ export const routeAssistantQuery = (query, previousIntent = {}) => {
   if (virtualGroup) {
     // A virtual group is usually a refinement (e.g. "속옷 종류로"). Keep useful
     // constraints such as gender/budget, but replace stale category/keyword filters.
-    const cleanIntent = mergeShoppingIntent(previousIntent, {}, deterministic, text);
+    const cleanIntent = mergeShoppingIntent(sessionIntent, {}, deterministic, text);
     return {
       mode: 'tool',
       toolCall: {
@@ -252,6 +357,7 @@ export const executeProductTool = ({
   const nextIntent = args;
   const categoryAny = Array.isArray(args.category_any) ? args.category_any.filter(Boolean) : [];
   const keywordAny = Array.isArray(args.keyword_any) ? args.keyword_any.filter(Boolean) : [];
+  const excludeIds = new Set((args.exclude_ids || []).map(Number).filter(Boolean));
   let products = categoryAny.length
     ? categoryAny
         .flatMap(category => searchProductsByIntent(
@@ -262,7 +368,10 @@ export const executeProductTool = ({
         .filter((product, index, array) => array.findIndex(item => Number(item.product_id) === Number(product.product_id)) === index)
         .slice(0, clampLimit(args.limit))
     : searchProductsByIntent(catalogProducts, { ...nextIntent, keyword_any: keywordAny }, clampLimit(args.limit));
-  if (!products.length && args.query && !keywordAny.length) {
+  if (excludeIds.size) {
+    products = products.filter(product => !excludeIds.has(Number(product.product_id)));
+  }
+  if (!products.length && args.query && !keywordAny.length && !excludeIds.size) {
     products = searchProducts(catalogProducts, args.query, clampLimit(args.limit));
   }
 

@@ -80,6 +80,7 @@ function AiAssistant() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [intentContext, setIntentContext] = useState(EMPTY_INTENT);
+  const [productContext, setProductContext] = useState([]);
   const [error, setError] = useState('');
   const [errorDetail, setErrorDetail] = useState('');
   const [diagnostics, setDiagnostics] = useState(null);
@@ -142,7 +143,7 @@ function AiAssistant() {
     setError('');
     setErrorDetail('');
 
-    const route = routeAssistantQuery(query, intentContext);
+    const route = routeAssistantQuery(query, intentContext, productContext);
     if (route.mode === 'chat') {
       setMessages(current => [...current, { role: 'assistant', text: route.text }]);
       setLoading(false);
@@ -169,6 +170,13 @@ function AiAssistant() {
           query,
           history,
           previousIntent: intentContext,
+          previousProducts: productContext.map((product, index) => ({
+            position: index + 1,
+            id: Number(product.product_id),
+            name: product.product_name,
+            price: Number(product.sell_price ?? product.retail_price ?? 0),
+            categories: product.categories || [],
+          })),
           categories: getCatalogCategoryNames(mainCategoryProducts),
         });
       } catch (e) {
@@ -199,6 +207,7 @@ function AiAssistant() {
 
     setIntentContext(execution.nextIntent || intentContext);
     const matches = execution.products || [];
+    if (matches.length) setProductContext(matches.slice(0, 6));
     const responseIndex = messages.length + 1;
     const fallbackText = buildToolFallbackAnswer(execution);
     setMessages(current => [...current, {
