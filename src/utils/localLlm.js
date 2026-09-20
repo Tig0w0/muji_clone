@@ -119,13 +119,19 @@ export const loadLocalLlm = onProgress => {
   return loadPromise;
 };
 
-export const planProductTool = async ({ query, history = [], previousIntent = {}, categories = [] }) => {
+export const planProductTool = async ({
+  query,
+  history = [],
+  previousIntent = {},
+  previousProducts = [],
+  categories = [],
+}) => {
   if (!supportsLocalLlm()) {
     const error = new Error('WebGPU or Web Worker is unavailable.');
     error.code = 'WEBGPU_UNSUPPORTED';
     throw error;
   }
-  return runWorkerTask('plan_tool', { query, history, previousIntent, categories });
+  return runWorkerTask('plan_tool', { query, history, previousIntent, previousProducts, categories });
 };
 
 export const generateProductToolAnswer = async ({
