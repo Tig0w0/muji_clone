@@ -12,6 +12,15 @@ const FOOD_BROAD_PATTERN = /맛있|먹을\s*(?:거|것)|먹거리|뭐\s*먹|간�
 const BATHROOM_PATTERN = /욕실|욕실용품|목욕|세면|샤워|배스|bath/i;
 const VIRTUAL_PRODUCT_GROUPS = [
   {
+    id: 'cosmetics',
+    pattern: /화장품|스킨케어|기초\s*화장|기초화장품|메이크업\s*제품/i,
+    category_any: ['뷰티'],
+    keyword_any: [
+      '스킨', '로션', '크림', '클렌징', '에센스', '세럼', '토너', '미스트',
+      '선크림', '자외선', '립스틱', '립밤', '파운데이션', '파우더', '블러셔', '마스카라',
+    ],
+  },
+  {
     id: 'underwear',
     pattern: /속옷|이너웨어|언더웨어|브라|캐미솔|브리프|쇼츠|팬티/i,
     keyword_any: ['속옷', '이너웨어', '언더웨어', '브라', '캐미솔', '브리프', '쇼츠', '팬티'],
@@ -295,10 +304,17 @@ export const buildToolFallbackAnswer = ({ products = [], result = {} } = {}) => 
   if (!products.length) {
     return '현재 상품 목록에서는 조건에 맞는 상품을 찾지 못했어요. 예산이나 종류를 조금 바꿔볼까요?';
   }
+
+  const summary = products.slice(0, 3).map(product => {
+    const name = product.product_name || product.name || '';
+    const price = getPrice(product);
+    return price ? `${name} ${price.toLocaleString('ko-KR')}원` : name;
+  }).filter(Boolean).join(', ');
+
   if (products.length === 1) {
-    return '현재 상품 목록에서 조건에 맞는 상품을 하나 찾았어요. 비슷한 상품도 같이 볼까요?';
+    return `${summary}을(를) 찾았어요. 비슷한 상품도 같이 볼까요?`;
   }
-  return `현재 상품 목록에서 조건에 맞는 후보 ${Math.min(products.length, 3)}개를 골랐어요. 가격이나 스타일 기준으로 더 좁혀볼까요?`;
+  return `${summary} 등을 찾았어요. 가격이나 종류를 기준으로 더 좁혀볼까요?`;
 };
 
 const minimalProduct = product => ({
