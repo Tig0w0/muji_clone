@@ -262,3 +262,22 @@ test('excludes previous cards when asking for different options', () => {
   expect(route.mode).toBe('tool');
   expect(route.toolCall.arguments.exclude_ids).toEqual([3, 4]);
 });
+
+
+test('routes cosmetics requests to beauty products with cosmetic keywords', () => {
+  const route = routeAssistantQuery('화장품 추천해줘', {});
+  expect(route.mode).toBe('tool');
+  expect(route.toolCall).toMatchObject({
+    tool: 'search_products',
+    arguments: {
+      category_any: ['뷰티'],
+      keyword_any: expect.arrayContaining(['스킨', '로션', '크림']),
+    },
+  });
+});
+
+test('fallback answer names grounded products instead of generic prose', () => {
+  const text = buildToolFallbackAnswer({ products: [products[1]], result: {} });
+  expect(text).toContain('과자 슈가 버터 비스킷');
+  expect(text).toContain('2,500원');
+});
