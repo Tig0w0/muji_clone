@@ -118,6 +118,8 @@ const EMPTY_SHOPPING_INTENT = {
 };
 
 const CONTINUATION_PATTERN = /그럼|그러면|그중|그거|그걸|그쪽|말고|대신|또|더|이어서|그대로|비슷한|다른 색|다른 가격/;
+const BROAD_APPAREL_PATTERN = /남성복|여성복|남자\s*(?:옷|의류)|여자\s*(?:옷|의류)|남성\s*(?:옷|의류)|여성\s*(?:옷|의류)|(?:남성|여성)\s*패션/i;
+const APPAREL_CATEGORIES = new Set(['셔츠', '티셔츠', '팬츠', '파자마', '가방']);
 
 const meaningfulEntries = intent => Object.entries(intent || {}).filter(([, value]) =>
   value !== '' && value !== null && value !== undefined && !(Array.isArray(value) && value.length === 0)
@@ -131,15 +133,22 @@ const mergeNonEmpty = (base, next) => ({
 export const mergeShoppingIntent = (previous = {}, parsed = {}, deterministic = {}, query = '') => {
   const previousCategory = normalizeCatalogText(previous.category || '');
   const explicitCategory = normalizeCatalogText(deterministic.category || '');
+  const explicitGender = canonicalGender(deterministic.gender);
+  const normalizedQuery = normalizeCatalogText(query);
   const isContinuation = CONTINUATION_PATTERN.test(normalize(query));
+  const broadApparelRequest = Boolean(explicitGender && BROAD_APPAREL_PATTERN.test(normalizedQuery));
+  const staleNonApparelCategory = Boolean(previousCategory && !APPAREL_CATEGORIES.has(previousCategory));
 
   const topicChanged = Boolean(
-    explicitCategory
-    && !isContinuation
-    && (
-      (previousCategory && explicitCategory !== previousCategory)
-      || (!previousCategory && (previous.gender || previous.purpose || previous.style))
+    (
+      explicitCategory
+      && !isContinuation
+      && (
+        (previousCategory && explicitCategory !== previousCategory)
+        || (!previousCategory && (previous.gender || previous.purpose || previous.style))
+      )
     )
+    || (broadApparelRequest && staleNonApparelCategory)
   );
 
   let next = topicChanged ? { ...EMPTY_SHOPPING_INTENT } : { ...EMPTY_SHOPPING_INTENT, ...previous };
@@ -147,8 +156,16 @@ export const mergeShoppingIntent = (previous = {}, parsed = {}, deterministic = 
   next = mergeNonEmpty(next, deterministic);
 
   // Non-apparel categories should never inherit a stale clothing gender.
-  if (explicitCategory && !['셔츠', '티셔츠', '팬츠', '파자마', '가방'].includes(explicitCategory)) {
-    next.gender = canonicalGender(deterministic.gender);
+  if (explicitCategory && !APPAREL_CATEGORIES.has(explicitCategory)) {
+    next.gender = explicitGender;
+  }
+
+  // "남성복/여성 의류" means a broad apparel search, not the previous product type.
+  // Clear a stale specific category so a prior snack/home query cannot become
+  // impossible combinations such as { gender: '남성', category: '스낵' }.
+  if (broadApparelRequest) {
+    next.category = '';
+    next.keywords = [];
   }
 
   if (topicChanged && !deterministic.purpose) next.purpose = '';
