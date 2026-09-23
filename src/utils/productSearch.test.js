@@ -104,3 +104,22 @@ test('keeps context for an explicit continuation', () => {
   expect(next.category).toBe('팬츠');
   expect(next.max_price).toBe(50000);
 });
+
+
+test('resets a stale snack category when switching to broad menswear', () => {
+  const previous = {
+    gender: '',
+    category: '스낵',
+    min_price: null,
+    max_price: null,
+    colors: [],
+    keywords: [],
+    purpose: '',
+    style: '',
+  };
+  const deterministic = extractDeterministicIntent('남성 의류 추천해줘');
+  const next = mergeShoppingIntent(previous, {}, deterministic, '남성 의류 추천해줘');
+
+  expect(next.gender).toBe('남성');
+  expect(next.category).toBe('');
+});
